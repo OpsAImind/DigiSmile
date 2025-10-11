@@ -107,12 +107,46 @@ export default function Navbar() {
             >
               ABOUT
             </Button>
-            <Button
-              variant={"header"}
-              onClick={() => navigateToSection("home/clinic-services")}
-            >
-              SERVICES
-            </Button>
+            <Menu variant={"header"}>
+              <MenuButton
+                as={Button}
+                variant={"header"}
+              >
+                SERVICES
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => navigateToSection("home/clinic-services")}>
+                  <Text as={"h6"}>All Services</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/root-canal-washington-dc/")}>
+                  <Text as={"h6"}>Root Canal - Washington DC</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/general-dentistry-washington-dc/")}>
+                  <Text as={"h6"}>General Dentistry - Washington DC</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/comprehensive-dental-care-washington-dc/")}>
+                  <Text as={"h6"}>Comprehensive Care - Washington DC</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/cosmetic-dentistry-washington-dc/")}>
+                  <Text as={"h6"}>Cosmetic Dentistry - Washington DC</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/dental-veneers-washington-dc/")}>
+                  <Text as={"h6"}>Dental Veneers - Washington DC</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/teeth-whitening-washington-dc/")}>
+                  <Text as={"h6"}>Teeth Whitening - Washington DC</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/affordable-dentures-washington-dc/")}>
+                  <Text as={"h6"}>Affordable Dentures - Washington DC</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/tooth-colored-fillings-washington-dc/")}>
+                  <Text as={"h6"}>Tooth-Colored Fillings - Washington DC</Text>
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/dental-fillings-washington-dc/")}>
+                  <Text as={"h6"}>Dental Fillings - Washington DC</Text>
+                </MenuItem>
+              </MenuList>
+            </Menu>
             <Button variant={"header"}>
               <Link href={"/#home-location"}>LOCATIONS</Link>
             </Button>
@@ -130,6 +164,12 @@ export default function Navbar() {
               onClick={() => navigateToSection("home/new-patients")}
             >
               NEW PATIENTS
+            </Button>
+            <Button
+              variant={"header"}
+              onClick={() => navigateToSection("blog")}
+            >
+              BLOG
             </Button>
             {isError && (
               <>
@@ -335,7 +375,15 @@ export default function Navbar() {
               marginY={2}
             >
               <Text as={"h4"} fontWeight={"bold"}>
-                SERVICES
+                ALL SERVICES
+              </Text>
+            </ListItem>
+            <ListItem
+              onClick={() => navigateToSection("blog")}
+              marginY={2}
+            >
+              <Text as={"h4"} fontWeight={"bold"}>
+                BLOG
               </Text>
             </ListItem>
             <ListItem marginY={2}>
