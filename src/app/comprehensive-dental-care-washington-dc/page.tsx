@@ -1,25 +1,17 @@
-import React from "react";
-import { Metadata } from "next";
-import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage";
-import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd";
-import { service_detail } from "@/assets/images";
+import type { Metadata } from "next"
+import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
+import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title:
-    "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
+  title: "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
   description:
-    "Full-service dental care in Washington, D.C. From preventive to cosmetic and restorative treatments, all your dental needs in one place. Call (202) 545-6336 today.",
-  keywords:
-    "comprehensive dental care Washington DC, full service dentist DC, complete dental care, all-in-one dental clinic DC, dental treatments Washington",
+    "Full-service dental care in Washington, D.C. Preventive, cosmetic, and restorative treatments in one place. Call (202) 545-6336.",
   alternates: {
-    canonical:
-      "https://www.smilexpertsdental.com/comprehensive-dental-care-washington-dc/"
+    canonical: "https://www.smilexpertsdental.com/comprehensive-dental-care-washington-dc/",
   },
   openGraph: {
-    title:
-      "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
-    description:
-      "Full-service dental care from preventive to cosmetic and restorative treatments, all in one place.",
+    title: "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
+    description: "Full-service dental care from preventive to cosmetic and restorative treatments, all in one place.",
     url: "https://www.smilexpertsdental.com/comprehensive-dental-care-washington-dc/",
     siteName: "Smile Experts Dental",
     locale: "en_US",
@@ -29,153 +21,133 @@ export const metadata: Metadata = {
         url: "https://www.smilexpertsdental.com/icon.png",
         width: 1200,
         height: 630,
-        alt: "Comprehensive Dental Care Washington DC"
-      }
-    ]
+        alt: "Comprehensive Dental Care Washington DC",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
+    title: "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
     description: "Full-service dental care in Washington, D.C.",
-    images: ["https://www.smilexpertsdental.com/icon.png"]
-  }
-};
+    images: ["https://www.smilexpertsdental.com/icon.png"],
+  },
+}
 
-export default function ComprehensiveDentalCareWashingtonDCPage() {
+export default function Page() {
+  const url = "https://www.smilexpertsdental.com/comprehensive-dental-care-washington-dc/"
   return (
     <>
       <ServiceJsonLd
         serviceName="Comprehensive Dental Care"
         description="Complete dental care services including preventive, cosmetic, and restorative treatments all under one roof."
-        url="https://www.smilexpertsdental.com/comprehensive-dental-care-washington-dc/"
-        areaServed="Washington, DC"
+        url={url}
+        areaServed="Washington, D.C."
       />
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "https://www.smilexpertsdental.com/" },
-          {
-            name: "Comprehensive Dental Care Washington DC",
-            url: "https://www.smilexpertsdental.com/comprehensive-dental-care-washington-dc/"
-          }
+          { name: "Comprehensive Dental Care Washington DC", url },
         ]}
       />
       <ServiceDetailPage
         title="Comprehensive Dental Care"
         location="Washington, D.C."
-        intro="Experience complete dental care under one roof. From routine checkups to advanced cosmetic and restorative treatments, we're your one-stop dental solution in Washington, D.C."
-        heroImage={service_detail}
-        heroImageAlt="Comprehensive Dental Care in Washington DC"
+        intro="Experience comprehensive dental care under one roof—routine checkups, cosmetic enhancements, and restorative treatments tailored to you."
+        heroImageSrc="/comprehensive-dental-care-washington-dc.jpg"
+        heroImageAlt="Comprehensive Dental Care in Washington, D.C."
+        theme={{
+          // 3-5 colors total: primary, primaryForeground, background, foreground, muted
+          primary: "#0EA5E9", // sky-500
+          primaryForeground: "#FFFFFF",
+          background: "#FFFFFF",
+          foreground: "#0B0D10",
+          muted: "#F3F5F7",
+        }}
         whatIsSection={{
           title: "What is Comprehensive Dental Care?",
           content:
-            "Comprehensive dental care means providing a full range of dental services to meet all your oral health needs in one convenient location. At Smile Experts Dental, we offer preventive care (cleanings, exams), restorative treatments (fillings, crowns, root canals), cosmetic dentistry (veneers, whitening), and specialized services (dentures, extractions). Our goal is to be your lifelong dental partner, providing personalized care for every stage of life.",
-          image: service_detail
+            "Comprehensive dental care means your entire oral health is supported in one place—from prevention and diagnostics to cosmetic and restorative solutions. We coordinate your care so you get the right treatment at the right time, with a plan designed for your long-term health.",
         }}
         benefits={[
           {
-            title: "All Services Under One Roof",
-            description:
-              "No need to visit multiple specialists. We handle everything from cleanings to complex restorations."
+            title: "All Services in One Place",
+            description: "Preventive, cosmetic, and restorative care coordinated by one team that knows your history.",
           },
           {
             title: "Personalized Treatment Plans",
-            description:
-              "We create customized care plans tailored to your unique oral health needs and goals."
+            description: "Your goals guide your plan—comfort, function, and aesthetics balanced for the best results.",
           },
           {
-            title: "Continuity of Care",
-            description:
-              "Build a long-term relationship with our team who knows your dental history and preferences."
-          },
-          {
-            title: "Advanced Technology",
-            description:
-              "We use the latest dental technology for accurate diagnosis and effective treatment."
+            title: "Modern Technology",
+            description: "Digital imaging and minimally invasive techniques improve accuracy, comfort, and outcomes.",
           },
           {
             title: "Convenient Scheduling",
-            description:
-              "Flexible appointment times to fit your busy schedule in downtown Washington, D.C."
+            description: "Flexible appointment times in Washington, D.C. for busy professionals and families.",
           },
           {
-            title: "Family-Friendly Environment",
-            description:
-              "We treat patients of all ages, making dental care easy for the whole family."
-          }
+            title: "Continuity of Care",
+            description: "A trusted team that monitors your oral health and proactively addresses changes.",
+          },
+          {
+            title: "Family-Friendly",
+            description: "Care for all ages—from first visits to comprehensive smile restorations.",
+          },
         ]}
         procedure={[
           {
             step: 1,
-            title: "Initial Consultation",
-            description:
-              "We conduct a thorough exam, review your medical and dental history, and discuss your concerns and goals."
+            title: "Comprehensive Exam",
+            description: "We review your health history, take any needed images, and discuss your goals.",
           },
           {
             step: 2,
-            title: "Comprehensive Assessment",
-            description:
-              "Digital X-rays, oral cancer screening, and evaluation of teeth, gums, bite, and jaw health."
+            title: "Full Assessment",
+            description: "We evaluate teeth, gums, bite, jaw health, and cosmetics to map your baseline.",
           },
           {
             step: 3,
-            title: "Customized Treatment Plan",
-            description:
-              "We present a detailed plan addressing immediate needs and long-term oral health goals."
+            title: "Personalized Plan",
+            description: "You’ll receive a clear, prioritized plan with options and transparent costs.",
           },
           {
             step: 4,
-            title: "Phased Treatment",
-            description:
-              "We prioritize treatments and schedule them in phases, ensuring comfort and affordability."
+            title: "Phased Care",
+            description: "Treatments are scheduled in phases for comfort, convenience, and budget.",
           },
           {
             step: 5,
-            title: "Ongoing Maintenance",
-            description:
-              "Regular checkups and cleanings to maintain your oral health and prevent future issues."
-          }
+            title: "Ongoing Prevention",
+            description: "Regular visits keep your smile healthy and reduce the risk of future problems.",
+          },
         ]}
         whoCandidateSection={{
-          title: "Who Benefits from Comprehensive Dental Care?",
+          title: "Who Benefits from Comprehensive Care?",
           content:
-            "Everyone! Whether you're looking for preventive care, need restorative work, want to enhance your smile, or require specialized treatments, comprehensive dental care ensures all your needs are met efficiently and effectively in one trusted location."
+            "Anyone seeking proactive dental health, efficient scheduling, and a long-term relationship with a trusted team in Washington, D.C.",
         }}
         faqs={[
           {
-            question: "What services are included in comprehensive dental care?",
+            question: "What does ‘comprehensive’ include?",
             answer:
-              "Our comprehensive care includes preventive services (cleanings, exams, X-rays), restorative treatments (fillings, crowns, bridges, root canals), cosmetic dentistry (veneers, whitening), and specialized services (dentures, extractions, gum disease treatment)."
+              "Prevention, diagnostics, fillings, crowns, root canals, dentures, cosmetic treatments, and more—coordinated in one practice.",
           },
           {
-            question: "How is comprehensive care different from general dentistry?",
-            answer:
-              "Comprehensive care goes beyond routine general dentistry by offering a wider range of specialized services under one roof, with a focus on long-term oral health planning and personalized treatment."
+            question: "Do you accept insurance?",
+            answer: "Yes, we work with many plans and provide transparent estimates and flexible options.",
           },
           {
-            question: "Do I need to see multiple dentists?",
-            answer:
-              "No, our comprehensive approach means you can receive most treatments from our experienced team without referrals to outside specialists."
+            question: "How do I start?",
+            answer: "Book a comprehensive exam and consultation. We’ll tailor a plan to your needs and goals.",
           },
-          {
-            question: "How much does comprehensive dental care cost?",
-            answer:
-              "Costs vary based on your individual treatment plan. We accept most insurance plans and offer flexible payment options to make care affordable."
-          },
-          {
-            question: "How do I get started?",
-            answer:
-              "Simply schedule a comprehensive dental exam. We'll assess your oral health and create a personalized treatment plan to meet your needs."
-          }
         ]}
         ctaSection={{
           title: "Experience Complete Dental Care",
           description:
-            "Get all your dental needs met in one convenient location. Schedule your comprehensive dental exam at Smile Experts Dental in Washington, D.C. today.",
+            "Get all your dental needs met in one location. Schedule your comprehensive exam in Washington, D.C. today.",
           phone: "(202) 545-6336",
-          clinic: "dc"
         }}
       />
     </>
-  );
+  )
 }

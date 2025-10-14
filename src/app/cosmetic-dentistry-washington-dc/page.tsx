@@ -1,178 +1,107 @@
-import React from "react";
-import { Metadata } from "next";
-import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage";
-import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd";
-import { cosmetic } from "@/assets/images";
+import type { Metadata } from "next"
+import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
+import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
   title: "Cosmetic Dentistry in Washington, D.C. | Smile Experts Dental",
   description:
-    "Transform your smile with cosmetic dentistry in Washington, D.C. Veneers, whitening, bonding, and smile makeovers. Call (202) 545-6336 for a consultation.",
-  keywords:
-    "cosmetic dentistry Washington DC, smile makeover DC, veneers Washington, teeth whitening DC, cosmetic dentist Washington DC, dental bonding DC",
+    "Cosmetic dentistry in Washington, D.C. including veneers, whitening, bonding, and more. Call (202) 545-6336.",
   alternates: {
-    canonical:
-      "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/"
+    canonical: "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/",
   },
   openGraph: {
     title: "Cosmetic Dentistry in Washington, D.C. | Smile Experts Dental",
-    description:
-      "Transform your smile with veneers, whitening, bonding, and complete smile makeovers.",
+    description: "Personalized cosmetic dentistry—veneers, whitening, and bonding to enhance your smile.",
     url: "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/",
     siteName: "Smile Experts Dental",
-    locale: "en_US",
-    type: "website",
     images: [
       {
         url: "https://www.smilexpertsdental.com/icon.png",
         width: 1200,
         height: 630,
-        alt: "Cosmetic Dentistry Washington DC"
-      }
-    ]
+        alt: "Cosmetic Dentistry Washington DC",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Cosmetic Dentistry in Washington, D.C. | Smile Experts Dental",
-    description: "Transform your smile with cosmetic dentistry in Washington, D.C.",
-    images: ["https://www.smilexpertsdental.com/icon.png"]
-  }
-};
+    description: "Cosmetic smile enhancements in Washington, D.C.",
+    images: ["https://www.smilexpertsdental.com/icon.png"],
+  },
+}
 
-export default function CosmeticDentistryWashingtonDCPage() {
+export default function Page() {
+  const url = "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/"
   return (
     <>
       <ServiceJsonLd
         serviceName="Cosmetic Dentistry"
-        description="Advanced cosmetic dental treatments including veneers, teeth whitening, bonding, and complete smile makeovers."
-        url="https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/"
-        areaServed="Washington, DC"
+        description="Smile enhancements including veneers, whitening, and bonding in Washington, D.C."
+        url={url}
+        areaServed="Washington, D.C."
       />
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "https://www.smilexpertsdental.com/" },
-          {
-            name: "Cosmetic Dentistry Washington DC",
-            url: "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/"
-          }
+          { name: "Cosmetic Dentistry Washington DC", url },
         ]}
       />
       <ServiceDetailPage
         title="Cosmetic Dentistry"
         location="Washington, D.C."
-        intro="Achieve the smile of your dreams with our advanced cosmetic dentistry services. From subtle enhancements to complete smile makeovers, we create beautiful, natural-looking results."
-        heroImage={cosmetic}
-        heroImageAlt="Cosmetic Dentistry in Washington DC"
+        intro="Refine tooth shape, shade, and symmetry with personalized cosmetic treatments designed for your unique smile."
+        heroImageSrc="/cosmetic-dentistry-washington-dc.jpg"
+        heroImageAlt="Cosmetic Dentistry in Washington, D.C."
         whatIsSection={{
           title: "What is Cosmetic Dentistry?",
           content:
-            "Cosmetic dentistry focuses on improving the appearance of your teeth, gums, and smile. Our cosmetic services include teeth whitening, porcelain veneers, dental bonding, tooth contouring, and complete smile makeovers. Whether you want to fix chips, gaps, stains, or misalignment, our cosmetic dentistry solutions in Washington, D.C. help you achieve a confident, radiant smile.",
-          image: cosmetic
+            "Cosmetic dentistry focuses on improving the appearance of your smile—addressing discoloration, chips, spacing, and alignment. We tailor plans to achieve natural, confident results.",
         }}
         benefits={[
+          { title: "Natural-Looking Results", description: "Modern materials blend seamlessly with your smile." },
           {
-            title: "Enhanced Confidence",
-            description:
-              "A beautiful smile boosts your self-esteem and makes a lasting impression."
+            title: "Personalized Plans",
+            description: "Every smile is unique—your plan reflects your goals and lifestyle.",
           },
+          { title: "Minimally Invasive", description: "Many options require little to no tooth alteration." },
           {
-            title: "Natural-Looking Results",
-            description:
-              "We use advanced materials and techniques to create smiles that look and feel natural."
+            title: "Confidence Boost",
+            description: "Look and feel your best in photos, presentations, and every day.",
           },
-          {
-            title: "Customized Solutions",
-            description:
-              "Every smile is unique. We tailor treatments to your facial features and personal goals."
-          },
-          {
-            title: "Quick Transformations",
-            description:
-              "Many cosmetic treatments can be completed in just one or two visits."
-          },
-          {
-            title: "Long-Lasting Results",
-            description:
-              "With proper care, cosmetic dental work can last for many years."
-          },
-          {
-            title: "Expert Artistry",
-            description:
-              "Our experienced cosmetic dentists combine science and art to create stunning smiles."
-          }
+          { title: "Fast Improvements", description: "Whitening and bonding can refresh your smile quickly." },
+          { title: "Durable Options", description: "Veneers and ceramic restorations provide long-lasting beauty." },
         ]}
         procedure={[
           {
             step: 1,
-            title: "Smile Consultation",
-            description:
-              "We discuss your goals, evaluate your teeth, and show you what's possible with digital smile design."
+            title: "Consultation & Smile Assessment",
+            description: "We discuss your goals and evaluate your smile.",
           },
           {
             step: 2,
-            title: "Treatment Planning",
-            description:
-              "We create a customized plan that may include whitening, veneers, bonding, or a combination of treatments."
+            title: "Treatment Options",
+            description: "We present options like whitening, bonding, or veneers.",
           },
-          {
-            step: 3,
-            title: "Preparation",
-            description:
-              "Depending on the treatment, we may prepare your teeth by removing a small amount of enamel or cleaning the surface."
-          },
-          {
-            step: 4,
-            title: "Treatment Application",
-            description:
-              "We apply veneers, bonding material, or whitening agents with precision and care."
-          },
+          { step: 3, title: "Preview & Planning", description: "See potential outcomes and plan timelines and costs." },
+          { step: 4, title: "Treatment Day(s)", description: "Comfortable, efficient care with a focus on detail." },
           {
             step: 5,
-            title: "Final Adjustments & Reveal",
-            description:
-              "We make final refinements and reveal your stunning new smile!"
-          }
+            title: "Maintenance",
+            description: "Keep your results fresh with simple at-home care and visits.",
+          },
         ]}
-        whoCandidateSection={{
-          title: "Who is a Candidate for Cosmetic Dentistry?",
-          content:
-            "If you're unhappy with the appearance of your teeth due to stains, chips, gaps, misalignment, or other cosmetic concerns, you may be a great candidate. We'll evaluate your oral health and recommend the best cosmetic treatments to achieve your dream smile."
-        }}
         faqs={[
-          {
-            question: "What cosmetic treatments do you offer?",
-            answer:
-              "We offer teeth whitening, porcelain veneers, dental bonding, tooth contouring, gum reshaping, and complete smile makeovers tailored to your needs."
-          },
-          {
-            question: "How long do cosmetic dental treatments last?",
-            answer:
-              "Results vary by treatment. Teeth whitening lasts 1-3 years, veneers can last 10-15 years, and bonding lasts 5-10 years with proper care."
-          },
-          {
-            question: "Is cosmetic dentistry painful?",
-            answer:
-              "Most cosmetic procedures are minimally invasive and painless. We use local anesthesia when needed to ensure your comfort."
-          },
-          {
-            question: "How much does cosmetic dentistry cost?",
-            answer:
-              "Costs vary based on the treatment. We offer free consultations to discuss your options and provide a detailed estimate."
-          },
-          {
-            question: "Can I see what my smile will look like before treatment?",
-            answer:
-              "Yes! We use digital smile design technology to show you a preview of your new smile before we begin treatment."
-          }
+          { question: "Are results natural?", answer: "Yes—shade, translucency, and shape are customized to you." },
+          { question: "Does whitening hurt?", answer: "Sensitivity is temporary for most; we offer gentle options." },
+          { question: "How long do veneers last?", answer: "With care, many veneers last 10–15 years or more." },
         ]}
         ctaSection={{
-          title: "Ready for Your Dream Smile?",
-          description:
-            "Transform your smile with expert cosmetic dentistry at Smile Experts Dental in Washington, D.C. Schedule your free consultation today.",
+          title: "Love Your Smile",
+          description: "Book a cosmetic consultation in Washington, D.C. and preview your possibilities.",
           phone: "(202) 545-6336",
-          clinic: "dc"
         }}
       />
     </>
-  );
+  )
 }

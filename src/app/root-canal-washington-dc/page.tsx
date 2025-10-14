@@ -1,178 +1,103 @@
-import React from "react";
-import { Metadata } from "next";
-import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage";
-import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd";
-import { root_canal_service } from "@/assets/images";
+import type { Metadata } from "next"
+import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
+import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
   title: "Root Canal Therapy in Washington, D.C. | Smile Experts Dental",
   description:
-    "Expert root canal treatment in Washington, D.C. Our experienced dentists provide pain-free endodontic care to save your natural teeth. Call (202) 545-6336 to book your appointment today.",
-  keywords:
-    "root canal Washington DC, endodontic treatment DC, root canal therapy, tooth infection treatment, emergency root canal DC",
-  alternates: {
-    canonical: "https://www.smilexpertsdental.com/root-canal-washington-dc/"
-  },
+    "Gentle, effective root canal therapy in Washington, D.C. Relieve tooth pain and save your natural tooth. Call (202) 545-6336.",
+  alternates: { canonical: "https://www.smilexpertsdental.com/root-canal-washington-dc/" },
   openGraph: {
     title: "Root Canal Therapy in Washington, D.C. | Smile Experts Dental",
-    description:
-      "Expert root canal treatment in Washington, D.C. Pain-free endodontic care to save your natural teeth.",
+    description: "Comfort-focused root canal treatment to remove infection and save your tooth.",
     url: "https://www.smilexpertsdental.com/root-canal-washington-dc/",
     siteName: "Smile Experts Dental",
-    locale: "en_US",
-    type: "website",
     images: [
-      {
-        url: "https://www.smilexpertsdental.com/icon.png",
-        width: 1200,
-        height: 630,
-        alt: "Root Canal Treatment Washington DC"
-      }
-    ]
+      { url: "https://www.smilexpertsdental.com/icon.png", width: 1200, height: 630, alt: "Root Canal Washington DC" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Root Canal Therapy in Washington, D.C. | Smile Experts Dental",
-    description:
-      "Expert root canal treatment in Washington, D.C. Pain-free endodontic care.",
-    images: ["https://www.smilexpertsdental.com/icon.png"]
-  }
-};
+    description: "Gentle root canal treatment in Washington, D.C.",
+    images: ["https://www.smilexpertsdental.com/icon.png"],
+  },
+}
 
-export default function RootCanalWashingtonDCPage() {
+export default function Page() {
+  const url = "https://www.smilexpertsdental.com/root-canal-washington-dc/"
   return (
     <>
       <ServiceJsonLd
         serviceName="Root Canal Therapy"
-        description="Expert root canal treatment to remove infection, clean and restore tooth health, keeping your smile strong and pain-free."
-        url="https://www.smilexpertsdental.com/root-canal-washington-dc/"
-        areaServed="Washington, DC"
+        description="Gentle endodontic treatment to remove infection, relieve pain, and save your natural tooth."
+        url={url}
+        areaServed="Washington, D.C."
       />
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "https://www.smilexpertsdental.com/" },
-          {
-            name: "Root Canal Washington DC",
-            url: "https://www.smilexpertsdental.com/root-canal-washington-dc/"
-          }
+          { name: "Root Canal Therapy Washington DC", url },
         ]}
       />
       <ServiceDetailPage
         title="Root Canal Therapy"
         location="Washington, D.C."
-        intro="Save your natural tooth with expert root canal treatment. Our experienced endodontists in Washington, D.C. provide gentle, pain-free care to eliminate infection and restore your oral health."
-        heroImage={root_canal_service}
-        heroImageAlt="Root Canal Treatment in Washington DC"
+        intro="End tooth pain fast. Our gentle root canal therapy removes infection and preserves your natural tooth."
+        heroImageSrc="/root-canal-therapy-washington-dc.jpg"
+        heroImageAlt="Root Canal Therapy in Washington, D.C."
         whatIsSection={{
-          title: "What is Root Canal Therapy?",
+          title: "What is a Root Canal?",
           content:
-            "Root canal therapy is a dental procedure designed to treat infection at the center of a tooth. When the pulp inside your tooth becomes infected due to decay, cracks, or trauma, a root canal removes the infected tissue, cleans the canal, and seals it to prevent further infection. This procedure saves your natural tooth and eliminates pain, allowing you to maintain your smile without extraction.",
-          image: root_canal_service
+            "A root canal removes infected or inflamed pulp from inside a tooth. After cleaning and sealing the tooth, a custom restoration protects it for comfortable function.",
         }}
         benefits={[
-          {
-            title: "Pain Relief",
-            description:
-              "Eliminate severe tooth pain caused by infection or inflammation of the tooth pulp."
-          },
-          {
-            title: "Save Your Natural Tooth",
-            description:
-              "Avoid extraction and preserve your natural tooth structure and function."
-          },
-          {
-            title: "Prevent Spread of Infection",
-            description:
-              "Stop the infection from spreading to surrounding teeth and gums."
-          },
-          {
-            title: "Restore Oral Health",
-            description:
-              "Return to normal eating, speaking, and smiling without discomfort."
-          },
-          {
-            title: "Expert Care in D.C.",
-            description:
-              "Receive treatment from experienced dentists using advanced technology in the heart of Washington, D.C."
-          },
-          {
-            title: "Comfortable Experience",
-            description:
-              "Modern anesthesia and sedation options ensure a pain-free procedure."
-          }
+          { title: "Pain Relief", description: "Removes infection and inflammation to eliminate toothache." },
+          { title: "Saves Your Tooth", description: "Preserve your natural tooth instead of extracting it." },
+          { title: "Restores Function", description: "Chew comfortably and protect the tooth with a crown." },
+          { title: "Stops Spread of Infection", description: "Protects nearby teeth and gums from further problems." },
+          { title: "Comfort-Focused", description: "Modern anesthetics and techniques for a smooth visit." },
+          { title: "High Success Rate", description: "Root canals are predictable and long-lasting with proper care." },
         ]}
         procedure={[
           {
             step: 1,
-            title: "Diagnosis & X-rays",
-            description:
-              "We examine your tooth and take X-rays to assess the extent of infection and plan your treatment."
+            title: "Diagnosis & Imaging",
+            description: "We confirm infection and plan treatment using imaging.",
           },
-          {
-            step: 2,
-            title: "Anesthesia & Access",
-            description:
-              "Local anesthesia is applied to numb the area. A small opening is made in the tooth to access the infected pulp."
-          },
+          { step: 2, title: "Comfortable Anesthesia", description: "We numb the area and ensure you’re comfortable." },
           {
             step: 3,
-            title: "Cleaning & Disinfection",
-            description:
-              "The infected pulp is carefully removed, and the root canals are cleaned and disinfected thoroughly."
+            title: "Cleaning the Canals",
+            description: "Infected tissue is removed and canals are disinfected.",
           },
           {
             step: 4,
-            title: "Filling & Sealing",
-            description:
-              "The cleaned canals are filled with a biocompatible material and sealed to prevent reinfection."
+            title: "Sealing & Temporary",
+            description: "Canals are sealed and a temporary is placed if needed.",
           },
-          {
-            step: 5,
-            title: "Restoration",
-            description:
-              "A crown or filling is placed on the tooth to restore its strength, function, and appearance."
-          }
+          { step: 5, title: "Final Restoration", description: "A custom crown restores strength and appearance." },
         ]}
-        whoCandidateSection={{
-          title: "Who Needs a Root Canal?",
-          content:
-            "You may need a root canal if you experience severe tooth pain, prolonged sensitivity to hot or cold, tooth discoloration, swelling or tenderness in the gums, or a persistent pimple on the gums. Our dentists in Washington, D.C. will evaluate your symptoms and recommend the best treatment to save your tooth."
-        }}
         faqs={[
           {
             question: "Is a root canal painful?",
-            answer:
-              "No, modern root canal procedures are virtually painless thanks to advanced anesthesia and techniques. Most patients report feeling relief from pain after the procedure."
+            answer: "Most patients feel pressure but little pain; it relieves discomfort caused by infection.",
           },
           {
-            question: "How long does a root canal take?",
-            answer:
-              "Most root canal treatments can be completed in one to two appointments, each lasting 60-90 minutes depending on the tooth's complexity."
+            question: "Do I need a crown?",
+            answer: "Back teeth often benefit from crowns to prevent fractures after treatment.",
           },
           {
-            question: "What is the recovery time after a root canal?",
-            answer:
-              "Most patients return to normal activities the next day. Mild discomfort may last a few days and can be managed with over-the-counter pain relievers."
+            question: "How long does it take?",
+            answer: "Many cases are completed in one visit; complex teeth may need two.",
           },
-          {
-            question: "How much does a root canal cost in Washington, D.C.?",
-            answer:
-              "The cost varies depending on the tooth and complexity. We accept most insurance plans and offer flexible payment options. Contact us for a personalized quote."
-          },
-          {
-            question: "Can I eat after a root canal?",
-            answer:
-              "Avoid eating until the numbness wears off. Stick to soft foods for the first few days and avoid chewing on the treated tooth until the permanent restoration is placed."
-          }
         ]}
         ctaSection={{
-          title: "Ready to Save Your Tooth?",
-          description:
-            "Don't let tooth pain hold you back. Schedule your root canal consultation at Smile Experts Dental in Washington, D.C. today.",
+          title: "Relieve Tooth Pain Today",
+          description: "Call now to schedule a gentle, effective root canal in Washington, D.C.",
           phone: "(202) 545-6336",
-          clinic: "dc"
         }}
       />
     </>
-  );
+  )
 }

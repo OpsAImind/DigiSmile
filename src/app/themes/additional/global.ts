@@ -16,12 +16,11 @@ export default {
     color: "black"
   },
   ".container": {
-    height: "100vh",
+    minHeight: "100vh",
     width: "100vw",
-    maxHeight: "100vh",
     maxWidth: "100vw",
-    // overflowY: "auto",
-    overflow: "hidden"
+    overflowY: "auto",
+    overflowX: "hidden"
   },
   ".scroll": {
     "::-webkit-scrollbar": {

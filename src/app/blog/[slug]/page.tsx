@@ -6,7 +6,7 @@ import { useRouter, useParams } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
-import { getBlogPostBySlug } from "@/utils/blogData";
+import { getBlogPostBySlug, blogPosts } from "@/utils/blogData";
 import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd";
 
 export default function BlogPostPage() {
@@ -17,6 +17,11 @@ export default function BlogPostPage() {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
 
   const post = getBlogPostBySlug(slug);
+  
+  // Get related posts (same category, excluding current post)
+  const relatedPosts = blogPosts
+    .filter(p => p.slug !== slug && p.category === post?.category)
+    .slice(0, 2);
 
   if (!post) {
     return (
@@ -108,11 +113,37 @@ export default function BlogPostPage() {
                 opacity={0.9}
                 justifyContent={isLaptop ? "center" : "flex-start"}
                 mb={6}
+                flexWrap="wrap"
               >
                 <Text>{post.author}</Text>
                 <Text>•</Text>
                 <Text>{post.date}</Text>
+                {post.readTime && (
+                  <>
+                    <Text>•</Text>
+                    <Text>{post.readTime}</Text>
+                  </>
+                )}
               </Flex>
+              
+              {/* Tags */}
+              {post.tags && post.tags.length > 0 && (
+                <Flex gap={2} flexWrap="wrap" justifyContent={isLaptop ? "center" : "flex-start"}>
+                  {post.tags.map((tag, index) => (
+                    <Box
+                      key={index}
+                      bg="whiteAlpha.300"
+                      px={3}
+                      py={1}
+                      borderRadius="full"
+                      fontSize="sm"
+                      fontWeight="medium"
+                    >
+                      {tag}
+                    </Box>
+                  ))}
+                </Flex>
+              )}
             </Box>
             
             {!isMobile && (
@@ -255,6 +286,86 @@ export default function BlogPostPage() {
             </Flex>
           </Flex>
         </Box>
+
+        {/* Related Posts */}
+        {relatedPosts.length > 0 && (
+          <Box className="home-section" background="#F7F7F7">
+            <Box maxW="1200px" mx="auto" px={8}>
+              <Text
+                as="h2"
+                fontSize={{ base: "2xl", md: "3xl" }}
+                fontWeight="bold"
+                color="brand.100"
+                mb={8}
+                textAlign="center"
+              >
+                Related Articles
+              </Text>
+              <Flex gap={8} flexDirection={isLaptop ? "column" : "row"}>
+                {relatedPosts.map((relatedPost) => (
+                  <Box
+                    key={relatedPost.slug}
+                    flex={1}
+                    bg="white"
+                    borderRadius="20px"
+                    overflow="hidden"
+                    boxShadow="0 10px 30px rgba(150, 63, 54, 0.1)"
+                    border="1px solid"
+                    borderColor="gray.100"
+                    cursor="pointer"
+                    transition="all 0.3s ease"
+                    _hover={{
+                      transform: "translateY(-8px)",
+                      boxShadow: "0 20px 40px rgba(150, 63, 54, 0.15)"
+                    }}
+                    onClick={() => router.push(`/blog/${relatedPost.slug}`)}
+                  >
+                    <Box position="relative" height="200px">
+                      <Image
+                        src={relatedPost.image}
+                        alt={relatedPost.title}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover"
+                        }}
+                      />
+                    </Box>
+                    <Box p={6}>
+                      <Box
+                        bg="brand.200"
+                        px={3}
+                        py={1}
+                        borderRadius="full"
+                        display="inline-block"
+                        mb={3}
+                      >
+                        <Text fontSize="xs" fontWeight="bold" color="brand.100" textTransform="uppercase">
+                          {relatedPost.category}
+                        </Text>
+                      </Box>
+                      <Text fontSize="xl" fontWeight="bold" color="gray.800" mb={2}>
+                        {relatedPost.title}
+                      </Text>
+                      <Text fontSize="md" color="gray.600" mb={4}>
+                        {relatedPost.excerpt}
+                      </Text>
+                      <Flex gap={2} fontSize="sm" color="gray.500">
+                        <Text>{relatedPost.date}</Text>
+                        {relatedPost.readTime && (
+                          <>
+                            <Text>•</Text>
+                            <Text>{relatedPost.readTime}</Text>
+                          </>
+                        )}
+                      </Flex>
+                    </Box>
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+          </Box>
+        )}
 
         {/* Back to Blog */}
         <Box className="home-section" background="white" textAlign="center">

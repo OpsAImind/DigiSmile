@@ -1,178 +1,101 @@
-import React from "react";
-import { Metadata } from "next";
-import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage";
-import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd";
-import { dental_venuer } from "@/assets/images";
+import type { Metadata } from "next"
+import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
+import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
   title: "Dental Veneers in Washington, D.C. | Smile Experts Dental",
   description:
-    "Get beautiful porcelain veneers in Washington, D.C. Fix chips, gaps, and discoloration for a flawless smile. Call (202) 545-6336 for a consultation.",
-  keywords:
-    "dental veneers Washington DC, porcelain veneers DC, composite veneers, smile makeover DC, veneers cost Washington, cosmetic veneers DC",
-  alternates: {
-    canonical:
-      "https://www.smilexpertsdental.com/dental-veneers-washington-dc/"
-  },
+    "Porcelain and composite veneers in Washington, D.C. Correct chips, gaps, and discoloration with natural-looking results.",
+  alternates: { canonical: "https://www.smilexpertsdental.com/dental-veneers-washington-dc/" },
   openGraph: {
     title: "Dental Veneers in Washington, D.C. | Smile Experts Dental",
-    description:
-      "Beautiful porcelain veneers to fix chips, gaps, and discoloration for a flawless smile.",
+    description: "Transform your smile with custom veneers designed to look natural.",
     url: "https://www.smilexpertsdental.com/dental-veneers-washington-dc/",
     siteName: "Smile Experts Dental",
-    locale: "en_US",
-    type: "website",
     images: [
       {
         url: "https://www.smilexpertsdental.com/icon.png",
         width: 1200,
         height: 630,
-        alt: "Dental Veneers Washington DC"
-      }
-    ]
+        alt: "Dental Veneers Washington DC",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dental Veneers in Washington, D.C. | Smile Experts Dental",
-    description: "Beautiful porcelain veneers in Washington, D.C.",
-    images: ["https://www.smilexpertsdental.com/icon.png"]
-  }
-};
+    description: "Natural-looking veneers in Washington, D.C.",
+    images: ["https://www.smilexpertsdental.com/icon.png"],
+  },
+}
 
-export default function DentalVeneersWashingtonDCPage() {
+export default function Page() {
+  const url = "https://www.smilexpertsdental.com/dental-veneers-washington-dc/"
   return (
     <>
       <ServiceJsonLd
         serviceName="Dental Veneers"
-        description="Custom porcelain and composite veneers to cover imperfections like chips, gaps, or discoloration, giving you a flawless, natural-looking smile."
-        url="https://www.smilexpertsdental.com/dental-veneers-washington-dc/"
-        areaServed="Washington, DC"
+        description="Custom porcelain and composite veneers in Washington, D.C."
+        url={url}
+        areaServed="Washington, D.C."
       />
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "https://www.smilexpertsdental.com/" },
-          {
-            name: "Dental Veneers Washington DC",
-            url: "https://www.smilexpertsdental.com/dental-veneers-washington-dc/"
-          }
+          { name: "Dental Veneers Washington DC", url },
         ]}
       />
       <ServiceDetailPage
         title="Dental Veneers"
         location="Washington, D.C."
-        intro="Transform your smile with custom dental veneers. Our porcelain and composite veneers cover imperfections and create a beautiful, natural-looking smile that lasts."
-        heroImage={dental_venuer}
-        heroImageAlt="Dental Veneers in Washington DC"
+        intro="Achieve a brighter, more balanced smile with custom veneers that enhance shape, shade, and symmetry."
+        heroImageSrc="/dental-veneers-washington-dc.jpg"
+        heroImageAlt="Dental Veneers in Washington, D.C."
         whatIsSection={{
           title: "What are Dental Veneers?",
           content:
-            "Dental veneers are thin, custom-made shells of tooth-colored material designed to cover the front surface of teeth. They are used to improve the appearance of teeth by correcting issues such as chips, cracks, gaps, discoloration, or misalignment. Veneers are bonded to the front of your teeth, providing a natural-looking, durable solution for a flawless smile.",
-          image: dental_venuer
+            "Veneers are thin, custom shells that bond to the front of teeth to improve color, shape, and alignment. They’re crafted for lifelike translucency and durability.",
         }}
         benefits={[
-          {
-            title: "Instant Smile Transformation",
-            description:
-              "Dramatically improve your smile's appearance in just two visits."
-          },
-          {
-            title: "Natural Appearance",
-            description:
-              "Porcelain veneers mimic the light-reflecting properties of natural teeth."
-          },
-          {
-            title: "Stain Resistant",
-            description:
-              "Porcelain veneers resist stains from coffee, tea, and wine better than natural teeth."
-          },
-          {
-            title: "Minimally Invasive",
-            description:
-              "Requires minimal tooth preparation compared to crowns or other restorations."
-          },
-          {
-            title: "Long-Lasting Results",
-            description:
-              "With proper care, veneers can last 10-15 years or longer."
-          },
-          {
-            title: "Versatile Solution",
-            description:
-              "Fix multiple cosmetic issues at once—chips, gaps, stains, and misalignment."
-          }
+          { title: "Natural Aesthetics", description: "Custom shade and shape for seamless results." },
+          { title: "Conservative", description: "Minimal tooth preparation in many cases." },
+          { title: "Stain Resistant", description: "Porcelain resists discoloration from daily life." },
+          { title: "Immediate Impact", description: "Transform your smile in a few visits." },
+          { title: "Durable", description: "With care, veneers can last many years." },
+          { title: "Confidence", description: "Feel great in photos, events, and everyday life." },
         ]}
         procedure={[
           {
             step: 1,
             title: "Consultation & Planning",
-            description:
-              "We discuss your goals, examine your teeth, and create a customized treatment plan."
+            description: "We align options with your goals and take records.",
           },
           {
             step: 2,
-            title: "Tooth Preparation",
-            description:
-              "A small amount of enamel is removed from the tooth surface to make room for the veneer."
+            title: "Preparation & Temporaries",
+            description: "Teeth are prepared if needed and temporaries placed.",
           },
-          {
-            step: 3,
-            title: "Impressions & Temporary Veneers",
-            description:
-              "We take impressions of your teeth and place temporary veneers while your custom veneers are crafted."
-          },
-          {
-            step: 4,
-            title: "Veneer Fabrication",
-            description:
-              "Your custom veneers are created in a dental lab to match your desired shape, size, and color."
-          },
-          {
-            step: 5,
-            title: "Bonding & Final Adjustments",
-            description:
-              "We bond the veneers to your teeth using a strong adhesive and make final adjustments for a perfect fit."
-          }
+          { step: 3, title: "Try-in & Bonding", description: "We refine details and bond your custom veneers." },
+          { step: 4, title: "Follow-Up", description: "We check comfort and provide care guidance." },
         ]}
-        whoCandidateSection={{
-          title: "Who is a Candidate for Dental Veneers?",
-          content:
-            "Veneers are ideal for individuals with healthy teeth and gums who want to improve the appearance of their smile. If you have chips, cracks, gaps, discoloration, or minor misalignment, veneers may be the perfect solution. We'll evaluate your oral health to determine if veneers are right for you."
-        }}
         faqs={[
           {
-            question: "What's the difference between porcelain and composite veneers?",
-            answer:
-              "Porcelain veneers are more durable, stain-resistant, and natural-looking but cost more. Composite veneers are more affordable and can be completed in one visit but may not last as long."
+            question: "Do veneers look fake?",
+            answer: "No—modern materials and customization create naturally beautiful results.",
           },
+          { question: "Are veneers permanent?", answer: "They’re a long-term option; some prep may be irreversible." },
           {
-            question: "How long do dental veneers last?",
+            question: "Porcelain vs composite?",
             answer:
-              "Porcelain veneers typically last 10-15 years or longer with proper care. Composite veneers last 5-7 years on average."
+              "Porcelain offers superior longevity and stain resistance; composite can be a budget-friendly option.",
           },
-          {
-            question: "Are veneers reversible?",
-            answer:
-              "No, because a small amount of enamel is removed during preparation, veneers are considered a permanent treatment."
-          },
-          {
-            question: "Do veneers require special care?",
-            answer:
-              "No special care is needed. Brush, floss, and visit the dentist regularly. Avoid biting hard objects and consider a nightguard if you grind your teeth."
-          },
-          {
-            question: "How much do veneers cost in Washington, D.C.?",
-            answer:
-              "The cost varies based on the type and number of veneers. We offer free consultations to provide a personalized quote and discuss payment options."
-          }
         ]}
         ctaSection={{
-          title: "Get Your Perfect Smile with Veneers",
-          description:
-            "Discover how dental veneers can transform your smile. Schedule a consultation at Smile Experts Dental in Washington, D.C. today.",
+          title: "Discover Your Best Smile",
+          description: "Schedule a veneers consultation in Washington, D.C. to explore your options.",
           phone: "(202) 545-6336",
-          clinic: "dc"
         }}
       />
     </>
-  );
+  )
 }

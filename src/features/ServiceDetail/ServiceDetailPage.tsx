@@ -1,485 +1,399 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import Image, { StaticImageData } from "next/image";
-import { Box, Button, Flex, Text, useMediaQuery, Grid, GridItem } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
-import Navbar from "@/components/Layout/Navbar";
-import Footer from "@/components/Layout/Footer";
-import { userImage1 } from "@/assets/images";
+import type React from "react"
+import { useMemo, useState } from "react"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
+import { Box, Container, Heading, Text, Button, Grid, GridItem, VStack, HStack, Flex, Image, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from "@chakra-ui/react"
+import Navbar from "@/components/Layout/Navbar"
+import Footer from "@/components/Layout/Footer"
 
-interface FAQ {
-  question: string;
-  answer: string;
+type FAQ = { question: string; answer: string }
+type Benefit = { title: string; description: string }
+type ProcedureStep = { step: number; title: string; description: string }
+
+type Theme = {
+  // Keep to 3-5 distinct colors; derive the rest internally
+  primary: string
+  primaryForeground: string
+  background: string
+  foreground: string
+  muted: string
 }
 
-interface Benefit {
-  title: string;
-  description: string;
-}
-
-interface ProcedureStep {
-  step: number;
-  title: string;
-  description: string;
-}
-
-interface ServiceDetailPageProps {
-  title: string;
-  location: string;
-  intro: string;
-  heroImage: StaticImageData;
-  heroImageAlt: string;
+export interface ServiceDetailPageProps {
+  title: string
+  location: string
+  intro: string
+  heroImageSrc: string
+  heroImageAlt: string
   whatIsSection: {
-    title: string;
-    content: string;
-    image?: StaticImageData;
-  };
-  benefits: Benefit[];
-  procedure?: ProcedureStep[];
+    title: string
+    content: string
+  }
+  benefits: Benefit[]
+  procedure?: ProcedureStep[]
   whoCandidateSection?: {
-    title: string;
-    content: string;
-  };
-  faqs: FAQ[];
+    title: string
+    content: string
+  }
+  faqs: FAQ[]
   ctaSection: {
-    title: string;
-    description: string;
-    phone: string;
-    clinic?: string;
-  };
+    title: string
+    description: string
+    phone: string
+  }
+  // Optional per-page theme override
+  theme?: Partial<Theme>
 }
 
-const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
+// ---- Theming utilities ----
+function hashString(str: string) {
+  let h = 0
+  for (let i = 0; i < str.length; i++) {
+    h = (h << 5) - h + str.charCodeAt(i)
+    h |= 0
+  }
+  return Math.abs(h)
+}
+
+function hsl(h: number, s: number, l: number) {
+  return `hsl(${h} ${s}% ${l}%)`
+}
+
+function pickThemeFromSeed(seed: string): Theme {
+  // Use consistent brand colors for all service pages
+  const primary = "#963f36" // Brand primary color
+  const primaryForeground = "#ffffff"
+  const background = "#ffffff"
+  const foreground = "#0b0d10"
+  const muted = "#faf7f5" // Brand light background
+  return { primary, primaryForeground, background, foreground, muted }
+}
+
+function isLight(hexOrHsl: string) {
+  // Naive luminance check; assumes hex when starting with #
+  if (!hexOrHsl.startsWith("#")) return true
+  const hex = hexOrHsl.replace("#", "")
+  const bigint = Number.parseInt(
+    hex.length === 3
+      ? hex
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : hex,
+    16,
+  )
+  const r = (bigint >> 16) & 255
+  const g = (bigint >> 8) & 255
+  const b = bigint & 255
+  // Relative luminance approximation
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 165
+}
+
+export default function ServiceDetailPage({
   title,
   location,
   intro,
-  heroImage,
+  heroImageSrc,
   heroImageAlt,
   whatIsSection,
   benefits,
   procedure,
   whoCandidateSection,
   faqs,
-  ctaSection
-}) => {
-  const router = useRouter();
-  const [isLaptop] = useMediaQuery("(max-width: 1000px)");
-  const [isMobile] = useMediaQuery("(max-width: 680px)");
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+  ctaSection,
+  theme: themeOverride,
+}: ServiceDetailPageProps) {
+  const [expanded, setExpanded] = useState<number | null>(null)
+  const prefersReducedMotion = useReducedMotion()
 
-  const handleBookAppointment = () => {
-    const userId = localStorage.getItem("userId");
-    const clinicParam = ctaSection.clinic ? `&clinic=${ctaSection.clinic}` : "";
-    
-    if (!userId) {
-      router.push(`/appointment?${clinicParam.slice(1)}`);
-    } else {
-      router.push(`/profile/${userId}/quick-appointment?tabId=2${clinicParam}`);
+  // Compute a distinct theme for each page automatically based on title+location.
+  const baseTheme = useMemo(() => pickThemeFromSeed(`${title}-${location}`), [title, location])
+  const theme = useMemo<Theme>(() => {
+    return {
+      primary: themeOverride?.primary ?? baseTheme.primary,
+      primaryForeground: themeOverride?.primaryForeground ?? baseTheme.primaryForeground,
+      background: themeOverride?.background ?? baseTheme.background,
+      foreground: themeOverride?.foreground ?? baseTheme.foreground,
+      muted: themeOverride?.muted ?? baseTheme.muted,
     }
-  };
+  }, [baseTheme, themeOverride])
+
+  // Derive subtle tokens from the 3-5 base colors
+  const card = theme.background
+  const border = isLight(theme.background) ? "rgba(2, 6, 23, 0.12)" : "rgba(255, 255, 255, 0.16)"
+  const accent = theme.primary
+
+  // Animation presets
+  const fadeUp = {
+    initial: { opacity: 0, y: prefersReducedMotion ? 0 : 18 },
+    whileInView: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    viewport: { once: true, margin: "-80px" },
+  }
+
+  const staggerParent = {
+    initial: {},
+    whileInView: {
+      transition: { staggerChildren: 0.08 },
+    },
+    viewport: { once: true, margin: "-60px" },
+  }
+
+  const item = {
+    initial: { opacity: 0, y: prefersReducedMotion ? 0 : 16 },
+    whileInView: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  }
 
   return (
-    <Box position="relative" overflowX="hidden">
+    <Box position="relative">
       <Navbar />
-      
-      {/* Hero Section - Modern Design */}
-      <Box
-        className="home-section"
-        position="relative"
-        minHeight="70vh"
-        background="linear-gradient(135deg, #963f36 0%, #b85450 100%)"
-        display="flex"
-        alignItems="center"
-        mt="80px"
-      >
-        <Flex
-          width="100%"
-          maxW="1400px"
-          mx="auto"
-          px={8}
-          alignItems="center"
-          gap={12}
-          flexDirection={isLaptop ? "column" : "row"}
+      <Box as="main" mt="80px">
+        {/* Hero */}
+        <Box
+          as={motion.section}
+          position="relative"
+          overflow="hidden"
+          bg={theme.primary}
+          color={theme.primaryForeground}
+          {...fadeUp}
         >
-          <Box flex={1} color="white" textAlign={isLaptop ? "center" : "left"}>
-            <Text
-              as="h1"
-              className="heading"
-              mb={6}
-              fontWeight="bold"
-            >
-              {title} in {location}
-            </Text>
-            <Text
-              fontSize={isMobile ? "lg" : "xl"}
-              mb={8}
-              lineHeight="tall"
-              opacity={0.9}
-            >
-              {intro}
-            </Text>
-            <Flex gap={4} justifyContent={isLaptop ? "center" : "flex-start"} flexWrap="wrap">
-              <Button
-                variant="appointment"
-                size="lg"
-                bg="white"
-                color="brand.100"
-                _hover={{ 
-                  transform: "translateY(-2px)",
-                  boxShadow: "xl"
-                }}
-                transition="all 0.3s ease"
-                onClick={handleBookAppointment}
-              >
-                Book Appointment
-              </Button>
-              <Button
-                as="a"
-                href={`tel:${ctaSection.phone}`}
-                size="lg"
-                bg="transparent"
-                color="white"
-                border="2px solid white"
-                _hover={{ 
-                  bg: "whiteAlpha.200",
-                  transform: "translateY(-2px)"
-                }}
-                transition="all 0.3s ease"
-              >
-                Call {ctaSection.phone}
-              </Button>
-            </Flex>
-          </Box>
-          
-          {!isMobile && (
-            <Box flex={1} position="relative">
-              <Box
-                position="relative"
-                borderRadius="20px"
-                overflow="hidden"
-                boxShadow="2xl"
-                transform="rotate(3deg)"
-                _hover={{ transform: "rotate(0deg)" }}
-                transition="all 0.5s ease"
-              >
-                <Image
-                  src={heroImage}
-                  alt={heroImageAlt}
-                  style={{ 
-                    width: "100%", 
-                    height: "400px", 
-                    objectFit: "cover"
-                  }}
-                />
-              </Box>
-            </Box>
-          )}
-        </Flex>
-      </Box>
-
-      {/* What Is Section - Matching Homepage Style */}
-      <Box className="home-section" background="#F7F7F7" position="relative">
-        <Flex
-          maxW="1400px"
-          mx="auto"
-          px={8}
-          alignItems="center"
-          gap={12}
-          flexDirection={isLaptop ? "column" : "row"}
-        >
-          <Box flex={1} order={isLaptop ? 2 : 1}>
-            <Text
-              as="h2"
-              className="heading"
-              color="brand.100"
-              mb={6}
-              textAlign={isLaptop ? "center" : "left"}
-            >
-              {whatIsSection.title}
-            </Text>
-            <Text 
-              fontSize="lg" 
-              color="gray.700" 
-              lineHeight="tall"
-              textAlign={isLaptop ? "center" : "left"}
-            >
-              {whatIsSection.content}
-            </Text>
-          </Box>
-          
-          <Box flex={1} order={isLaptop ? 1 : 2} position="relative">
-            {!isMobile && (
-              <Image
-                src={userImage1}
-                alt="Dental Professional"
-                style={{ 
-                  width: "100%", 
-                  height: "auto",
-                  borderRadius: "20px"
-                }}
-              />
-            )}
-          </Box>
-        </Flex>
-      </Box>
-
-      {/* Benefits Section - Card Grid */}
-      <Box className="home-section" background="white">
-        <Box maxW="1400px" mx="auto" px={8}>
-          <Text
-            as="h2"
-            className="heading"
-            color="brand.100"
-            mb={12}
-            textAlign="center"
-          >
-            Why Choose {title} in {location}?
-          </Text>
-          
-          <Grid
-            templateColumns={isMobile ? "1fr" : isLaptop ? "repeat(2, 1fr)" : "repeat(3, 1fr)"}
-            gap={8}
-          >
-            {benefits.map((benefit, index) => (
-              <GridItem key={index}>
-                <Box
-                  bg="white"
-                  p={8}
-                  borderRadius="20px"
-                  boxShadow="0 10px 30px rgba(150, 63, 54, 0.1)"
+        <Container maxW="6xl" py={{ base: 12, md: 16 }}>
+          <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={{ base: 8, md: 12 }} alignItems="center">
+            <Box as={motion.div} {...fadeUp}>
+              <Heading as="h1" size="3xl" fontWeight="bold" mb={4}>
+                {title} in {location}
+              </Heading>
+              <Text fontSize={{ base: "md", md: "lg" }} mb={6} opacity={0.95}>
+                {intro}
+              </Text>
+              <HStack spacing={3} flexWrap="wrap">
+                <Button
+                  as="a"
+                  href="/appointment"
+                  size="lg"
+                  bg={card}
+                  color={theme.foreground}
+                  _hover={{ opacity: 0.9 }}
+                  boxShadow="sm"
                   border="1px solid"
-                  borderColor="gray.100"
-                  height="100%"
-                  position="relative"
-                  _hover={{
-                    transform: "translateY(-8px)",
-                    boxShadow: "0 20px 40px rgba(150, 63, 54, 0.15)"
-                  }}
-                  transition="all 0.3s ease"
+                  borderColor={border}
                 >
-                  <Box
-                    position="absolute"
-                    top={-3}
-                    left={6}
-                    bg="brand.100"
-                    color="white"
-                    px={4}
-                    py={1}
-                    borderRadius="full"
-                    fontSize="sm"
-                    fontWeight="bold"
-                  >
-                    {String(index + 1).padStart(2, '0')}
-                  </Box>
-                  <Text
-                    fontSize="xl"
-                    fontWeight="bold"
-                    color="brand.100"
-                    mb={4}
-                    mt={2}
-                  >
-                    {benefit.title}
-                  </Text>
-                  <Text color="gray.700" lineHeight="tall">
-                    {benefit.description}
-                  </Text>
-                </Box>
-              </GridItem>
+                  Book Appointment
+                </Button>
+                <Button
+                  as="a"
+                  href={`tel:${ctaSection.phone}`}
+                  size="lg"
+                  variant="outline"
+                  borderColor={theme.primaryForeground}
+                  color={theme.primaryForeground}
+                  _hover={{ bg: "whiteAlpha.200" }}
+                >
+                  Call {ctaSection.phone}
+                </Button>
+              </HStack>
+            </Box>
+
+            <Box
+              as={motion.div}
+              order={{ base: -1, md: 1 }}
+              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }}
+              whileInView={{ opacity: 1, x: 0, transition: { duration: 0.6 } }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <Image
+                src={heroImageSrc || "/placeholder.svg?height=600&width=900&query=service hero image"}
+                alt={heroImageAlt}
+                w="full"
+                maxH="400px"
+                objectFit="cover"
+                borderRadius="xl"
+                boxShadow="lg"
+                border="1px solid"
+                borderColor={border}
+              />
+            </Box>
+          </Grid>
+        </Container>
+
+        {/* Decorative underline */}
+        <Box
+          position="absolute"
+          bottom={0}
+          left={0}
+          right={0}
+          h="4px"
+          bgGradient={`linear(to-r, ${card}, ${accent})`}
+        />
+      </Box>
+
+      {/* What Is */}
+      <Box as={motion.section} bg={theme.muted} {...fadeUp}>
+        <Container maxW="6xl" py={{ base: 12, md: 16 }}>
+          <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} mb={4}>
+            {whatIsSection.title}
+          </Heading>
+          <Text fontSize={{ base: "md", md: "lg" }} color="rgba(2,6,23,0.75)">
+            {whatIsSection.content}
+          </Text>
+        </Container>
+      </Box>
+
+      {/* Benefits */}
+      <Box
+        as={motion.section}
+        bg={theme.background}
+        variants={staggerParent}
+        initial="initial"
+        whileInView="whileInView"
+        viewport={{ once: true }}
+      >
+        <Container maxW="6xl" py={{ base: 12, md: 16 }}>
+          <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} mb={8}>
+            Why Choose {title} in {location}?
+          </Heading>
+          <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
+            {benefits.map((b, i) => (
+              <Box
+                as={motion.article}
+                key={i}
+                bg={card}
+                p={6}
+                borderRadius="xl"
+                boxShadow="sm"
+                border="1px solid"
+                borderColor={border}
+                variants={item}
+              >
+                <Text fontSize="sm" fontWeight="semibold" color={accent} mb={2}>
+                  {"0".concat(String(i + 1)).slice(-2)}
+                </Text>
+                <Heading as="h3" size="md" fontWeight="bold" color={theme.foreground} mb={2}>
+                  {b.title}
+                </Heading>
+                <Text fontSize="md" color="rgba(2,6,23,0.75)">
+                  {b.description}
+                </Text>
+              </Box>
             ))}
           </Grid>
-        </Box>
+        </Container>
       </Box>
 
-      {/* Procedure Section - Timeline Style */}
-      {procedure && procedure.length > 0 && (
-        <Box className="home-section" background="#F7F7F7">
-          <Box maxW="1200px" mx="auto" px={8}>
-            <Text
-              as="h2"
-              className="heading"
-              color="brand.100"
-              mb={12}
-              textAlign="center"
-            >
+      {/* Procedure */}
+      {procedure && procedure.length > 0 ? (
+        <Box as={motion.section} bg={theme.muted} {...fadeUp}>
+          <Container maxW="5xl" py={{ base: 12, md: 16 }}>
+            <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} mb={8}>
               What to Expect During Your {title}
-            </Text>
-            
-            <Flex flexDirection="column" gap={6} position="relative">
-              {/* Timeline Line */}
-              <Box
-                position="absolute"
-                left={isMobile ? "25px" : "50px"}
-                top="50px"
-                bottom="50px"
-                width="3px"
-                bg="brand.100"
-                opacity={0.3}
-                display={isMobile ? "none" : "block"}
-              />
-              
-              {procedure.map((step, index) => (
-                <Flex
-                  key={index}
-                  gap={6}
-                  alignItems="flex-start"
-                  position="relative"
-                >
-                  <Box
-                    minW={isMobile ? "40px" : "60px"}
-                    h={isMobile ? "40px" : "60px"}
-                    bg="brand.100"
-                    color="white"
-                    display="flex"
+            </Heading>
+            <VStack spacing={4} align="stretch">
+              {procedure.map((step) => (
+                <Flex key={step.step} gap={4} as={motion.li} {...fadeUp}>
+                  <Flex
+                    w="40px"
+                    h="40px"
+                    flexShrink={0}
                     alignItems="center"
                     justifyContent="center"
                     borderRadius="full"
-                    fontSize={isMobile ? "lg" : "xl"}
-                    fontWeight="bold"
-                    boxShadow="lg"
-                    position="relative"
-                    zIndex={2}
+                    bg={theme.primary}
+                    color={theme.primaryForeground}
+                    fontWeight="semibold"
                   >
                     {step.step}
-                  </Box>
+                  </Flex>
                   <Box
-                    bg="white"
-                    p={6}
-                    borderRadius="15px"
-                    boxShadow="md"
                     flex={1}
+                    bg={card}
+                    p={4}
+                    borderRadius="lg"
                     border="1px solid"
-                    borderColor="gray.100"
+                    borderColor={border}
                   >
-                    <Text fontSize="xl" fontWeight="bold" mb={3} color="brand.100">
+                    <Heading as="h3" size="md" fontWeight="bold" color={theme.foreground} mb={1}>
                       {step.title}
-                    </Text>
-                    <Text color="gray.700" lineHeight="tall">
+                    </Heading>
+                    <Text fontSize="md" color="rgba(2,6,23,0.75)">
                       {step.description}
                     </Text>
                   </Box>
                 </Flex>
               ))}
-            </Flex>
-          </Box>
+            </VStack>
+          </Container>
         </Box>
-      )}
+      ) : null}
 
-      {/* Who is a Candidate Section */}
-      {whoCandidateSection && (
-        <Box className="home-section" background="white">
-          <Box maxW="1000px" mx="auto" px={8} textAlign="center">
-            <Text
-              as="h2"
-              className="heading"
-              color="brand.100"
-              mb={6}
-            >
+      {/* Candidate */}
+      {whoCandidateSection ? (
+        <Box as={motion.section} bg={theme.background} {...fadeUp}>
+          <Container maxW="4xl" py={{ base: 12, md: 16 }} textAlign="center">
+            <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} mb={4}>
               {whoCandidateSection.title}
-            </Text>
-            <Text fontSize="lg" color="gray.700" lineHeight="tall">
+            </Heading>
+            <Text fontSize={{ base: "md", md: "lg" }} color="rgba(2,6,23,0.75)">
               {whoCandidateSection.content}
             </Text>
-          </Box>
+          </Container>
         </Box>
-      )}
+      ) : null}
 
-      {/* FAQ Section - Accordion Style */}
-      <Box className="home-section" background="#F7F7F7">
-        <Box maxW="1000px" mx="auto" px={8}>
-          <Text
-            as="h2"
-            className="heading"
-            color="brand.100"
-            mb={12}
-            textAlign="center"
-          >
+      {/* FAQs */}
+      <Box as={motion.section} bg={theme.muted} {...fadeUp}>
+        <Container maxW="3xl" py={{ base: 12, md: 16 }}>
+          <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} textAlign="center" mb={8}>
             Frequently Asked Questions
-          </Text>
-          
-          <Flex flexDirection="column" gap={4}>
-            {faqs.map((faq, index) => (
-              <Box
-                key={index}
-                bg="white"
-                borderRadius="15px"
-                boxShadow="md"
+          </Heading>
+          <Accordion allowToggle>
+            {faqs.map((faq, i) => (
+              <AccordionItem
+                key={i}
+                bg={card}
+                borderRadius="lg"
                 border="1px solid"
-                borderColor="gray.100"
-                overflow="hidden"
-                transition="all 0.3s ease"
-                _hover={{ boxShadow: "lg" }}
+                borderColor={border}
+                mb={4}
               >
-                <Button
-                  w="100%"
-                  p={6}
-                  bg="transparent"
-                  textAlign="left"
-                  fontWeight="bold"
-                  fontSize="lg"
-                  color="brand.100"
-                  _hover={{ bg: "gray.50" }}
-                  onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
-                  rightIcon={
-                    <Text fontSize="xl">
-                      {expandedFAQ === index ? "−" : "+"}
-                    </Text>
-                  }
-                  justifyContent="space-between"
-                >
-                  {faq.question}
-                </Button>
-                
-                {expandedFAQ === index && (
-                  <Box p={6} pt={0} borderTop="1px solid" borderColor="gray.100">
-                    <Text color="gray.700" lineHeight="tall">
-                      {faq.answer}
+                <AccordionButton py={3} px={4}>
+                  <Box flex="1" textAlign="left">
+                    <Text fontSize="lg" fontWeight="bold" color={theme.foreground}>
+                      {faq.question}
                     </Text>
                   </Box>
-                )}
-              </Box>
+                  <AccordionIcon color={accent} />
+                </AccordionButton>
+                <AccordionPanel pb={4} pt={0} px={4}>
+                  <Text fontSize="md" color="rgba(2,6,23,0.75)">
+                    {faq.answer}
+                  </Text>
+                </AccordionPanel>
+              </AccordionItem>
             ))}
-          </Flex>
-        </Box>
+          </Accordion>
+        </Container>
       </Box>
 
-      {/* CTA Section - Modern Gradient */}
-      <Box 
-        className="home-section"
-        background="linear-gradient(135deg, #963f36 0%, #b85450 100%)"
-        color="white"
-      >
-        <Flex
-          maxW="1200px"
-          mx="auto"
-          px={8}
-          flexDirection="column"
-          alignItems="center"
-          textAlign="center"
-          gap={6}
-        >
-          <Text
-            as="h2"
-            className="heading"
-            mb={4}
-          >
+      {/* CTA */}
+      <Box as={motion.section} bg={theme.primary} color={theme.primaryForeground} {...fadeUp}>
+        <Container maxW="5xl" py={{ base: 12, md: 16 }} textAlign="center">
+          <Heading as="h2" size="2xl" fontWeight="bold" mb={3}>
             {ctaSection.title}
-          </Text>
-          <Text fontSize="xl" maxW="700px" opacity={0.9} mb={4}>
+          </Heading>
+          <Text fontSize={{ base: "md", md: "lg" }} maxW="2xl" mx="auto" mb={6} opacity={0.95}>
             {ctaSection.description}
           </Text>
-          <Flex gap={6} flexWrap="wrap" justifyContent="center">
+          <HStack spacing={3} justify="center" flexWrap="wrap">
             <Button
-              variant="appointment"
+              as="a"
+              href="/appointment"
               size="lg"
-              bg="white"
-              color="brand.100"
-              _hover={{ 
-                transform: "translateY(-3px)",
-                boxShadow: "xl"
-              }}
-              transition="all 0.3s ease"
-              onClick={handleBookAppointment}
+              bg={card}
+              color={theme.foreground}
+              _hover={{ opacity: 0.9 }}
+              boxShadow="sm"
+              border="1px solid"
+              borderColor={border}
             >
               Book Online Now
             </Button>
@@ -487,24 +401,18 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
               as="a"
               href={`tel:${ctaSection.phone}`}
               size="lg"
-              bg="transparent"
-              color="white"
-              border="2px solid white"
-              _hover={{ 
-                bg: "whiteAlpha.200",
-                transform: "translateY(-3px)"
-              }}
-              transition="all 0.3s ease"
+              variant="outline"
+              borderColor={theme.primaryForeground}
+              color={theme.primaryForeground}
+              _hover={{ bg: "whiteAlpha.200" }}
             >
               Call {ctaSection.phone}
             </Button>
-          </Flex>
-        </Flex>
+          </HStack>
+        </Container>
       </Box>
-
+      </Box>
       <Footer />
     </Box>
-  );
-};
-
-export default ServiceDetailPage;
+  )
+}

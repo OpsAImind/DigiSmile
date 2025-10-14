@@ -18,6 +18,8 @@ export interface BlogPost {
   author: string;
   metaTitle: string;
   metaDescription: string;
+  tags?: string[];
+  readTime?: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -55,7 +57,9 @@ export const blogPosts: BlogPost[] = [
     metaTitle:
       "5 Signs You Need Root Canal Treatment | Smile Experts Dental Blog",
     metaDescription:
-      "Discover the 5 warning signs that indicate you may need root canal treatment and why early intervention is crucial for saving your tooth."
+      "Discover the 5 warning signs that indicate you may need root canal treatment and why early intervention is crucial for saving your tooth.",
+    tags: ["Root Canal", "Dental Pain", "Tooth Infection", "Emergency Dentistry"],
+    readTime: "5 min read"
   },
   {
     slug: "how-to-maintain-white-teeth-after-whitening",
@@ -94,7 +98,9 @@ export const blogPosts: BlogPost[] = [
     metaTitle:
       "How to Maintain White Teeth After Whitening | Smile Experts Dental",
     metaDescription:
-      "Learn expert tips to keep your teeth bright and white long after your professional whitening treatment."
+      "Learn expert tips to keep your teeth bright and white long after your professional whitening treatment.",
+    tags: ["Teeth Whitening", "Oral Care", "Cosmetic Dentistry", "Dental Tips"],
+    readTime: "6 min read"
   },
   {
     slug: "importance-of-regular-dental-checkups",
@@ -133,9 +139,19 @@ export const blogPosts: BlogPost[] = [
     metaTitle:
       "The Importance of Regular Dental Checkups | Smile Experts Dental",
     metaDescription:
-      "Discover why routine dental visits are essential for maintaining oral health and preventing serious dental problems."
+      "Discover why routine dental visits are essential for maintaining oral health and preventing serious dental problems.",
+    tags: ["Preventive Care", "Dental Checkup", "Oral Health", "Gum Disease"],
+    readTime: "7 min read"
   }
 ];
+
+export function getAllTags(): string[] {
+  const tags = new Set<string>();
+  blogPosts.forEach(post => {
+    post.tags?.forEach(tag => tags.add(tag));
+  });
+  return Array.from(tags).sort();
+}
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);

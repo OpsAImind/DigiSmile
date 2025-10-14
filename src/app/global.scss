@@ -1,9 +1,9 @@
 * {
-  padding: 0;
-  margin: 0;
-  border: none;
-  background: none;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -36,31 +36,36 @@
   }
 }
 
-h1 {
-  font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem) !important;
-}
+// Scope heading styles to avoid conflicts with Tailwind utilities
+// Only apply to elements with specific classes, not globally
+.custom-content {
+  h1 {
+    font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem) !important;
+  }
 
-h2 {
-  font-size: clamp(1.25rem, 1.5vw + 1rem, 2rem) !important;
-}
+  h2 {
+    font-size: clamp(1.25rem, 1.5vw + 1rem, 2rem) !important;
+  }
 
-h3 {
-  font-size: clamp(1.125rem, 1.5vw + 1rem, 1.5rem) !important;
-}
+  h3 {
+    font-size: clamp(1.125rem, 1.5vw + 1rem, 1.5rem) !important;
+  }
 
-h4 {
-  font-size: clamp(1rem, 1vw + 0.75rem, 1.125rem) !important;
-}
+  h4 {
+    font-size: clamp(1rem, 1vw + 0.75rem, 1.125rem) !important;
+  }
 
-h5 {
-  font-size: clamp(0.875rem, 0.875vw + 0.75rem, 1rem) !important;
-}
+  h5 {
+    font-size: clamp(0.875rem, 0.875vw + 0.75rem, 1rem) !important;
+  }
 
-h6 {
-  font-size: clamp(0.75rem, 0.75vw + 0.5rem, 0.875rem) !important;
-}
-p {
-  font-size: clamp(0.625rem, 0.625vw + 0.5rem, 0.75rem) !important;
+  h6 {
+    font-size: clamp(0.75rem, 0.75vw + 0.5rem, 0.875rem) !important;
+  }
+  
+  p {
+    font-size: clamp(0.625rem, 0.625vw + 0.5rem, 0.75rem) !important;
+  }
 }
 
 /* CSS */
