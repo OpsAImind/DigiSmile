@@ -19,13 +19,13 @@ export default function BlogPageClient() {
       {/* Hero Section - Modern Design */}
       <Box
         className="home-section"
-        pt="120px"
+      
         background="linear-gradient(135deg, #963f36 0%, #b85450 100%)"
         color="white"
         textAlign="center"
       >
       <Navbar />
-        <Box maxW="1200px" mx="auto" px={8}>
+        <Box maxW="1200px" alignContent={"center"} height={"50vh"} mx="auto" px={8}>
           <Text
             as="h1"
             className="heading"
@@ -35,8 +35,10 @@ export default function BlogPageClient() {
             Dental Health Blog
           </Text>
           <Text fontSize="xl" maxW="800px" mx="auto" opacity={0.9}>
-            Expert tips, advice, and insights from Smile Experts Dental in Washington, D.C.
-          </Text>
+    Stay informed with expert dental tips, oral care advice, and the latest insights from 
+    <strong> Smile Experts Dental in Washington, D.C.</strong>. Our blog helps you understand treatments, 
+    maintain a healthy smile, and make confident choices about your dental health.
+  </Text>
         </Box>
       </Box>
 
@@ -75,6 +77,9 @@ export default function BlogPageClient() {
                       height: "100%",
                       objectFit: "cover"
                     }}
+                    width={100}
+                    height={250}
+                    objectFit="cover"
                   />
                 </Box>
                 <Box p={6}>

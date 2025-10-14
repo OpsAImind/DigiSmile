@@ -1,393 +1,72 @@
-"use client";
-
-import React from "react";
-import { Box, Flex, Text, Button, useMediaQuery } from "@chakra-ui/react";
-import { useRouter, useParams } from "next/navigation";
-import Image from "next/image";
-import Navbar from "@/components/Layout/Navbar";
-import Footer from "@/components/Layout/Footer";
+import type { Metadata } from "next";
 import { getBlogPostBySlug, blogPosts } from "@/utils/blogData";
-import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd";
+import BlogPostClient from "./BlogPostClient";
 
-export default function BlogPostPage() {
-  const router = useRouter();
-  const params = useParams();
-  const slug = params?.slug as string;
-  const [isLaptop] = useMediaQuery("(max-width: 1000px)");
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+type Props = {
+  params: { slug: string };
+};
 
-  const post = getBlogPostBySlug(slug);
-  
-  // Get related posts (same category, excluding current post)
-  const relatedPosts = blogPosts
-    .filter(p => p.slug !== slug && p.category === post?.category)
-    .slice(0, 2);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = getBlogPostBySlug(params.slug);
 
   if (!post) {
-    return (
-      <Box position="relative">
-        <Navbar />
-        <Box mt="80px" px={8} py={16} textAlign="center">
-          <Text fontSize="2xl" fontWeight="bold" mb={4}>
-            Blog Post Not Found
-          </Text>
-          <Button onClick={() => router.push("/blog")} variant="appointment">
-            Back to Blog
-          </Button>
-        </Box>
-        <Footer />
-      </Box>
-    );
+    return {
+      title: "Blog Post Not Found | Smile Experts Dental",
+      description: "The requested blog post could not be found.",
+    };
   }
 
-  return (
-    <>
-      <ArticleJsonLd
-        title={post.title}
-        description={post.excerpt}
-        url={`https://www.smilexpertsdental.com/blog/${post.slug}`}
-        datePublished={new Date(post.date).toISOString()}
-        authorName={post.author}
-        image={`https://www.smilexpertsdental.com/icon.png`}
-      />
-      <BreadcrumbJsonLd
-        items={[
-          { name: "Home", url: "https://www.smilexpertsdental.com/" },
-          { name: "Blog", url: "https://www.smilexpertsdental.com/blog/" },
-          {
-            name: post.title,
-            url: `https://www.smilexpertsdental.com/blog/${post.slug}`
-          }
-        ]}
-      />
-      <Box position="relative">
-        <Navbar />
+  return {
+    title: post.metaTitle,
+    description: post.metaDescription,
+    keywords: post.tags,
+    alternates: {
+      canonical: `https://www.smilexpertsdental.com/blog/${post.slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `https://www.smilexpertsdental.com/blog/${post.slug}`,
+      siteName: "Smile Experts Dental",
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      locale: "en_US",
+      type: "article",
+      publishedTime: new Date(post.date).toISOString(),
+      authors: [post.author],
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  };
+}
 
-        {/* Hero Section - Modern Design */}
-        <Box 
-          className="home-section"
-          mt="80px" 
-          position="relative" 
-          minHeight="60vh"
-          background="linear-gradient(135deg, #963f36 0%, #b85450 100%)"
-          display="flex"
-          alignItems="center"
-        >
-          <Flex
-            width="100%"
-            maxW="1200px"
-            mx="auto"
-            px={8}
-            alignItems="center"
-            gap={12}
-            flexDirection={isLaptop ? "column" : "row"}
-          >
-            <Box flex={1} color="white" textAlign={isLaptop ? "center" : "left"}>
-              <Box
-                bg="whiteAlpha.200"
-                px={4}
-                py={2}
-                borderRadius="full"
-                display="inline-block"
-                mb={4}
-              >
-                <Text
-                  fontSize="sm"
-                  fontWeight="bold"
-                  textTransform="uppercase"
-                >
-                  {post.category}
-                </Text>
-              </Box>
-              <Text
-                as="h1"
-                className="heading"
-                mb={6}
-                fontWeight="bold"
-              >
-                {post.title}
-              </Text>
-              <Flex
-                gap={4}
-                fontSize="lg"
-                opacity={0.9}
-                justifyContent={isLaptop ? "center" : "flex-start"}
-                mb={6}
-                flexWrap="wrap"
-              >
-                <Text>{post.author}</Text>
-                <Text>•</Text>
-                <Text>{post.date}</Text>
-                {post.readTime && (
-                  <>
-                    <Text>•</Text>
-                    <Text>{post.readTime}</Text>
-                  </>
-                )}
-              </Flex>
-              
-              {/* Tags */}
-              {post.tags && post.tags.length > 0 && (
-                <Flex gap={2} flexWrap="wrap" justifyContent={isLaptop ? "center" : "flex-start"}>
-                  {post.tags.map((tag, index) => (
-                    <Box
-                      key={index}
-                      bg="whiteAlpha.300"
-                      px={3}
-                      py={1}
-                      borderRadius="full"
-                      fontSize="sm"
-                      fontWeight="medium"
-                    >
-                      {tag}
-                    </Box>
-                  ))}
-                </Flex>
-              )}
-            </Box>
-            
-            {!isMobile && (
-              <Box flex={1} position="relative">
-                <Box
-                  position="relative"
-                  borderRadius="20px"
-                  overflow="hidden"
-                  boxShadow="2xl"
-                  transform="rotate(-3deg)"
-                  _hover={{ transform: "rotate(0deg)" }}
-                  transition="all 0.5s ease"
-                >
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    style={{ 
-                      width: "100%", 
-                      height: "350px", 
-                      objectFit: "cover"
-                    }}
-                  />
-                </Box>
-              </Box>
-            )}
-          </Flex>
-        </Box>
+export async function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
-        {/* Article Content */}
-        <Box className="home-section" background="#F7F7F7">
-          <Box maxW="900px" mx="auto" px={8}>
-            <Box
-              bg="white"
-              p={8}
-              borderRadius="20px"
-              boxShadow="0 10px 30px rgba(150, 63, 54, 0.1)"
-              border="1px solid"
-              borderColor="gray.100"
-            >
-              <Box
-                className="blog-content"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-                sx={{
-                  "& h2": {
-                    fontSize: isMobile ? "xl" : "2xl",
-                    fontWeight: "bold",
-                    color: "brand.100",
-                    mt: 8,
-                    mb: 4,
-                    "&:first-of-type": {
-                      mt: 0
-                    }
-                  },
-                  "& p": {
-                    fontSize: "lg",
-                    color: "gray.700",
-                    lineHeight: "tall",
-                    mb: 6
-                  },
-                  "& ul, & ol": {
-                    ml: 6,
-                    mb: 6
-                  },
-                  "& li": {
-                    fontSize: "lg",
-                    color: "gray.700",
-                    mb: 2,
-                    lineHeight: "tall"
-                  }
-                }}
-              />
-            </Box>
-          </Box>
-        </Box>
-
-        {/* CTA Section */}
-        <Box 
-          className="home-section"
-          background="linear-gradient(135deg, #963f36 0%, #b85450 100%)"
-          color="white"
-        >
-          <Flex
-            maxW="1000px"
-            mx="auto"
-            px={8}
-            flexDirection="column"
-            alignItems="center"
-            textAlign="center"
-            gap={6}
-          >
-            <Text
-              as="h2"
-              className="heading"
-              mb={4}
-            >
-              Ready to Improve Your Smile?
-            </Text>
-            <Text fontSize="xl" maxW="700px" opacity={0.9} mb={4}>
-              Schedule an appointment with Smile Experts Dental in Washington, D.C. today.
-            </Text>
-            <Flex gap={6} flexWrap="wrap" justifyContent="center">
-              <Button
-                variant="appointment"
-                size="lg"
-                bg="white"
-                color="brand.100"
-                _hover={{ 
-                  transform: "translateY(-3px)",
-                  boxShadow: "xl"
-                }}
-                transition="all 0.3s ease"
-                onClick={() => {
-                  const userId = localStorage.getItem("userId");
-                  if (!userId) {
-                    router.push("/appointment?clinic=dc");
-                  } else {
-                    router.push(
-                      `/profile/${userId}/quick-appointment?tabId=2&clinic=dc`
-                    );
-                  }
-                }}
-              >
-                Book Appointment
-              </Button>
-              <Button
-                as="a"
-                href="tel:(202) 545-6336"
-                size="lg"
-                bg="transparent"
-                color="white"
-                border="2px solid white"
-                _hover={{ 
-                  bg: "whiteAlpha.200",
-                  transform: "translateY(-3px)"
-                }}
-                transition="all 0.3s ease"
-              >
-                Call (202) 545-6336
-              </Button>
-            </Flex>
-          </Flex>
-        </Box>
-
-        {/* Related Posts */}
-        {relatedPosts.length > 0 && (
-          <Box className="home-section" background="#F7F7F7">
-            <Box maxW="1200px" mx="auto" px={8}>
-              <Text
-                as="h2"
-                fontSize={{ base: "2xl", md: "3xl" }}
-                fontWeight="bold"
-                color="brand.100"
-                mb={8}
-                textAlign="center"
-              >
-                Related Articles
-              </Text>
-              <Flex gap={8} flexDirection={isLaptop ? "column" : "row"}>
-                {relatedPosts.map((relatedPost) => (
-                  <Box
-                    key={relatedPost.slug}
-                    flex={1}
-                    bg="white"
-                    borderRadius="20px"
-                    overflow="hidden"
-                    boxShadow="0 10px 30px rgba(150, 63, 54, 0.1)"
-                    border="1px solid"
-                    borderColor="gray.100"
-                    cursor="pointer"
-                    transition="all 0.3s ease"
-                    _hover={{
-                      transform: "translateY(-8px)",
-                      boxShadow: "0 20px 40px rgba(150, 63, 54, 0.15)"
-                    }}
-                    onClick={() => router.push(`/blog/${relatedPost.slug}`)}
-                  >
-                    <Box position="relative" height="200px">
-                      <Image
-                        src={relatedPost.image}
-                        alt={relatedPost.title}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover"
-                        }}
-                      />
-                    </Box>
-                    <Box p={6}>
-                      <Box
-                        bg="brand.200"
-                        px={3}
-                        py={1}
-                        borderRadius="full"
-                        display="inline-block"
-                        mb={3}
-                      >
-                        <Text fontSize="xs" fontWeight="bold" color="brand.100" textTransform="uppercase">
-                          {relatedPost.category}
-                        </Text>
-                      </Box>
-                      <Text fontSize="xl" fontWeight="bold" color="gray.800" mb={2}>
-                        {relatedPost.title}
-                      </Text>
-                      <Text fontSize="md" color="gray.600" mb={4}>
-                        {relatedPost.excerpt}
-                      </Text>
-                      <Flex gap={2} fontSize="sm" color="gray.500">
-                        <Text>{relatedPost.date}</Text>
-                        {relatedPost.readTime && (
-                          <>
-                            <Text>•</Text>
-                            <Text>{relatedPost.readTime}</Text>
-                          </>
-                        )}
-                      </Flex>
-                    </Box>
-                  </Box>
-                ))}
-              </Flex>
-            </Box>
-          </Box>
-        )}
-
-        {/* Back to Blog */}
-        <Box className="home-section" background="white" textAlign="center">
-          <Box maxW="600px" mx="auto" px={8}>
-            <Button
-              variant="link"
-              color="brand.100"
-              fontSize="lg"
-              _hover={{ 
-                textDecoration: "none", 
-                transform: "translateX(-4px)" 
-              }}
-              transition="all 0.3s ease"
-              onClick={() => router.push("/blog")}
-            >
-              ← Back to Blog
-            </Button>
-          </Box>
-        </Box>
-
-        <Footer />
-      </Box>
-    </>
-  );
+export default function BlogPostPage({ params }: Props) {
+  return <BlogPostClient slug={params.slug} />;
 }

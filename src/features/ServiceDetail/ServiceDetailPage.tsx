@@ -146,21 +146,20 @@ export default function ServiceDetailPage({
 
   return (
     <Box position="relative">
+      <Box as="main" bg={theme.primary}>
       <Navbar />
-      <Box as="main" mt="80px">
         {/* Hero */}
         <Box
           as={motion.section}
           position="relative"
           overflow="hidden"
-          bg={theme.primary}
           color={theme.primaryForeground}
           {...fadeUp}
         >
-        <Container maxW="6xl" py={{ base: 12, md: 16 }}>
+        <Container maxW="6xl" py={{ base: 20, md: 24 }}>
           <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={{ base: 8, md: 12 }} alignItems="center">
             <Box as={motion.div} {...fadeUp}>
-              <Heading as="h1" size="3xl" fontWeight="bold" mb={4}>
+              <Heading as="h1" size="3xl" fontWeight="bold" mb={4} lineHeight={"1.2"}>
                 {title} in {location}
               </Heading>
               <Text fontSize={{ base: "md", md: "lg" }} mb={6} opacity={0.95}>
@@ -176,6 +175,7 @@ export default function ServiceDetailPage({
                   _hover={{ opacity: 0.9 }}
                   boxShadow="sm"
                   border="1px solid"
+                  textColor={theme.primaryForeground}
                   borderColor={border}
                 >
                   Book Appointment
@@ -249,7 +249,7 @@ export default function ServiceDetailPage({
         viewport={{ once: true }}
       >
         <Container maxW="6xl" py={{ base: 12, md: 16 }}>
-          <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} mb={8}>
+          <Heading as="h2" size="2xl" fontWeight="bold" lineHeight={"1.2"} color={theme.foreground} mb={8}>
             Why Choose {title} in {location}?
           </Heading>
           <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
@@ -284,7 +284,7 @@ export default function ServiceDetailPage({
       {procedure && procedure.length > 0 ? (
         <Box as={motion.section} bg={theme.muted} {...fadeUp}>
           <Container maxW="5xl" py={{ base: 12, md: 16 }}>
-            <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} mb={8}>
+            <Heading as="h2" size="2xl" fontWeight="bold" lineHeight={"1.2"} color={theme.foreground} mb={8}>
               What to Expect During Your {title}
             </Heading>
             <VStack spacing={4} align="stretch">
@@ -392,6 +392,7 @@ export default function ServiceDetailPage({
               color={theme.foreground}
               _hover={{ opacity: 0.9 }}
               boxShadow="sm"
+              textColor={theme.primaryForeground}
               border="1px solid"
               borderColor={border}
             >

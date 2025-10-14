@@ -15,7 +15,9 @@ import MissionComponent from "../mission";
 import WhyChooseUsComponent from "../why-choose-us";
 import Map from "@/components/common/Map";
 
+// @ts-ignore
 const MotionBox = motion(Box);
+// @ts-ignore
 const MotionFlex = motion(Flex);
 
 const fadeInUpVariants = {
