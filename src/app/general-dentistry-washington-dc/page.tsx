@@ -3,12 +3,12 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "General Dentistry in Washington, D.C. | Smile Experts Dental",
+  title: "General Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Preventive and family dental care in Washington, D.C. Cleanings, exams, and personalized oral health plans. Call (202) 545-6336.",
+    "Preventive and family dental care in Smile Experts Dental Clinic Cleanings, exams, and personalized oral health plans. Call (202) 545-6336.",
   alternates: { canonical: "https://www.smilexpertsdental.com/general-dentistry-washington-dc/" },
   openGraph: {
-    title: "General Dentistry in Washington, D.C. | Smile Experts Dental",
+    title: "General Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Cleanings, exams, and prevention for all ages.",
     url: "https://www.smilexpertsdental.com/general-dentistry-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "General Dentistry in Washington, D.C. | Smile Experts Dental",
-    description: "Preventive and family dental care in Washington, D.C.",
+    title: "General Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Preventive and family dental care in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -35,9 +35,9 @@ export default function Page() {
     <>
       <ServiceJsonLd
         serviceName="General Dentistry"
-        description="Cleanings, exams, and prevention for long-term oral health in Washington, D.C."
+        description="Cleanings, exams, and prevention for long-term oral health in Smile Experts Dental Clinic"
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -47,10 +47,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="General Dentistry"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="Maintain a healthy smile with routine cleanings, exams, and preventive care for the whole family."
         heroImageSrc="/general-dentistry-washington-dc.jpg"
-        heroImageAlt="General Dentistry in Washington, D.C."
+        heroImageAlt="General Dentistry in Smile Experts Dental Clinic"
         whatIsSection={{
           title: "What is General Dentistry?",
           content:
@@ -62,7 +62,7 @@ export default function Page() {
           { title: "Comfortable Visits", description: "Gentle cleanings and modern technology." },
           { title: "Family-Friendly", description: "Care for children, teens, and adults." },
           { title: "Clear Plans", description: "We explain options and timelines for any recommended care." },
-          { title: "Convenient Scheduling", description: "Easy appointments in Washington, D.C." },
+          { title: "Convenient Scheduling", description: "Easy appointments in Smile Experts Dental Clinic" },
         ]}
         faqs={[
           {
@@ -77,7 +77,7 @@ export default function Page() {
         ]}
         ctaSection={{
           title: "Keep Your Smile Healthy",
-          description: "Schedule your cleaning and exam in Washington, D.C. today.",
+          description: "Schedule your cleaning and exam in Smile Experts Dental Clinic today.",
           phone: "(202) 545-6336",
         }}
       />

@@ -3,12 +3,12 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Teeth Whitening in Washington, D.C. | Smile Experts Dental",
+  title: "Teeth Whitening in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Professional teeth whitening in Washington, D.C. Brighten your smile safely and effectively. Call (202) 545-6336.",
+    "Professional teeth whitening in Smile Experts Dental Clinic Brighten your smile safely and effectively. Call (202) 545-6336.",
   alternates: { canonical: "https://www.smilexpertsdental.com/teeth-whitening-washington-dc/" },
   openGraph: {
-    title: "Teeth Whitening in Washington, D.C. | Smile Experts Dental",
+    title: "Teeth Whitening in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Noticeably brighter smiles with in-office and take-home options.",
     url: "https://www.smilexpertsdental.com/teeth-whitening-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Teeth Whitening in Washington, D.C. | Smile Experts Dental",
-    description: "Safe, effective whitening in Washington, D.C.",
+    title: "Teeth Whitening in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Safe, effective whitening in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -37,7 +37,7 @@ export default function Page() {
         serviceName="Teeth Whitening"
         description="Professional teeth whitening options for fast, predictable results."
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -47,10 +47,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="Teeth Whitening"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="Lift deep stains and brighten your smile with professional-grade whitening designed for your comfort."
         heroImageSrc="/teeth-whitening-washington-dc.jpg"
-        heroImageAlt="Teeth Whitening in Washington, D.C."
+        heroImageAlt="Teeth Whitening in Smile Experts Dental Clinic"
         whatIsSection={{
           title: "What is Professional Whitening?",
           content:
@@ -77,7 +77,7 @@ export default function Page() {
         ]}
         ctaSection={{
           title: "Smile Brighter, Sooner",
-          description: "Book professional whitening in Washington, D.C. and see immediate results.",
+          description: "Book professional whitening in Smile Experts Dental Clinic and see immediate results.",
           phone: "(202) 545-6336",
         }}
       />

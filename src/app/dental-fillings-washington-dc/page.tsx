@@ -3,12 +3,12 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Dental Fillings in Washington, D.C. | Smile Experts Dental",
+  title: "Dental Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Dental fillings in Washington, D.C. to repair cavities and restore tooth strength and comfort. Call (202) 545-6336.",
+    "Dental fillings in Smile Experts Dental Clinic to repair cavities and restore tooth strength and comfort. Call (202) 545-6336.",
   alternates: { canonical: "https://www.smilexpertsdental.com/dental-fillings-washington-dc/" },
   openGraph: {
-    title: "Dental Fillings in Washington, D.C. | Smile Experts Dental",
+    title: "Dental Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Restore decayed teeth with comfortable, long-lasting fillings.",
     url: "https://www.smilexpertsdental.com/dental-fillings-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dental Fillings in Washington, D.C. | Smile Experts Dental",
-    description: "Comfortable fillings in Washington, D.C.",
+    title: "Dental Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Comfortable fillings in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -37,7 +37,7 @@ export default function Page() {
         serviceName="Dental Fillings"
         description="Repair cavities and restore comfort and function with durable fillings."
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -47,10 +47,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="Dental Fillings"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="We remove decay and place durable fillings designed for comfort, function, and appearance."
         heroImageSrc="/dental-fillings-washington-dc.jpg"
-        heroImageAlt="Dental Fillings in Washington, D.C."
+        heroImageAlt="Dental Fillings in Smile Experts Dental Clinic"
         whatIsSection={{
           title: "What are Dental Fillings?",
           content:
@@ -80,7 +80,7 @@ export default function Page() {
         ]}
         ctaSection={{
           title: "Repair Cavities Comfortably",
-          description: "Schedule a filling appointment in Washington, D.C.",
+          description: "Schedule a filling appointment in Smile Experts Dental Clinic",
           phone: "(202) 545-6336",
         }}
       />

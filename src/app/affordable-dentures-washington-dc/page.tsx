@@ -3,12 +3,12 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Affordable Dentures in Washington, D.C. | Smile Experts Dental",
+  title: "Affordable Dentures in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Affordable dentures and partials in Washington, D.C. Restore comfort, function, and confidence. Call (202) 545-6336.",
+    "Affordable dentures and partials in Smile Experts Dental Clinic Restore comfort, function, and confidence. Call (202) 545-6336.",
   alternates: { canonical: "https://www.smilexpertsdental.com/affordable-dentures-washington-dc/" },
   openGraph: {
-    title: "Affordable Dentures in Washington, D.C. | Smile Experts Dental",
+    title: "Affordable Dentures in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Comfortable, natural-looking dentures and partials tailored to you.",
     url: "https://www.smilexpertsdental.com/affordable-dentures-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Affordable Dentures in Washington, D.C. | Smile Experts Dental",
-    description: "Dentures and partials in Washington, D.C.",
+    title: "Affordable Dentures in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Dentures and partials in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -35,9 +35,9 @@ export default function Page() {
     <>
       <ServiceJsonLd
         serviceName="Affordable Dentures"
-        description="Comfortable, natural-looking full and partial dentures in Washington, D.C."
+        description="Comfortable, natural-looking full and partial dentures in Smile Experts Dental Clinic"
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -47,10 +47,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="Affordable Dentures"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="Restore your smile’s function and appearance with dentures designed for comfort, fit, and confidence."
         heroImageSrc="/affordable-dentures-washington-dc.jpg"
-        heroImageAlt="Affordable Dentures in Washington, D.C."
+        heroImageAlt="Affordable Dentures in Smile Experts Dental Clinic"
         whatIsSection={{
           title: "What are Dentures?",
           content:
@@ -87,7 +87,7 @@ export default function Page() {
         ]}
         ctaSection={{
           title: "Restore Comfort and Confidence",
-          description: "Schedule a denture consultation in Washington, D.C.",
+          description: "Schedule a denture consultation in Smile Experts Dental Clinic",
           phone: "(202) 545-6336",
         }}
       />
