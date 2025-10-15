@@ -56,6 +56,11 @@ export default function RootLayout({
           name="keywords"
           content="dentist, dental clinic, teeth cleaning, cosmetic dentistry, dental implants, Invisalign, emergency dentist, pediatric dentist, DMV area, Washington DC, Burke VA"
         />
+        {/* Google Search Console Verification */}
+        <meta
+          name="google-site-verification"
+          content="AA9Jf8Hx-aHLAEEvCGq2lMEp-ag_53BAIbd-fU6Cc9I"
+        />
         <meta name="geo.region" content="US-VA" />
         <meta name="geo.placename" content="Burke" />
         <meta name="geo.placename" content="Washington" />

@@ -10,6 +10,7 @@ import {
   Box,
   Button,
   Flex,
+  Icon,
   IconButton,
   List,
   ListItem,
@@ -20,19 +21,22 @@ import {
   Text,
   useMediaQuery
 } from "@chakra-ui/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { HEADER_HEIGHT } from "@/utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeaderStatus, toggleHeader } from "@/redux/SharedSlice";
 import Link from "next/link";
+import { FaTooth, FaChevronDown } from "react-icons/fa";
 
 export default function Navbar() {
   const { data, isError } = useGetUserDetailsQuery();
   const router = useRouter();
   const dispatch = useDispatch();
   const [isMobile] = useMediaQuery("(max-width: 1000px)");
-
+  const [scrolled, setScrolled] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   const headerStatus = useSelector(getHeaderStatus);
 
@@ -72,6 +76,18 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const triggerPoint = window.innerHeight * 0.6; // 60vh
+      setScrolled(scrollY > triggerPoint);
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  
+
   return (
     <Box
       className={`header-container ${isMobile ? "mobile-header" : "desktop-header"} ${headerStatus === true ? "sticky-header" : ""}`}
@@ -79,7 +95,8 @@ export default function Navbar() {
       top={0}
       zIndex={4}
       width={"100%"}
-      bg={"transparent"}
+      bg={scrolled ? "#963f36" : "transparent"}
+      transition="background-color 0.4s ease"
       borderBottom={isMobile ? "1px white solid" : "unset"}
     >
       <Flex
@@ -107,12 +124,113 @@ export default function Navbar() {
             >
               ABOUT
             </Button>
-            <Button
-              variant={"header"}
-              onClick={() => navigateToSection("home/clinic-services")}
-            >
-              SERVICES
-            </Button>
+            <Menu variant={"header"}>
+              <Box
+                position="relative"
+                onMouseEnter={() => setIsServicesOpen(true)}
+                onMouseLeave={() => setIsServicesOpen(false)}
+              >
+                <Flex align="center" cursor="pointer" gap={1}>
+                  <Button
+                    variant="header"
+                    rightIcon={<FaChevronDown />}
+                    _hover={{ color: "brand.100" }}
+                  >
+                    SERVICES
+                  </Button>
+                </Flex>
+
+                <AnimatePresence>
+                  {isServicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.25 }}
+                      style={{
+                        position: "absolute",
+                        top: "50px",
+                        left: 0,
+                        zIndex: 100,
+                        width: "600px"
+                      }}
+                    >
+                      <Box
+                        bg="white"
+                        p={6}
+                        borderRadius="xl"
+                        boxShadow="xl"
+                        backdropFilter="blur(10px)"
+                        border="1px solid rgba(0,0,0,0.05)"
+                      >
+                        <Flex wrap="wrap" gap={4}>
+                          {[
+                            {
+                              label: "All Services",
+                              path: "/home/clinic-services"
+                            },
+                            {
+                              label: "Root Canal - Washington DC",
+                              path: "/root-canal-washington-dc/"
+                            },
+                            {
+                              label: "General Dentistry - Washington DC",
+                              path: "/general-dentistry-washington-dc/"
+                            },
+                            {
+                              label: "Comprehensive Care - Washington DC",
+                              path: "/comprehensive-dental-care-washington-dc/"
+                            },
+                            {
+                              label: "Cosmetic Dentistry - Washington DC",
+                              path: "/cosmetic-dentistry-washington-dc/"
+                            },
+                            {
+                              label: "Dental Veneers - Washington DC",
+                              path: "/dental-veneers-washington-dc/"
+                            },
+                            {
+                              label: "Teeth Whitening - Washington DC",
+                              path: "/teeth-whitening-washington-dc/"
+                            },
+                            {
+                              label: "Affordable Dentures - Washington DC",
+                              path: "/affordable-dentures-washington-dc/"
+                            },
+                            {
+                              label: "Tooth-Colored Fillings - Washington DC",
+                              path: "/tooth-colored-fillings-washington-dc/"
+                            },
+                            {
+                              label: "Dental Fillings - Washington DC",
+                              path: "/dental-fillings-washington-dc/"
+                            }
+                          ].map((service, index) => (
+                            <Box
+                              key={index}
+                              width="calc(50% - 8px)"
+                              color="brand.100"
+                              cursor="pointer"
+                              _hover={{
+                                transform: "translateX(4px)"
+                              }}
+                              alignItems={"left"}
+                              transition="all 0.2s"
+                              onClick={() => router.push(service.path)}
+                            >
+                              <Flex align="left" gap={2}>
+                                <Icon as={FaTooth} color="#963f36" />
+                                <Text>{service.label}</Text>
+                              </Flex>
+                            </Box>
+                          ))}
+                        </Flex>
+                      </Box>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Box>
+            </Menu>
             <Button variant={"header"}>
               <Link href={"/#home-location"}>LOCATIONS</Link>
             </Button>
@@ -130,6 +248,12 @@ export default function Navbar() {
               onClick={() => navigateToSection("home/new-patients")}
             >
               NEW PATIENTS
+            </Button>
+            <Button
+              variant={"header"}
+              onClick={() => navigateToSection("blog")}
+            >
+              BLOG
             </Button>
             {isError && (
               <>
@@ -335,7 +459,12 @@ export default function Navbar() {
               marginY={2}
             >
               <Text as={"h4"} fontWeight={"bold"}>
-                SERVICES
+                ALL SERVICES
+              </Text>
+            </ListItem>
+            <ListItem onClick={() => navigateToSection("blog")} marginY={2}>
+              <Text as={"h4"} fontWeight={"bold"}>
+                BLOG
               </Text>
             </ListItem>
             <ListItem marginY={2}>

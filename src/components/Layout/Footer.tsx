@@ -157,6 +157,147 @@ const Footer = () => {
             </Button>
           </Flex>
         </Flex>
+        <Flex
+          width={"100%"}
+          justifyContent={"space-around"}
+          flexWrap={"wrap"}
+          gap={8}
+          py={8}
+          borderTop={"1px solid rgba(255,255,255,0.2)"}
+        >
+          <Flex flexDir={"column"} gap={2}>
+            <Text as={"h5"} fontWeight={"bold"} mb={2}>
+              Quick Links
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => navigateToSection("home/about-us")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              About Us
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => navigateToSection("home/clinic-services")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              All Services
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => navigateToSection("blog")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Blog
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => navigateToSection("home/privacy-policy")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Privacy Policy
+            </Text>
+          </Flex>
+          <Flex flexDir={"column"} gap={2}>
+            <Text as={"h5"} fontWeight={"bold"} mb={2}>
+              Washington D.C. Services
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/root-canal-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Root Canal Therapy
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/general-dentistry-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              General Dentistry
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/cosmetic-dentistry-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Cosmetic Dentistry
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/dental-veneers-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Dental Veneers
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/teeth-whitening-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Teeth Whitening
+            </Text>
+          </Flex>
+          <Flex flexDir={"column"} gap={2}>
+            <Text as={"h5"} fontWeight={"bold"} mb={2}>
+              More Services
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/affordable-dentures-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Affordable Dentures
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/tooth-colored-fillings-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Tooth-Colored Fillings
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/dental-fillings-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Dental Fillings
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/comprehensive-dental-care-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Comprehensive Care
+            </Text>
+          </Flex>
+        </Flex>
         <p>
           &copy; {new Date().getFullYear()} Smile Expert Dental. All rights
           reserved.
