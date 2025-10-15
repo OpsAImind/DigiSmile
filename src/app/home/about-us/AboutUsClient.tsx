@@ -59,14 +59,14 @@ const AboutUsClient = () => {
             textAlign={"center"}
             color={"brand.100"}
           >
-            What we're striving for
+            What we&apos;re striving for
           </Text>
           <Text as={"h3"} mt={8} color={"brand.100"}>
             At Smile Experts Dental Clinic, nothing is more important than the
             highest quality of care. Since day one, we have been committed to
             our values so each of our patients can rest assured they are in good
             hands.
-          </Text>
+          </Text> 
           <Flex width={"100%"} mt={20} flexDir={isLaptop ? "column" : "row"}>
             <Flex
               width={"100%"}
@@ -134,7 +134,7 @@ const AboutUsClient = () => {
                     Seamless Service
                   </Text>
                   <Text as={"h5"} color={"brand.100"}>
-                    A trip to the dentist's office should be a source of
+                    A trip to the dentist&apos;s office should be a source of
                     serenity, not anxiety.
                   </Text>
                   <Text as={"h5"} color={"brand.100"} mt={4}>
@@ -188,7 +188,7 @@ const AboutUsClient = () => {
                 highest quality dental treatment. Her approach is grounded in
                 personalized care, ensuring that each patient receives a
                 treatment plan tailored specifically to their needs. Dr.
-                Mahmood's commitment to excellence in patient care is evident in
+                Mahmood&apos;s commitment to excellence in patient care is evident in
                 the way she has structured her practice and the patient-centric
                 focus she maintains.
               </Text>
@@ -253,8 +253,8 @@ const AboutUsClient = () => {
                       time to time). But when you cut through the gimmicks and
                       marketing ploys, you&apos;ll find that white teeth
                       actually start with the foundation of a healthy smile. As
-                      our founder Dr. Mahmood says, "You would never get your
-                      car waxed without first getting it cleaned" - the same
+                      our founder Dr. Mahmood says, &quot;You would never get your
+                      car waxed without first getting it cleaned&quot; - the same
                       applies to our teeth. After diligent research, we
                       identified an innovative method that leverages the
                       dentist-designed Glo Pro Power technology. In one
