@@ -170,39 +170,39 @@ export default function Navbar() {
                               path: "/home/clinic-services"
                             },
                             {
-                              label: "Root Canal - Washington DC",
+                              label: "Root Canal",
                               path: "/root-canal-washington-dc/"
                             },
                             {
-                              label: "General Dentistry - Washington DC",
+                              label: "General Dentistry",
                               path: "/general-dentistry-washington-dc/"
                             },
                             {
-                              label: "Comprehensive Care - Washington DC",
+                              label: "Comprehensive Care",
                               path: "/comprehensive-dental-care-washington-dc/"
                             },
                             {
-                              label: "Cosmetic Dentistry - Washington DC",
+                              label: "Cosmetic Dentistry",
                               path: "/cosmetic-dentistry-washington-dc/"
                             },
                             {
-                              label: "Dental Veneers - Washington DC",
+                              label: "Dental Veneers",
                               path: "/dental-veneers-washington-dc/"
                             },
                             {
-                              label: "Teeth Whitening - Washington DC",
+                              label: "Teeth Whitening",
                               path: "/teeth-whitening-washington-dc/"
                             },
                             {
-                              label: "Affordable Dentures - Washington DC",
+                              label: "Affordable Dentures",
                               path: "/affordable-dentures-washington-dc/"
                             },
                             {
-                              label: "Tooth-Colored Fillings - Washington DC",
+                              label: "Tooth-Colored Fillings",
                               path: "/tooth-colored-fillings-washington-dc/"
                             },
                             {
-                              label: "Dental Fillings - Washington DC",
+                              label: "Dental Fillings",
                               path: "/dental-fillings-washington-dc/"
                             }
                           ].map((service, index) => (

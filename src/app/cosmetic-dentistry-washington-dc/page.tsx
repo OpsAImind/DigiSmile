@@ -3,14 +3,14 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Cosmetic Dentistry in Washington, D.C. | Smile Experts Dental",
+  title: "Cosmetic Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Cosmetic dentistry in Washington, D.C. including veneers, whitening, bonding, and more. Call (202) 545-6336.",
+    "Cosmetic dentistry in Smile Experts Dental Clinic including veneers, whitening, bonding, and more. Call (202) 545-6336.",
   alternates: {
     canonical: "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/",
   },
   openGraph: {
-    title: "Cosmetic Dentistry in Washington, D.C. | Smile Experts Dental",
+    title: "Cosmetic Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Personalized cosmetic dentistry—veneers, whitening, and bonding to enhance your smile.",
     url: "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cosmetic Dentistry in Washington, D.C. | Smile Experts Dental",
-    description: "Cosmetic smile enhancements in Washington, D.C.",
+    title: "Cosmetic Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Cosmetic smile enhancements in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -37,9 +37,9 @@ export default function Page() {
     <>
       <ServiceJsonLd
         serviceName="Cosmetic Dentistry"
-        description="Smile enhancements including veneers, whitening, and bonding in Washington, D.C."
+        description="Smile enhancements including veneers, whitening, and bonding in Smile Experts Dental Clinic"
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -49,10 +49,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="Cosmetic Dentistry"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="Refine tooth shape, shade, and symmetry with personalized cosmetic treatments designed for your unique smile."
         heroImageSrc="/cosmetic-dentistry-washington-dc.jpg"
-        heroImageAlt="Cosmetic Dentistry in Washington, D.C."
+        heroImageAlt="Cosmetic Dentistry in Smile Experts Dental Clinic"
         whatIsSection={{
           title: "What is Cosmetic Dentistry?",
           content:
@@ -98,7 +98,7 @@ export default function Page() {
         ]}
         ctaSection={{
           title: "Love Your Smile",
-          description: "Book a cosmetic consultation in Washington, D.C. and preview your possibilities.",
+          description: "Book a cosmetic consultation in Smile Experts Dental Clinic and preview your possibilities.",
           phone: "(202) 545-6336",
         }}
       />

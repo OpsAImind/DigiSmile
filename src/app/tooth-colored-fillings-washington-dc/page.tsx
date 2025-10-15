@@ -3,12 +3,12 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Tooth-Colored Fillings in Washington, D.C. | Smile Experts Dental",
+  title: "Tooth-Colored Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Natural-looking, mercury-free tooth-colored fillings in Washington, D.C. Restore strength and appearance. Call (202) 545-6336.",
+    "Natural-looking, mercury-free tooth-colored fillings in Smile Experts Dental Clinic Restore strength and appearance. Call (202) 545-6336.",
   alternates: { canonical: "https://www.smilexpertsdental.com/tooth-colored-fillings-washington-dc/" },
   openGraph: {
-    title: "Tooth-Colored Fillings in Washington, D.C. | Smile Experts Dental",
+    title: "Tooth-Colored Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Composite fillings restore decayed or chipped teeth with a seamless look.",
     url: "https://www.smilexpertsdental.com/tooth-colored-fillings-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tooth-Colored Fillings in Washington, D.C. | Smile Experts Dental",
-    description: "Aesthetic composite fillings in Washington, D.C.",
+    title: "Tooth-Colored Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Aesthetic composite fillings in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -37,7 +37,7 @@ export default function Page() {
         serviceName="Tooth-Colored Fillings"
         description="Aesthetic, durable composite fillings that blend with your natural tooth color."
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -47,10 +47,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="Tooth-Colored Fillings"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="Repair cavities and small chips with composite fillings that match your tooth color for a seamless finish."
         heroImageSrc="/tooth-colored-fillings-washington-dc.jpg"
-        heroImageAlt="Tooth-Colored Fillings in Washington, D.C."
+        heroImageAlt="Tooth-Colored Fillings in Smile Experts Dental Clinic"
         whatIsSection={{
           title: "What are Tooth-Colored Fillings?",
           content:
@@ -71,7 +71,7 @@ export default function Page() {
         ]}
         ctaSection={{
           title: "Seamless, Durable Restorations",
-          description: "Book a filling appointment in Washington, D.C. today.",
+          description: "Book a filling appointment in Smile Experts Dental Clinic today.",
           phone: "(202) 545-6336",
         }}
       />

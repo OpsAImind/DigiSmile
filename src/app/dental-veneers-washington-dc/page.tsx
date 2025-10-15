@@ -3,12 +3,12 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Dental Veneers in Washington, D.C. | Smile Experts Dental",
+  title: "Dental Veneers in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Porcelain and composite veneers in Washington, D.C. Correct chips, gaps, and discoloration with natural-looking results.",
+    "Porcelain and composite veneers in Smile Experts Dental Clinic Correct chips, gaps, and discoloration with natural-looking results.",
   alternates: { canonical: "https://www.smilexpertsdental.com/dental-veneers-washington-dc/" },
   openGraph: {
-    title: "Dental Veneers in Washington, D.C. | Smile Experts Dental",
+    title: "Dental Veneers in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Transform your smile with custom veneers designed to look natural.",
     url: "https://www.smilexpertsdental.com/dental-veneers-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dental Veneers in Washington, D.C. | Smile Experts Dental",
-    description: "Natural-looking veneers in Washington, D.C.",
+    title: "Dental Veneers in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Natural-looking veneers in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -35,9 +35,9 @@ export default function Page() {
     <>
       <ServiceJsonLd
         serviceName="Dental Veneers"
-        description="Custom porcelain and composite veneers in Washington, D.C."
+        description="Custom porcelain and composite veneers in Smile Experts Dental Clinic"
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -47,10 +47,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="Dental Veneers"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="Achieve a brighter, more balanced smile with custom veneers that enhance shape, shade, and symmetry."
         heroImageSrc="/dental-veneers-washington-dc.jpg"
-        heroImageAlt="Dental Veneers in Washington, D.C."
+        heroImageAlt="Dental Veneers in Smile Experts Dental Clinic"
         whatIsSection={{
           title: "What are Dental Veneers?",
           content:
@@ -92,7 +92,7 @@ export default function Page() {
         ]}
         ctaSection={{
           title: "Discover Your Best Smile",
-          description: "Schedule a veneers consultation in Washington, D.C. to explore your options.",
+          description: "Schedule a veneers consultation in Smile Experts Dental Clinic to explore your options.",
           phone: "(202) 545-6336",
         }}
       />

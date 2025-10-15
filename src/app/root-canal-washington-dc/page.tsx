@@ -3,12 +3,12 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Root Canal Therapy in Washington, D.C. | Smile Experts Dental",
+  title: "Root Canal Therapy in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Gentle, effective root canal therapy in Washington, D.C. Relieve tooth pain and save your natural tooth. Call (202) 545-6336.",
+    "Gentle, effective root canal therapy in Smile Experts Dental Clinic Relieve tooth pain and save your natural tooth. Call (202) 545-6336.",
   alternates: { canonical: "https://www.smilexpertsdental.com/root-canal-washington-dc/" },
   openGraph: {
-    title: "Root Canal Therapy in Washington, D.C. | Smile Experts Dental",
+    title: "Root Canal Therapy in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Comfort-focused root canal treatment to remove infection and save your tooth.",
     url: "https://www.smilexpertsdental.com/root-canal-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Root Canal Therapy in Washington, D.C. | Smile Experts Dental",
-    description: "Gentle root canal treatment in Washington, D.C.",
+    title: "Root Canal Therapy in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Gentle root canal treatment in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -32,7 +32,7 @@ export default function Page() {
         serviceName="Root Canal Therapy"
         description="Gentle endodontic treatment to remove infection, relieve pain, and save your natural tooth."
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -42,10 +42,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="Root Canal Therapy"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="End tooth pain fast. Our gentle root canal therapy removes infection and preserves your natural tooth."
         heroImageSrc="/root-canal-therapy-washington-dc.jpg"
-        heroImageAlt="Root Canal Therapy in Washington, D.C."
+        heroImageAlt="Root Canal Therapy in Smile Experts Dental Clinic"
         whatIsSection={{
           title: "What is a Root Canal?",
           content:
@@ -94,7 +94,7 @@ export default function Page() {
         ]}
         ctaSection={{
           title: "Relieve Tooth Pain Today",
-          description: "Call now to schedule a gentle, effective root canal in Washington, D.C.",
+          description: "Call now to schedule a gentle, effective root canal in Smile Experts Dental Clinic",
           phone: "(202) 545-6336",
         }}
       />

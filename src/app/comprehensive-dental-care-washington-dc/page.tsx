@@ -3,14 +3,14 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
+  title: "Comprehensive Dental Care in Smile Experts Dental Clinic | Smile Experts Dental",
   description:
-    "Full-service dental care in Washington, D.C. Preventive, cosmetic, and restorative treatments in one place. Call (202) 545-6336.",
+    "Full-service dental care in Smile Experts Dental Clinic Preventive, cosmetic, and restorative treatments in one place. Call (202) 545-6336.",
   alternates: {
     canonical: "https://www.smilexpertsdental.com/comprehensive-dental-care-washington-dc/",
   },
   openGraph: {
-    title: "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
+    title: "Comprehensive Dental Care in Smile Experts Dental Clinic | Smile Experts Dental",
     description: "Full-service dental care from preventive to cosmetic and restorative treatments, all in one place.",
     url: "https://www.smilexpertsdental.com/comprehensive-dental-care-washington-dc/",
     siteName: "Smile Experts Dental",
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Comprehensive Dental Care in Washington, D.C. | Smile Experts Dental",
-    description: "Full-service dental care in Washington, D.C.",
+    title: "Comprehensive Dental Care in Smile Experts Dental Clinic | Smile Experts Dental",
+    description: "Full-service dental care in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -41,7 +41,7 @@ export default function Page() {
         serviceName="Comprehensive Dental Care"
         description="Complete dental care services including preventive, cosmetic, and restorative treatments all under one roof."
         url={url}
-        areaServed="Washington, D.C."
+        areaServed="Smile Experts Dental Clinic"
       />
       <BreadcrumbJsonLd
         items={[
@@ -51,10 +51,10 @@ export default function Page() {
       />
       <ServiceDetailPage
         title="Comprehensive Dental Care"
-        location="Washington, D.C."
+        location="Smile Experts Dental Clinic"
         intro="Experience comprehensive dental care under one roof—routine checkups, cosmetic enhancements, and restorative treatments tailored to you."
         heroImageSrc="/comprehensive-dental-care-washington-dc.jpg"
-        heroImageAlt="Comprehensive Dental Care in Washington, D.C."
+        heroImageAlt="Comprehensive Dental Care in Smile Experts Dental Clinic"
         theme={{
           // 3-5 colors total: primary, primaryForeground, background, foreground, muted
           primary: "#0EA5E9", // sky-500
@@ -83,7 +83,7 @@ export default function Page() {
           },
           {
             title: "Convenient Scheduling",
-            description: "Flexible appointment times in Washington, D.C. for busy professionals and families.",
+            description: "Flexible appointment times in Smile Experts Dental Clinic for busy professionals and families.",
           },
           {
             title: "Continuity of Care",
@@ -124,7 +124,7 @@ export default function Page() {
         whoCandidateSection={{
           title: "Who Benefits from Comprehensive Care?",
           content:
-            "Anyone seeking proactive dental health, efficient scheduling, and a long-term relationship with a trusted team in Washington, D.C.",
+            "Anyone seeking proactive dental health, efficient scheduling, and a long-term relationship with a trusted team in Smile Experts Dental Clinic",
         }}
         faqs={[
           {
@@ -144,7 +144,7 @@ export default function Page() {
         ctaSection={{
           title: "Experience Complete Dental Care",
           description:
-            "Get all your dental needs met in one location. Schedule your comprehensive exam in Washington, D.C. today.",
+            "Get all your dental needs met in one location. Schedule your comprehensive exam in Smile Experts Dental Clinic today.",
           phone: "(202) 545-6336",
         }}
       />
