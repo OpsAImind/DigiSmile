@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "dental practice DC",
     "our mission"
   ],
-  alternates: { canonical: "https://www.smilexpertsdental.com/home/about-us/" },
+  alternates: { canonical: "https://www.smilexpertsdental.com/about-us/" },
   openGraph: {
     title: "About Us | Smile Experts Dental",
     description: "Meet our team and learn about our commitment to exceptional dental care.",
-    url: "https://www.smilexpertsdental.com/home/about-us/",
+    url: "https://www.smilexpertsdental.com/about-us/",
     siteName: "Smile Experts Dental",
     images: [
       {

@@ -6,7 +6,7 @@ import {
 import { FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net",
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("authToken");
 

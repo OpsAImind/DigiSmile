@@ -37,6 +37,7 @@ export default function Navbar() {
   const [userId, setUserId] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isServicesExpanded, setIsServicesExpanded] = useState(false);
 
   const headerStatus = useSelector(getHeaderStatus);
 
@@ -120,7 +121,7 @@ export default function Navbar() {
           <Flex alignItems={"center"} gap={8}>
             <Button
               variant={"header"}
-              onClick={() => navigateToSection("home/about-us")}
+              onClick={() => navigateToSection("about-us")}
             >
               ABOUT
             </Button>
@@ -167,7 +168,7 @@ export default function Navbar() {
                           {[
                             {
                               label: "All Services",
-                              path: "/home/clinic-services"
+                              path: "/clinic-services"
                             },
                             {
                               label: "Root Canal",
@@ -239,13 +240,13 @@ export default function Navbar() {
             </Button>
             <Button
               variant={"header"}
-              onClick={() => navigateToSection("home/privacy-policy")}
+              onClick={() => navigateToSection("privacy-policy")}
             >
               PRIVACY POLICY
             </Button>
             <Button
               variant={"header"}
-              onClick={() => navigateToSection("home/new-patients")}
+              onClick={() => navigateToSection("new-patients")}
             >
               NEW PATIENTS
             </Button>
@@ -421,121 +422,304 @@ export default function Navbar() {
         )}
       </Flex>
 
-      {/* Drawer for mobile menu */}
-      {isMobile && drawerOpen && (
-        <Box
-          backgroundColor={headerStatus === true ? "#963f36" : "#faf7f5"}
-          color={headerStatus === true ? "#fff" : "#963f36"}
-          width={"100%"}
-          position={"fixed"}
-          display={"inherit"}
-          top={HEADER_HEIGHT}
-          role="presentation"
-          onClick={() => setDrawerOpen(!drawerOpen)}
-          padding={8}
-          className="responsive-header"
-        >
-          <List
-            display={"flex"}
-            flexDir={"column"}
-            alignItems={"center"}
-            gap={4}
-          >
-            <ListItem onClick={() => navigateToSection("/")} marginY={2}>
-              <Text as={"h4"} fontWeight={"bold"}>
-                HOME
-              </Text>
-            </ListItem>
-            <ListItem
-              onClick={() => navigateToSection("home/about-us")}
-              marginY={2}
-            >
-              <Text as={"h4"} fontWeight={"bold"}>
-                ABOUT US
-              </Text>
-            </ListItem>
-            <ListItem
-              onClick={() => navigateToSection("home/clinic-services")}
-              marginY={2}
-            >
-              <Text as={"h4"} fontWeight={"bold"}>
-                ALL SERVICES
-              </Text>
-            </ListItem>
-            <ListItem onClick={() => navigateToSection("blog")} marginY={2}>
-              <Text as={"h4"} fontWeight={"bold"}>
-                BLOG
-              </Text>
-            </ListItem>
-            <ListItem marginY={2}>
-              <Button variant={"header"}>
-                <Link href={"/#footer-section"}>
-                  <Text as={"h4"} fontWeight={"bold"}>
-                    LOCATIONS
-                  </Text>
-                </Link>
-              </Button>
-            </ListItem>
-            <ListItem
-              onClick={() => navigateToSection("home/new-patients")}
-              marginY={2}
-            >
-              <Text as={"h4"} fontWeight={"bold"}>
-                NEW PATIENTS
-              </Text>
-            </ListItem>
-            <ListItem
-              onClick={() => navigateToSection("home/privacy-policy")}
-              marginY={2}
-            >
-              <Text as={"h4"} fontWeight={"bold"}>
-                PRIVACY POLICY
-              </Text>
-            </ListItem>
-            <ListItem marginY={2}>
-              <Button variant={"header"}>
-                <Link href={"/#footer-section"}>
-                  <Text as={"h4"} fontWeight={"bold"}>
-                    CONTACT US
-                  </Text>
-                </Link>
-              </Button>
-            </ListItem>
+      {/* Drawer for mobile menu - Modern Sidebar */}
+      {isMobile && (
+        <AnimatePresence>
+          {drawerOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  zIndex: 998,
+                }}
+                onClick={() => setDrawerOpen(false)}
+              />
 
-            {isError && (
-              <>
-                <ListItem
-                  onClick={() => navigateToSection("auth/signup")}
-                  width={"fit-content"}
-                  background={"#963f36"}
-                  color={"#fff"}
-                  padding={".7rem 5rem"}
-                  borderRadius={"lg"}
-                  border={"1px #faf7f5 solid"}
+              {/* Sidebar */}
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{
+                  type: "spring",
+                  damping: 25,
+                  stiffness: 200,
+                }}
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "75%",
+                  maxWidth: "320px",
+                  height: "100%",
+                  backgroundColor: "#5F6B7A",
+                  zIndex: 999,
+                  boxShadow: "4px 0 20px rgba(0, 0, 0, 0.3)",
+                  overflowY: "auto",
+                }}
+              >
+                <Box
+                  height="100%"
+                  display="flex"
+                  flexDirection="column"
+                  paddingTop={HEADER_HEIGHT}
                 >
-                  <Text as={"h4"} fontWeight={"bold"}>
-                    Signup
-                  </Text>
-                </ListItem>
-                <ListItem
-                  onClick={() => navigateToSection("auth/login")}
-                  width={"fit-content"}
-                  background={"#fff"}
-                  color={"#963f36"}
-                  padding={".7rem 5.3rem"}
-                  borderRadius={"lg"}
-                  border={
-                    headerStatus === true ? "1px #fff solid" : "1px black solid"
-                  }
-                >
-                  <Text as={"h4"} fontWeight={"bold"}>
-                    Login
-                  </Text>
-                </ListItem>
-              </>
-            )}
-          </List>
-        </Box>
+                  <List
+                    display="flex"
+                    flexDir="column"
+                    gap={0}
+                    padding={0}
+                    margin={0}
+                    width="100%"
+                  >
+                    {/* Close button */}
+                    <Flex justifyContent="space-between" alignItems="center" padding={4} borderBottom="1px solid rgba(255,255,255,0.1)">
+                      <Text color="white" fontSize="xl" fontWeight="bold">MENU</Text>
+                      <IconButton
+                        aria-label="close"
+                        onClick={() => setDrawerOpen(false)}
+                        color="white"
+                        bg="transparent"
+                        _hover={{ bg: "rgba(255,255,255,0.1)" }}
+                      >
+                        <Text fontSize="2xl">×</Text>
+                      </IconButton>
+                    </Flex>
+
+                    {/* Navigation Items - Matching Desktop Menu */}
+                    <Box>
+                      {/* ABOUT */}
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0, duration: 0.3 }}
+                      >
+                        <ListItem
+                          borderBottom="1px solid rgba(255,255,255,0.05)"
+                          _hover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                          transition="background-color 0.2s"
+                          padding={3}
+                          cursor="pointer"
+                          onClick={() => {
+                            navigateToSection("about-us");
+                            setDrawerOpen(false);
+                          }}
+                        >
+                          <Text
+                            as="h5"
+                            color="white"
+                            fontWeight="normal"
+                            fontSize="md"
+                            letterSpacing="0.5px"
+                            _hover={{ color: "#963f36" }}
+                            transition="color 0.2s"
+                          >
+                            ABOUT
+                          </Text>
+                        </ListItem>
+                      </motion.div>
+
+                      {/* SERVICES - Collapsible */}
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.05, duration: 0.3 }}
+                      >
+                        <ListItem
+                          borderBottom="1px solid rgba(255,255,255,0.15)"
+                          _hover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                          transition="background-color 0.2s"
+                          padding={3}
+                          cursor="pointer"
+                          onClick={() => setIsServicesExpanded(!isServicesExpanded)}
+                        >
+                          <Flex alignItems="center" justifyContent="space-between">
+                            <Text
+                              as="h5"
+                              color="white"
+                              fontWeight="bold"
+                              fontSize="md"
+                              letterSpacing="0.5px"
+                              _hover={{ color: "#963f36" }}
+                              transition="color 0.2s"
+                            >
+                              SERVICES
+                            </Text>
+                            <motion.div
+                              animate={{ rotate: isServicesExpanded ? 180 : 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <FaChevronDown color="white" />
+                            </motion.div>
+                          </Flex>
+                        </ListItem>
+                      </motion.div>
+
+                      {/* Services Submenu - Collapsible */}
+                      <AnimatePresence>
+                        {isServicesExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            style={{ overflow: "hidden" }}
+                          >
+                            {[
+                              { label: "ALL SERVICES", path: "clinic-services" },
+                              { label: "Root Canal", path: "root-canal-washington-dc/" },
+                              { label: "General Dentistry", path: "general-dentistry-washington-dc/" },
+                              { label: "Comprehensive Care", path: "comprehensive-dental-care-washington-dc/" },
+                              { label: "Cosmetic Dentistry", path: "cosmetic-dentistry-washington-dc/" },
+                              { label: "Dental Veneers", path: "dental-veneers-washington-dc/" },
+                              { label: "Teeth Whitening", path: "teeth-whitening-washington-dc/" },
+                              { label: "Affordable Dentures", path: "affordable-dentures-washington-dc/" },
+                              { label: "Tooth-Colored Fillings", path: "tooth-colored-fillings-washington-dc/" },
+                              { label: "Dental Fillings", path: "dental-fillings-washington-dc/" },
+                            ].map((service, index) => (
+                              <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.03, duration: 0.2 }}
+                              >
+                                <ListItem
+                                  borderBottom="1px solid rgba(255,255,255,0.05)"
+                                  _hover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                                  transition="background-color 0.2s"
+                                  padding={3}
+                                  cursor="pointer"
+                                  onClick={() => {
+                                    navigateToSection(service.path);
+                                    setDrawerOpen(false);
+                                  }}
+                                >
+                                  <Flex alignItems="center" gap={2} marginLeft={4}>
+                                    <Icon as={FaTooth} color="#963f36" fontSize="sm" />
+                                    <Text
+                                      as="h5"
+                                      color="white"
+                                      fontWeight="normal"
+                                      fontSize="md"
+                                      letterSpacing="0.5px"
+                                      _hover={{ color: "#963f36" }}
+                                      transition="color 0.2s"
+                                    >
+                                      {service.label}
+                                    </Text>
+                                  </Flex>
+                                </ListItem>
+                              </motion.div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Other menu items */}
+                      {[
+                        { label: "LOCATIONS", path: "/#home-location", divider: true },
+                        { label: "CONTACT US", path: "/#footer-section" },
+                        { label: "PRIVACY POLICY", path: "privacy-policy" },
+                        { label: "NEW PATIENTS", path: "new-patients" },
+                        { label: "BLOG", path: "blog", divider: true },
+                      ].map((item, index) => {
+                        const adjustedIndex = index + 2; // Offset for ABOUT and SERVICES items
+                        return (
+                          <motion.div
+                            key={adjustedIndex}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: adjustedIndex * 0.05, duration: 0.3 }}
+                          >
+                        <ListItem
+                          borderBottom={item.divider ? "1px solid rgba(255,255,255,0.15)" : "1px solid rgba(255,255,255,0.05)"}
+                          _hover={{
+                            backgroundColor: "rgba(255, 255, 255, 0.1)",
+                          }}
+                          transition="background-color 0.2s"
+                          padding={3}
+                          cursor="pointer"
+                          onClick={() => {
+                            if (item.path?.startsWith("#")) {
+                              navigateToSection(item.path.substring(1));
+                            } else {
+                              navigateToSection(item.path);
+                            }
+                            setDrawerOpen(false);
+                          }}
+                        >
+                          <Text
+                            as="h5"
+                            color="white"
+                            fontWeight="normal"
+                            fontSize="md"
+                            letterSpacing="0.5px"
+                            _hover={{ color: "#963f36" }}
+                            transition="color 0.2s"
+                          >
+                            {item.label}
+                          </Text>
+                        </ListItem>
+                          </motion.div>
+                        );
+                      })}
+                    </Box>
+
+                    {/* Login/Signup buttons */}
+                    {isError && (
+                      <>
+                        <Box padding={4} borderTop="1px solid rgba(255,255,255,0.15)" marginTop="auto">
+                          <Button
+                            width="100%"
+                            background="#963f36"
+                            color="white"
+                            padding={3}
+                            borderRadius="md"
+                            marginBottom={2}
+                            onClick={() => {
+                              navigateToSection("auth/signup");
+                              setDrawerOpen(false);
+                            }}
+                            _hover={{ background: "#7a2f2a" }}
+                            transition="all 0.2s"
+                          >
+                            <Text as="h5" fontWeight="bold">SIGNUP</Text>
+                          </Button>
+                          <Button
+                            width="100%"
+                            background="transparent"
+                            color="white"
+                            padding={3}
+                            borderRadius="md"
+                            border="1px solid white"
+                            onClick={() => {
+                              navigateToSection("auth/login");
+                              setDrawerOpen(false);
+                            }}
+                            _hover={{ background: "rgba(255, 255, 255, 0.1)" }}
+                            transition="all 0.2s"
+                          >
+                            <Text as="h5" fontWeight="bold">LOGIN</Text>
+                          </Button>
+                        </Box>
+                      </>
+                    )}
+                  </List>
+                </Box>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       )}
     </Box>
   );

@@ -14,7 +14,7 @@ import QuickAppointmentIconComponent from "@/app/Icons/QuickAppointmentIcon";
 export const clinicServices = [
   {
     heading: "General Dentistry",
-    title: "General Dentistry - Washington DC",
+    title: "General Dentistry - Smile Expert Dental",
     value: "general_dentistry",
     description:
       "Our general dentistry services provide comprehensive oral health care for patients of all ages. From routine checkups to preventive care, we ensure your smile stays healthy and bright.",
@@ -31,7 +31,7 @@ export const clinicServices = [
   },
   {
     heading: "Cosmetic Dentistry",
-    title: "Cosmetic Dentistry - Washington DC",
+    title: "Cosmetic Dentistry - Smile Expert Dental",
     value: "cosmetic_dentistry",
     description:
       "Transform your smile with our advanced cosmetic dentistry services. We combine artistry with cutting-edge technology to create beautiful, natural-looking results that boost your confidence.",
@@ -47,7 +47,7 @@ export const clinicServices = [
   },
   {
     heading: "Teeth Whitening",
-    title: "Professional Teeth Whitening - Washington DC",
+    title: "Professional Teeth Whitening - Smile Expert Dental",
     value: "teeth_whitening",
     description:
       "Brighten your smile with our professional teeth whitening treatments. Safe, effective, and delivering dramatic results, our whitening services can remove years of stains and discoloration.",
@@ -62,7 +62,7 @@ export const clinicServices = [
   },
   {
     heading: "Dental Veneers",
-    title: "Porcelain Veneers - Washington DC",
+    title: "Porcelain Veneers - Smile Expert Dental",
     value: "dental_veneers",
     description:
       "Achieve a flawless smile with custom porcelain veneers. These thin shells are bonded to the front of your teeth to correct imperfections and create a stunning, natural-looking smile.",
@@ -77,7 +77,7 @@ export const clinicServices = [
   },
   {
     heading: "Root Canal Treatment",
-    title: "Root Canal Therapy - Washington DC",
+    title: "Root Canal Therapy - Smile Expert Dental",
     value: "root_canal",
     description:
       "Save your natural tooth with gentle, pain-free root canal therapy. Our experienced team uses advanced techniques to eliminate infection and restore your tooth's health and function.",
@@ -93,7 +93,7 @@ export const clinicServices = [
   },
   {
     heading: "Dental Fillings",
-    title: "Tooth-Colored Fillings - Washington DC",
+    title: "Tooth-Colored Fillings - Smile Expert Dental",
     value: "dental_fillings",
     description:
       "Restore decayed or damaged teeth with our tooth-colored fillings. These durable, natural-looking restorations blend seamlessly with your smile while protecting your teeth from further decay.",
@@ -108,7 +108,7 @@ export const clinicServices = [
   },
   {
     heading: "Tooth-Colored Fillings",
-    title: "Composite Fillings - Washington DC",
+    title: "Composite Fillings - Smile Expert Dental",
     value: "tooth_colored_fillings",
     description:
       "Say goodbye to silver fillings! Our tooth-colored composite fillings provide a beautiful, natural appearance while effectively treating cavities and restoring tooth structure.",
@@ -123,7 +123,7 @@ export const clinicServices = [
   },
   {
     heading: "Dentures",
-    title: "Affordable Dentures - Washington DC",
+    title: "Affordable Dentures - Smile Expert Dental",
     value: "dentures",
     description:
       "Restore your smile and confidence with our high-quality, affordable dentures. We offer both full and partial dentures custom-made to fit comfortably and look natural.",
@@ -139,7 +139,7 @@ export const clinicServices = [
   },
   {
     heading: "Comprehensive Dental Care",
-    title: "Complete Dental Care - Washington DC",
+    title: "Complete Dental Care - Smile Expert Dental",
     value: "comprehensive_care",
     description:
       "Experience complete oral health care under one roof. Our comprehensive dental services cover everything from preventive care to advanced restorative treatments, ensuring your smile stays healthy for life.",
@@ -156,7 +156,7 @@ export const clinicServices = [
   },
   {
     heading: "Preventive Dentistry",
-    title: "Preventive Dental Care - Washington DC",
+    title: "Preventive Dental Care - Smile Expert Dental",
     value: "preventive_care",
     description:
       "Prevention is the foundation of good oral health. Our preventive dentistry services help you maintain a healthy smile and avoid costly dental problems in the future.",
@@ -171,7 +171,7 @@ export const clinicServices = [
   },
   {
     heading: "Emergency Dental Care",
-    title: "Emergency Dentist - Washington DC",
+    title: "Emergency Dentist - Smile Expert Dental",
     value: "emergency_care",
     description:
       "Dental emergencies can happen anytime. Our team is ready to provide prompt, compassionate care when you need it most. We offer same-day appointments for urgent dental issues.",
@@ -261,13 +261,13 @@ export const appointmentLists = [
   {
     id: "1",
     name: "About us",
-    url: "/home/about-us",
+    url: "/about-us",
     component: AboutUSIconComponent
   },
   {
     id: "2",
     name: "Services",
-    url: "/home/clinic-services",
+    url: "/clinic-services",
     component: ServiceIconComponent
   },
   {

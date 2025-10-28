@@ -4,9 +4,10 @@ import moment from "moment";
 
 export const fetchAvailableAppointments = async (payload: any) => {
   const { appointment_date, city, showBooked= false } = payload;
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_appointments`,
+      `${apiBaseUrl}/get_appointments`,
       {
         method: "POST",
         headers: {
@@ -30,9 +31,10 @@ export const fetchAvailableAppointments = async (payload: any) => {
 const formatTime = (time: string) => moment(time, "HH:mm:ss").format("h A");
 
 export const fetchAppointmentHistory = async (userId: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_user_appointments/${userId}`,
+      `${apiBaseUrl}/get_user_appointments/${userId}`,
       { method: "GET" }
     );
     const jsonResponse = await apiResponse.json();
@@ -52,9 +54,10 @@ export const fetchAppointmentHistory = async (userId: any) => {
 };
 
 export const fetchAppointmentList = async (appointment_date: string) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_patient_appointments`,
+      `${apiBaseUrl}/get_patient_appointments`,
       {
         method: "POST",
         headers: {
@@ -79,9 +82,10 @@ export const fetchAppointmentList = async (appointment_date: string) => {
 };
 
 export const fetchUpcomingAppointment = async (userId: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_user_appointments/${userId}`,
+      `${apiBaseUrl}/get_user_appointments/${userId}`,
       { method: "GET" }
     );
     const jsonResponse = await apiResponse.json();
@@ -101,9 +105,10 @@ export const fetchUpcomingAppointment = async (userId: any) => {
 };
 
 export const cancelAppointment = async (appointment_id: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/cancel_appointment`,
+      `${apiBaseUrl}/cancel_appointment`,
       {
         method: "POST",
         headers: {
@@ -126,9 +131,11 @@ export const BookQuickAppointmentAction = async (
   payload: any,
   authToken: any
 ) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
+  
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/book_appointment_existing_user`,
+      `${apiBaseUrl}/book_appointment_existing_user`,
       {
         method: "POST",
         headers: {
@@ -139,41 +146,66 @@ export const BookQuickAppointmentAction = async (
       }
     );
     const jsonResponse = await apiResponse.json();
-
+    console.log(jsonResponse);
     if (apiResponse.status !== 201) throw jsonResponse;
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    // Provide user-friendly error message
+    let errorMessage = error.message || "An error occurred while booking the appointment";
+    if (error.message?.includes("could not locate runnable browser")) {
+      errorMessage = "The appointment system is temporarily unavailable. Please try again later or contact us directly.";
+    }
+    console.log(error);
+    return { success: false, error: errorMessage };
   }
 };
 
 export const BookAppointmentAction = async (payload: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
+  
+  // Remove empty start_time and end_time for new user appointments
+  const cleanedPayload = { ...payload };
+  if (!cleanedPayload.start_time || cleanedPayload.start_time === '') {
+    delete cleanedPayload.start_time;
+  }
+  if (!cleanedPayload.end_time || cleanedPayload.end_time === '') {
+    delete cleanedPayload.end_time;
+  }
+  
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/new_user_appointment`,
+      `${apiBaseUrl}/new_user_appointment`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(cleanedPayload)
       }
     );
     const jsonResponse = await apiResponse.json();
+    console.log(jsonResponse);
 
     if (apiResponse.status !== 201) throw jsonResponse;
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    // Provide user-friendly error message
+    console.log(error);
+    let errorMessage = error.message || "An error occurred while booking the appointment";
+    if (error.message?.includes("could not locate runnable browser")) {
+      errorMessage = "The appointment system is temporarily unavailable. Please try again later or contact us directly.";
+    }
+    return { success: false, error: errorMessage };
   }
 };
 
 export const RescheduleAppointmentAction = async (payload: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/reschedule_appointment`,
+      `${apiBaseUrl}/reschedule_appointment`,
       {
         method: "POST",
         headers: {
@@ -188,14 +220,16 @@ export const RescheduleAppointmentAction = async (payload: any) => {
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
+    console.log(error);
     return { success: false, error: error.message };
   }
 };
 
 export const AddMedicalRecordsAction = async (payload: any, authToken: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/add_medical_record`,
+      `${apiBaseUrl}/add_medical_record`,
       {
         method: "POST",
         headers: {

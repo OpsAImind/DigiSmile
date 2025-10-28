@@ -208,7 +208,7 @@ const Footer = () => {
           </Flex>
           <Flex flexDir={"column"} gap={2}>
             <Text as={"h5"} fontWeight={"bold"} mb={2}>
-              Washington D.C. Services
+              Our Services
             </Text>
             <Text
               as={"a"}
