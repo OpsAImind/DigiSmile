@@ -205,98 +205,110 @@ const ClinicServicesClient = () => {
                     }}
                     transition="all 0.3s"
                   >
-                    <AccordionButton
-                      py={6}
-                      px={6}
-                      _hover={{ bg: "brand.200" }}
-                      _expanded={{ bg: "brand.100", color: "white" }}
-                    >
-                      <Flex
-                        flex="1"
-                        textAlign="left"
-                        alignItems="center"
-                        gap={4}
-                      >
-                        <Box
-                          as={FaTooth}
-                          fontSize="2xl"
-                          color="inherit"
-                        />
-                        <Heading
-                          as="h3"
-                          fontSize={isMobile ? "lg" : "xl"}
-                          fontWeight={700}
+                    {({ isExpanded }) => (
+                      <>
+                        <AccordionButton
+                          py={6}
+                          px={6}
+                          _hover={{ bg: "brand.200" }}
+                          _expanded={{ bg: "brand.100", color: "white" }}
                         >
-                          {service.title ?? service.heading}
-                        </Heading>
-                      </Flex>
-                      <AccordionIcon fontSize="2xl" />
-                    </AccordionButton>
-                    <AccordionPanel pb={6} px={6}>
-                      <Flex
-                        flexDir={isLaptop ? "column" : "row"}
-                        gap={8}
-                        alignItems="flex-start"
-                      >
-                        <Box flex={1}>
-                          <Text
-                            fontSize={isMobile ? "md" : "lg"}
-                            mb={6}
-                            lineHeight="tall"
-                            color="gray.700"
+                          <Flex
+                            flex="1"
+                            textAlign="left"
+                            alignItems="center"
+                            gap={4}
                           >
-                            {service.description}
-                          </Text>
-                          <Divider my={4} borderColor="gray.300" />
-                          {service.services && service.services.length > 0 && (
-                            <>
-                              <Heading
-                                as="h4"
-                                fontSize="lg"
-                                fontWeight={700}
-                                mb={4}
-                                color="brand.100"
+                            <Box
+                              as={FaTooth}
+                              fontSize="2xl"
+                              color="inherit"
+                            />
+                            <Heading
+                              as="h3"
+                              fontSize={isMobile ? "lg" : "xl"}
+                              fontWeight={700}
+                            >
+                              {service.title ?? service.heading}
+                            </Heading>
+                          </Flex>
+                          <AccordionIcon fontSize="2xl" />
+                        </AccordionButton>
+                        <AccordionPanel 
+                          pb={6} 
+                          px={6}
+                          bg={isExpanded ? "brand.100" : "white"}
+                          color={isExpanded ? "white" : "inherit"}
+                        >
+                          <Flex
+                            flexDir={isLaptop ? "column" : "row"}
+                            gap={8}
+                            alignItems="flex-start"
+                          >
+                            <Box flex={1}>
+                              <Text
+                                fontSize={isMobile ? "md" : "lg"}
+                                mb={6}
+                                lineHeight="tall"
+                                color={isExpanded ? "white" : "gray.700"}
                               >
-                                Services Include:
-                              </Heading>
-                              <Grid
-                                templateColumns={isMobile ? "1fr" : "repeat(2, 1fr)"}
-                                gap={3}
-                              >
-                                {service.services.map((item: string, idx: number) => (
-                                  <Flex
-                                    key={idx}
-                                    alignItems="flex-start"
-                                    gap={2}
+                                {service.description}
+                              </Text>
+                              <Divider my={4} borderColor={isExpanded ? "rgba(255,255,255,0.3)" : "gray.300"} />
+                              {service.services && service.services.length > 0 && (
+                                <>
+                                  <Heading
+                                    as="h4"
+                                    fontSize="lg"
+                                    fontWeight={700}
+                                    mb={4}
+                                    color={isExpanded ? "white" : "brand.100"}
                                   >
-                                    <Box
-                                      as={FaCheckCircle}
-                                      color="brand.100"
-                                      mt={1}
-                                      flexShrink={0}
-                                    />
-                                    <Text fontSize="md" color="gray.700">
-                                      {item}
-                                    </Text>
-                                  </Flex>
-                                ))}
-                              </Grid>
-                            </>
-                          )}
-                        </Box>
-                        {service.link && (
-                          <Button
-                            variant="appointment"
-                            onClick={() => navigateToSection(service.link!)}
-                            alignSelf={isLaptop ? "stretch" : "flex-start"}
-                            size="lg"
-                            minW={isLaptop ? "full" : "200px"}
-                          >
-                            Learn More
-                          </Button>
-                        )}
-                      </Flex>
-                    </AccordionPanel>
+                                    Services Include:
+                                  </Heading>
+                                  <Grid
+                                    templateColumns={isMobile ? "1fr" : "repeat(2, 1fr)"}
+                                    gap={3}
+                                  >
+                                    {service.services.map((item: string, idx: number) => (
+                                      <Flex
+                                        key={idx}
+                                        alignItems="flex-start"
+                                        gap={2}
+                                      >
+                                        <Box
+                                          as={FaCheckCircle}
+                                          color={isExpanded ? "white" : "brand.100"}
+                                          mt={1}
+                                          flexShrink={0}
+                                        />
+                                        <Text fontSize="md" color={isExpanded ? "white" : "gray.700"}>
+                                          {item}
+                                        </Text>
+                                      </Flex>
+                                    ))}
+                                  </Grid>
+                                </>
+                              )}
+                            </Box>
+                            {service.link && (
+                              <Button
+                                variant={isExpanded ? "outline" : "appointment"}
+                                onClick={() => navigateToSection(service.link!)}
+                                alignSelf={isLaptop ? "stretch" : "flex-start"}
+                                size="lg"
+                                minW={isLaptop ? "full" : "200px"}
+                                color={isExpanded ? "white" : undefined}
+                                borderColor={isExpanded ? "white" : undefined}
+                                _hover={isExpanded ? { bg: "whiteAlpha.200" } : undefined}
+                              >
+                                Learn More
+                              </Button>
+                            )}
+                          </Flex>
+                        </AccordionPanel>
+                      </>
+                    )}
                   </AccordionItem>
                 </MotionBox>
               ))}
@@ -308,11 +320,18 @@ const ClinicServicesClient = () => {
       {/* CTA Section */}
       <Box bg="brand.100" py={16}>
         <Container maxW="container.xl">
-          <VStack spacing={6} textAlign="center">
+          <VStack 
+            spacing={6} 
+            textAlign="center"
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
+          >
             <Heading
               as="h2"
               color="white"
               fontSize={isMobile ? "2xl" : "3xl"}
+              textAlign="center"
             >
               Ready to Transform Your Smile?
             </Heading>
@@ -320,6 +339,8 @@ const ClinicServicesClient = () => {
               color="white"
               fontSize={isMobile ? "md" : "lg"}
               maxW="700px"
+              textAlign="center"
+              mx="auto"
             >
               Schedule your appointment today and experience the difference of
               exceptional dental care in Washington, D.C.
@@ -328,7 +349,11 @@ const ClinicServicesClient = () => {
               gap={4}
               flexDir={isMobile ? "column" : "row"}
               mt={4}
-              width={isMobile ? "100%" : "auto"}
+              justifyContent="center"
+              alignItems="center"
+              width="100%"
+              maxW={isMobile ? "100%" : "600px"}
+              mx="auto"
             >
               <Button
                 size="lg"
