@@ -113,7 +113,7 @@ const privacyPolicyPage = () => {
           <Text as={"h4"} mt={2}>
             Your information will be handled in accordance with our Privacy
             Policy, which can be viewed at
-            smilexpertsdental.com/home/privacy-policy.
+            smilexpertsdental.com/privacy-policy.
           </Text>
 
           <Text as={"h3"} mt={8} fontWeight={800}>

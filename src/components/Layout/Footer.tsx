@@ -33,14 +33,14 @@ const Footer = () => {
       >
         <Image src={digismileLogoImage} alt="logo" width={200} height={100} />
         <Flex
-          justifyContent="space-between"
-          alignItems={"center"}
+          justifyContent={isLaptop ? "center" : "space-between"}
+          alignItems={"flex-start"}
           gap={20}
           width={"100%"}
           padding={"0 2rem"}
           flexDir={isLaptop ? "column" : "row"}
         >
-          <Flex width={"100%"} flexDir={"column"} gap={8}>
+          <Flex flex={1} maxW={isLaptop ? "100%" : "600px"} flexDir={"column"} gap={8}>
             <Flex
               flexDir={"column"}
               width={"100%"}
@@ -98,7 +98,7 @@ const Footer = () => {
               Book a consultation
             </Button>
           </Flex>
-          <Flex width={"100%"} flexDir={"column"} gap={8}>
+          <Flex flex={1} maxW={isLaptop ? "100%" : "600px"} flexDir={"column"} gap={8}>
             <Flex
               flexDir={"column"}
               width={"100%"}
@@ -208,7 +208,7 @@ const Footer = () => {
           </Flex>
           <Flex flexDir={"column"} gap={2}>
             <Text as={"h5"} fontWeight={"bold"} mb={2}>
-              Washington D.C. Services
+              Our Services
             </Text>
             <Text
               as={"a"}

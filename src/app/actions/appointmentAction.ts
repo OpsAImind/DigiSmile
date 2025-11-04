@@ -4,17 +4,27 @@ import moment from "moment";
 
 export const fetchAvailableAppointments = async (payload: any) => {
   const { appointment_date, city, showBooked= false } = payload;
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
+  
+  // Create AbortController for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_appointments`,
+      `${apiBaseUrl}/get_appointments`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ appointment_date, city })
+        body: JSON.stringify({ appointment_date, city }),
+        signal: controller.signal
       }
     );
+    
+    clearTimeout(timeoutId);
+    
     const jsonResponse = await apiResponse.json();
     if (apiResponse.status !== 200) throw jsonResponse;
     if(showBooked && jsonResponse?.slotss){
@@ -23,16 +33,21 @@ export const fetchAvailableAppointments = async (payload: any) => {
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      return { success: false, error: "Request timeout - API took too long to respond. Please check your connection." };
+    }
+    return { success: false, error: error.message || "Failed to fetch appointments. Please try again." };
   }
 };
 
 const formatTime = (time: string) => moment(time, "HH:mm:ss").format("h A");
 
 export const fetchAppointmentHistory = async (userId: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_user_appointments/${userId}`,
+      `${apiBaseUrl}/get_user_appointments/${userId}`,
       { method: "GET" }
     );
     const jsonResponse = await apiResponse.json();
@@ -52,9 +67,10 @@ export const fetchAppointmentHistory = async (userId: any) => {
 };
 
 export const fetchAppointmentList = async (appointment_date: string) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_patient_appointments`,
+      `${apiBaseUrl}/get_patient_appointments`,
       {
         method: "POST",
         headers: {
@@ -79,9 +95,10 @@ export const fetchAppointmentList = async (appointment_date: string) => {
 };
 
 export const fetchUpcomingAppointment = async (userId: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_user_appointments/${userId}`,
+      `${apiBaseUrl}/get_user_appointments/${userId}`,
       { method: "GET" }
     );
     const jsonResponse = await apiResponse.json();
@@ -101,9 +118,10 @@ export const fetchUpcomingAppointment = async (userId: any) => {
 };
 
 export const cancelAppointment = async (appointment_id: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/cancel_appointment`,
+      `${apiBaseUrl}/cancel_appointment`,
       {
         method: "POST",
         headers: {
@@ -126,9 +144,11 @@ export const BookQuickAppointmentAction = async (
   payload: any,
   authToken: any
 ) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
+  
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/book_appointment_existing_user`,
+      `${apiBaseUrl}/book_appointment_existing_user`,
       {
         method: "POST",
         headers: {
@@ -139,25 +159,69 @@ export const BookQuickAppointmentAction = async (
       }
     );
     const jsonResponse = await apiResponse.json();
-
-    if (apiResponse.status !== 201) throw jsonResponse;
+    
+    if (apiResponse.status !== 201) {
+      throw jsonResponse;
+    }
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    // Try to extract error message from various possible fields
+    let errorMessage = 
+      error?.message || 
+      error?.error || 
+      error?.detail || 
+      error?.error_message ||
+      error?.error_detail ||
+      "An error occurred while booking the appointment";
+    
+    // Add status code information if available
+    if (error?.status_code || error?.status) {
+      const statusCode = error.status_code || error.status;
+      errorMessage += ` (Status: ${statusCode})`;
+    }
+    
+    // Handle specific error cases
+    if (errorMessage?.includes("could not locate runnable browser") || 
+        error?.detail?.includes("could not locate runnable browser") ||
+        JSON.stringify(error).includes("could not locate runnable browser")) {
+      errorMessage = "The appointment booking system requires browser automation which is not configured on the server. Please contact the administrator to install a headless browser (Chrome/Chromium) on the Elastic Beanstalk instance.";
+    }
+    
+    // If we have additional details, include them
+    if (error?.detail && error.detail !== errorMessage) {
+      errorMessage += `. Details: ${error.detail}`;
+    }
+    
+    return { 
+      success: false, 
+      error: errorMessage,
+      errorDetails: error // Include full error object for debugging
+    };
   }
 };
 
 export const BookAppointmentAction = async (payload: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
+  
+  // Remove empty start_time and end_time for new user appointments
+  const cleanedPayload = { ...payload };
+  if (!cleanedPayload.start_time || cleanedPayload.start_time === '') {
+    delete cleanedPayload.start_time;
+  }
+  if (!cleanedPayload.end_time || cleanedPayload.end_time === '') {
+    delete cleanedPayload.end_time;
+  }
+  
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/new_user_appointment`,
+      `${apiBaseUrl}/new_user_appointment`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(cleanedPayload)
       }
     );
     const jsonResponse = await apiResponse.json();
@@ -166,14 +230,20 @@ export const BookAppointmentAction = async (payload: any) => {
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    // Provide user-friendly error message
+    let errorMessage = error.message || "An error occurred while booking the appointment";
+    if (error.message?.includes("could not locate runnable browser")) {
+      errorMessage = "The appointment system is temporarily unavailable. Please try again later or contact us directly.";
+    }
+    return { success: false, error: errorMessage };
   }
 };
 
 export const RescheduleAppointmentAction = async (payload: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/reschedule_appointment`,
+      `${apiBaseUrl}/reschedule_appointment`,
       {
         method: "POST",
         headers: {
@@ -193,9 +263,10 @@ export const RescheduleAppointmentAction = async (payload: any) => {
 };
 
 export const AddMedicalRecordsAction = async (payload: any, authToken: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/add_medical_record`,
+      `${apiBaseUrl}/add_medical_record`,
       {
         method: "POST",
         headers: {

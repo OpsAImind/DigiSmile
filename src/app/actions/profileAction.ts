@@ -1,9 +1,10 @@
 "use server";
 
 export const fetchUserPrescription = async (userId: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_medical_records/${userId}`,
+      `${apiBaseUrl}/get_medical_records/${userId}`,
       { method: "GET" }
     );
     const jsonResponse = await apiResponse.json();
@@ -22,9 +23,10 @@ export const fetchUserPrescription = async (userId: any) => {
 };
 
 export const fetchUserCheckups = async (userId: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_medical_records/${userId}`,
+      `${apiBaseUrl}/get_medical_records/${userId}`,
       { method: "GET" }
     );
     const jsonResponse = await apiResponse.json();

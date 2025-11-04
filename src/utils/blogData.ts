@@ -52,7 +52,7 @@ export const blogPosts: BlogPost[] = [
       "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1074",
     category: "Dental Health",
     date: "October 10, 2025",
-    author: "Smile Experts",
+    author: "Smile Experts Dental",
     metaTitle:
       "5 Signs You Need Root Canal Treatment | Smile Experts Dental Blog",
     metaDescription:
@@ -94,7 +94,7 @@ export const blogPosts: BlogPost[] = [
       "https://plus.unsplash.com/premium_photo-1674998806375-58edc35ddf3b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
     category: "Cosmetic Dentistry",
     date: "October 8, 2025",
-    author: "Smile Experts",
+    author: "Smile Experts Dental",
     metaTitle:
       "How to Maintain White Teeth After Whitening | Smile Experts Dental",
     metaDescription:
@@ -133,7 +133,7 @@ export const blogPosts: BlogPost[] = [
       "https://lh3.googleusercontent.com/p/AF1QipOHe5OlI3J5HFXb0Y9Z8iyayW5Y8zZVV2cAwSt9=s680-w680-h510-rw",
     category: "Preventive Care",
     date: "October 5, 2025",
-    author: "Smile Experts",
+    author: "Smile Experts Dental",
     metaTitle:
       "The Importance of Regular Dental Checkups | Smile Experts Dental",
     metaDescription:

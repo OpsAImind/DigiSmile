@@ -1,9 +1,10 @@
 "use server";
 
 export const changePasswordAction = async (passwords: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/change_password`,
+      `${apiBaseUrl}/change_password`,
       {
         method: "POST",
         headers: {
@@ -28,9 +29,10 @@ export const changePasswordAction = async (passwords: any) => {
 
 export const UpdateProfileAction = async (detail: any) => {
   detail.name = detail.first_name + " " + detail.last_name;
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/update_details`,
+      `${apiBaseUrl}/update_details`,
       {
         method: "POST",
         headers: {
@@ -55,9 +57,10 @@ export const UpdateProfileAction = async (detail: any) => {
 };
 
 export const forgotPasswordAction = async (payload: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/forget_password`,
+      `${apiBaseUrl}/forget_password`,
       {
         method: "POST",
         headers: {
@@ -77,9 +80,10 @@ export const forgotPasswordAction = async (payload: any) => {
 };
 
 export const fetchUserDetails = async (authToken: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
   try {
     const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/get_user_details`,
+      `${apiBaseUrl}/get_user_details`,
       {
         method: "GET",
         headers: {
