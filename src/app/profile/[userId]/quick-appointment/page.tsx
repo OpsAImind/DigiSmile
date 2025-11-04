@@ -83,11 +83,15 @@ const QuickAppointment = () => {
         setSubmitting(false);
       }
     } else {
+      // Convert city to location (backend expects 'location')
+      values.location = values.city;
       delete values.city;
+      
       const response = await BookQuickAppointmentAction(
         values,
         localStorage.getItem("authToken")
       );
+      
       if (response?.success) {
         dispatch(
           showToastWithTimeout({
@@ -135,17 +139,34 @@ const QuickAppointment = () => {
   const handleDateChange = async (date: Date, city: string) => {
     setLoadingSlots(true);
     const updatedDate = moment(date).format("YYYY-MM-DD");
-    const response = await fetchAvailableAppointments({
-      appointment_date: updatedDate,
-      city
-    });
-    if (response?.success) {
-      setSlots(response?.data?.slotss || []);
-    } else {
+    try {
+      const response = await fetchAvailableAppointments({
+        appointment_date: updatedDate,
+        city
+      });
+      if (response?.success) {
+        setSlots(response?.data?.slotss || []);
+      } else {
+        setSlots([]);
+        dispatch(
+          showToastWithTimeout({
+            message: response?.error || "Failed to load appointment slots",
+            status: "error"
+          })
+        );
+      }
+    } catch (error) {
       setSlots([]);
+      dispatch(
+        showToastWithTimeout({
+          message: "Failed to load appointment slots. Please try again.",
+          status: "error"
+        })
+      );
+    } finally {
+      setLoadingSlots(false);
+      setSelectedDate(date);
     }
-    setLoadingSlots(false);
-    setSelectedDate(date);
   };
 
   return (

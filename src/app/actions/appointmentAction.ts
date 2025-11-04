@@ -5,6 +5,11 @@ import moment from "moment";
 export const fetchAvailableAppointments = async (payload: any) => {
   const { appointment_date, city, showBooked= false } = payload;
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
+  
+  // Create AbortController for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
   try {
     const apiResponse = await fetch(
       `${apiBaseUrl}/get_appointments`,
@@ -13,9 +18,13 @@ export const fetchAvailableAppointments = async (payload: any) => {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ appointment_date, city })
+        body: JSON.stringify({ appointment_date, city }),
+        signal: controller.signal
       }
     );
+    
+    clearTimeout(timeoutId);
+    
     const jsonResponse = await apiResponse.json();
     if (apiResponse.status !== 200) throw jsonResponse;
     if(showBooked && jsonResponse?.slotss){
@@ -24,7 +33,11 @@ export const fetchAvailableAppointments = async (payload: any) => {
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
-    return { success: false, error: error.message };
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      return { success: false, error: "Request timeout - API took too long to respond. Please check your connection." };
+    }
+    return { success: false, error: error.message || "Failed to fetch appointments. Please try again." };
   }
 };
 
@@ -146,18 +159,45 @@ export const BookQuickAppointmentAction = async (
       }
     );
     const jsonResponse = await apiResponse.json();
-    console.log(jsonResponse);
-    if (apiResponse.status !== 201) throw jsonResponse;
+    
+    if (apiResponse.status !== 201) {
+      throw jsonResponse;
+    }
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
-    // Provide user-friendly error message
-    let errorMessage = error.message || "An error occurred while booking the appointment";
-    if (error.message?.includes("could not locate runnable browser")) {
-      errorMessage = "The appointment system is temporarily unavailable. Please try again later or contact us directly.";
+    // Try to extract error message from various possible fields
+    let errorMessage = 
+      error?.message || 
+      error?.error || 
+      error?.detail || 
+      error?.error_message ||
+      error?.error_detail ||
+      "An error occurred while booking the appointment";
+    
+    // Add status code information if available
+    if (error?.status_code || error?.status) {
+      const statusCode = error.status_code || error.status;
+      errorMessage += ` (Status: ${statusCode})`;
     }
-    console.log(error);
-    return { success: false, error: errorMessage };
+    
+    // Handle specific error cases
+    if (errorMessage?.includes("could not locate runnable browser") || 
+        error?.detail?.includes("could not locate runnable browser") ||
+        JSON.stringify(error).includes("could not locate runnable browser")) {
+      errorMessage = "The appointment booking system requires browser automation which is not configured on the server. Please contact the administrator to install a headless browser (Chrome/Chromium) on the Elastic Beanstalk instance.";
+    }
+    
+    // If we have additional details, include them
+    if (error?.detail && error.detail !== errorMessage) {
+      errorMessage += `. Details: ${error.detail}`;
+    }
+    
+    return { 
+      success: false, 
+      error: errorMessage,
+      errorDetails: error // Include full error object for debugging
+    };
   }
 };
 
@@ -185,14 +225,12 @@ export const BookAppointmentAction = async (payload: any) => {
       }
     );
     const jsonResponse = await apiResponse.json();
-    console.log(jsonResponse);
 
     if (apiResponse.status !== 201) throw jsonResponse;
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
     // Provide user-friendly error message
-    console.log(error);
     let errorMessage = error.message || "An error occurred while booking the appointment";
     if (error.message?.includes("could not locate runnable browser")) {
       errorMessage = "The appointment system is temporarily unavailable. Please try again later or contact us directly.";
@@ -220,7 +258,6 @@ export const RescheduleAppointmentAction = async (payload: any) => {
 
     return { success: true, data: jsonResponse };
   } catch (error: any) {
-    console.log(error);
     return { success: false, error: error.message };
   }
 };

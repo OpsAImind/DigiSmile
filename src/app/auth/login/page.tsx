@@ -40,15 +40,17 @@ const LoginPage = () => {
     values: LoginFormValues,
     setSubmitting: (data: boolean) => void
   ) => {
-    userLogin(values).then((response: any) => {
-      if (response?.data?.status_code === 200) {
+    try {
+      const response = await userLogin(values).unwrap();
+      
+      if (response?.status_code === 200) {
         dispatch(
           showToastWithTimeout({
             message: "Successfully logged in",
             status: "success"
           })
         );
-        setAuthToken(response.data);
+        setAuthToken(response);
         setTimeout(() => {
           router.push(
             `/profile/${localStorage.getItem("userId")}/profile?tabId=0`
@@ -57,13 +59,21 @@ const LoginPage = () => {
       } else {
         dispatch(
           showToastWithTimeout({
-            message: response.error.data.message || "Something went wrong",
+            message: response.message || "Something went wrong",
             status: "error"
           })
         );
       }
+    } catch (err: any) {
+      dispatch(
+        showToastWithTimeout({
+          message: err?.data?.message || err?.error?.data?.message || "Login failed. Please try again.",
+          status: "error"
+        })
+      );
+    } finally {
       setSubmitting(false);
-    });
+    }
   };
 
   return (
