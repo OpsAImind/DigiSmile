@@ -80,15 +80,16 @@ const ClinicServicesClient = () => {
             fontSize={isMobile ? "3xl" : isLaptop ? "4xl" : "5xl"}
             fontWeight={900}
           >
-            COMPREHENSIVE DENTAL SERVICES
+            Comprehensive Dental Care
           </Heading>
           <Text
             color="white"
             fontSize={isMobile ? "md" : "xl"}
             maxW="800px"
             fontWeight={500}
+            fontStyle="italic"
           >
-            Expert dental care in Washington, D.C. for all your oral health needs
+            Trusted dental services in Washington, D.C. for complete oral health
           </Text>
         </VStack>
       </Box>
@@ -101,8 +102,9 @@ const ClinicServicesClient = () => {
               as="h2"
               color="brand.100"
               fontSize={isMobile ? "2xl" : "3xl"}
+              fontWeight={700}
             >
-              Your Complete Dental Care Solution
+              Focused On Long Term Oral Health
             </Heading>
             <Text
               fontSize={isMobile ? "md" : "lg"}
@@ -110,10 +112,7 @@ const ClinicServicesClient = () => {
               maxW="900px"
               lineHeight="tall"
             >
-              At Smile Experts Dental, we offer a comprehensive range of dental services
-              to keep your smile healthy, beautiful, and confident. From routine checkups
-              to advanced cosmetic procedures, our experienced team is dedicated to
-              providing exceptional care in a comfortable, welcoming environment.
+              Our dental services focus on prevention, early diagnosis, and personalized treatment. Through routine exams, cleanings, and patient education, we help maintain healthy teeth and gums while supporting comfort, clarity, and long-term oral wellness for every patient we serve.
             </Text>
           </VStack>
 
@@ -179,8 +178,7 @@ const ClinicServicesClient = () => {
               maxW="800px"
               mb={8}
             >
-              Explore our full range of dental services designed to meet all your
-              oral health needs. Click on any service to learn more about what we offer.
+              We offer a complete range of preventive, restorative, and diagnostic treatments as a <strong>full-service dental office</strong> committed to consistent care and reliable results for individuals and families.
             </Text>
 
             <Accordion allowToggle variant="services" width="100%">
@@ -264,7 +262,7 @@ const ClinicServicesClient = () => {
                                     mb={4}
                                     color={isExpanded ? "white" : "brand.100"}
                                   >
-                                    Services Include:
+                                    Included Services
                                   </Heading>
                                   <Grid
                                     templateColumns={isMobile ? "1fr" : "repeat(2, 1fr)"}
@@ -333,7 +331,7 @@ const ClinicServicesClient = () => {
               fontSize={isMobile ? "2xl" : "3xl"}
               textAlign="center"
             >
-              Ready to Transform Your Smile?
+              Ready for a Healthier, Confident Smile?
             </Heading>
             <Text
               color="white"
@@ -342,8 +340,7 @@ const ClinicServicesClient = () => {
               textAlign="center"
               mx="auto"
             >
-              Schedule your appointment today and experience the difference of
-              exceptional dental care in Washington, D.C.
+              Schedule your appointment today and experience exceptional dental care from trusted professionals in Washington, D.C.
             </Text>
             <Flex
               gap={4}
@@ -359,9 +356,17 @@ const ClinicServicesClient = () => {
                 size="lg"
                 bg="white"
                 color="brand.100"
-                _hover={{ bg: "gray.100" }}
+                _hover={{ bg: "gray.100", transform: "translateY(-2px)" }}
                 onClick={() => router.push("/#footer-section")}
                 width={isMobile ? "full" : "auto"}
+                sx={{
+                  backgroundColor: "white !important",
+                  "&:hover": {
+                    backgroundColor: "#E0E5F2 !important"
+                  }
+                }}
+                boxShadow="md"
+                transition="all 0.3s ease"
               >
                 Contact Us
               </Button>

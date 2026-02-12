@@ -2,16 +2,13 @@ import type { Metadata } from "next";
 import AboutUsClient from "./AboutUsClient";
 
 export const metadata: Metadata = {
-  title: "About Us | Smile Experts Dental Washington, D.C.",
+  title: "About Smile Experts Dental | Trusted Dental Care DC",
   description:
-    "Meet the team at Smile Experts Dental. Learn about our mission, values, and commitment to providing exceptional dental care in Washington, D.C.",
+    "Learn about Smile Experts Dental, our compassionate team, guiding principles, and commitment to comfortable, transparent, high-quality dental care.",
   keywords: [
-    "about smile experts dental",
-    "dentist Washington DC",
-    "dental team",
-    "Dr. Mahmood",
-    "dental practice DC",
-    "our mission"
+    "experienced dentists",
+    "Experts Dental Clinic",
+    "dental professionals"
   ],
   alternates: { canonical: "https://www.smilexpertsdental.com/about-us/" },
   openGraph: {
