@@ -3,11 +3,10 @@
 import { Poppins, DM_Sans } from "next/font/google";
 import "./global.scss";
 import React, { Suspense } from "react";
-import Script from "next/script";
 import AppWrappers from "./AppWrapper";
 import { Provider } from "react-redux";
 import store from "@/redux/store";
-import Head from "next/head";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <title>Best General and Cosmetic Dentist in DMV Area | DigiSmile</title>
         <meta
           name="description"
@@ -64,35 +63,25 @@ export default function RootLayout({
         <meta name="geo.region" content="US-VA" />
         <meta name="geo.placename" content="Burke" />
         <meta name="geo.placename" content="Washington" />
-      </Head>
-
-      {/* Google Analytics */}
-      <Script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_APP_GTAG}`}
-      />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_APP_GTAG}');
-        `}
-      </Script>
-      <Script id="chatbot-config" strategy="beforeInteractive">
-        {`
-            window.embeddedChatbotConfig = {
-              chatbotId: "1ZYPlrW9E56Qhv7BVhwjH",
-              domain: "www.chatbase.co"
-            };
-          `}
-      </Script>
-      <Script
-        src="https://www.chatbase.co/embed.min.js"
-        strategy="afterInteractive"
-        defer
-      />
+        
+        {/* Chatbot Config */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.embeddedChatbotConfig = {
+                chatbotId: "1ZYPlrW9E56Qhv7BVhwjH",
+                domain: "www.chatbase.co"
+              };
+            `
+          }}
+        />
+        <script
+          src="https://www.chatbase.co/embed.min.js"
+          defer
+        />
+      </head>
       <body className={`${poppins.className} ${dmSans.className}`}>
+        <GoogleAnalytics />
         <Suspense fallback={<div>Loading...</div>}>
           <Provider store={store}>
             <AppWrappers>{children}</AppWrappers>

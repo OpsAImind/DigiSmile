@@ -14,174 +14,165 @@ import QuickAppointmentIconComponent from "@/app/Icons/QuickAppointmentIcon";
 export const clinicServices = [
   {
     heading: "General Dentistry",
-    title: "General Dentistry - Smile Expert Dental",
+    title: "General Dentistry – Smile Expert Dental",
     value: "general_dentistry",
     description:
-      "Our general dentistry services provide comprehensive oral health care for patients of all ages. From routine checkups to preventive care, we ensure your smile stays healthy and bright.",
+      "Our general dentistry services in Washington, D.C. support everyday oral health through routine exams, cleanings, and early detection, helping patients maintain strong teeth and healthy gums for the long term.",
     services: [
-      "Comprehensive Dental Examinations",
-      "Professional Teeth Cleaning",
-      "Digital X-Rays",
-      "Oral Cancer Screenings",
-      "Fluoride Treatments",
-      "Dental Sealants",
-      "Gum Disease Treatment"
+      "Routine dental exams",
+      "Professional cleanings",
+      "Digital X-rays",
+      "Oral health education",
+      "Gum disease prevention"
     ],
     link: "/general-dentistry-washington-dc/"
   },
   {
     heading: "Cosmetic Dentistry",
-    title: "Cosmetic Dentistry - Smile Expert Dental",
+    title: "Cosmetic Dentistry – Smile Expert Dental",
     value: "cosmetic_dentistry",
     description:
-      "Transform your smile with our advanced cosmetic dentistry services. We combine artistry with cutting-edge technology to create beautiful, natural-looking results that boost your confidence.",
+      "Our cosmetic dentistry in Washington, D.C. focuses on improving the appearance of your smile by addressing tooth color, alignment, and shape with natural-looking results that build confidence.",
     services: [
-      "Teeth Whitening",
-      "Porcelain Veneers",
-      "Dental Bonding",
-      "Smile Makeovers",
-      "Gum Contouring",
-      "Tooth-Colored Fillings"
+      "Smile consultations",
+      "Teeth whitening",
+      "Veneers",
+      "Cosmetic bonding",
+      "Smile makeovers"
     ],
     link: "/cosmetic-dentistry-washington-dc/"
   },
   {
     heading: "Teeth Whitening",
-    title: "Professional Teeth Whitening - Smile Expert Dental",
+    title: "Professional Teeth Whitening – Smile Expert Dental",
     value: "teeth_whitening",
     description:
-      "Brighten your smile with our professional teeth whitening treatments. Safe, effective, and delivering dramatic results, our whitening services can remove years of stains and discoloration.",
+      "Professional teeth whitening in Washington, D.C. helps remove deep stains caused by food, drinks, and lifestyle habits through safe, supervised treatments that deliver noticeably brighter smiles.",
     services: [
-      "In-Office Whitening",
-      "Take-Home Whitening Kits",
-      "Custom Whitening Trays",
-      "Stain Removal Treatment",
-      "Touch-Up Treatments"
+      "In-office whitening",
+      "Take-home whitening kits",
+      "Sensitivity management",
+      "Shade assessment",
+      "Post-treatment guidance"
     ],
     link: "/teeth-whitening-washington-dc/"
   },
   {
     heading: "Dental Veneers",
-    title: "Porcelain Veneers - Smile Expert Dental",
+    title: "Porcelain Veneers – Smile Expert Dental",
     value: "dental_veneers",
     description:
-      "Achieve a flawless smile with custom porcelain veneers. These thin shells are bonded to the front of your teeth to correct imperfections and create a stunning, natural-looking smile.",
+      "Dental veneers in Washington, D.C. improve tooth shape, color, and alignment using thin, durable porcelain shells designed to correct cosmetic concerns and create a balanced smile.",
     services: [
-      "Porcelain Veneers",
-      "Composite Veneers",
-      "Minimal Prep Veneers",
-      "Veneer Consultation & Design",
-      "Smile Preview Technology"
+      "Cosmetic evaluation",
+      "Custom veneer design",
+      "Tooth preparation",
+      "Veneer placement",
+      "Smile refinement"
     ],
     link: "/dental-veneers-washington-dc/"
   },
   {
     heading: "Root Canal Treatment",
-    title: "Root Canal Therapy - Smile Expert Dental",
+    title: "Root Canal Therapy – Smile Expert Dental",
     value: "root_canal",
     description:
-      "Save your natural tooth with gentle, pain-free root canal therapy. Our experienced team uses advanced techniques to eliminate infection and restore your tooth's health and function.",
+      "Root canal therapy in Washington, D.C., treats infected tooth pulp to relieve pain and stop infection while preserving your natural tooth and restoring comfort and function.",
     services: [
-      "Root Canal Therapy",
-      "Emergency Root Canal Treatment",
-      "Endodontic Retreatment",
-      "Digital Imaging",
-      "Pain Management",
-      "Same-Day Emergency Care"
+      "Infection diagnosis",
+      "Pulp removal",
+      "Canal cleaning",
+      "Tooth sealing",
+      "Post-treatment restoration"
     ],
     link: "/root-canal-washington-dc/"
   },
   {
     heading: "Dental Fillings",
-    title: "Tooth-Colored Fillings - Smile Expert Dental",
+    title: "Tooth-Colored Fillings – Smile Expert Dental",
     value: "dental_fillings",
     description:
-      "Restore decayed or damaged teeth with our tooth-colored fillings. These durable, natural-looking restorations blend seamlessly with your smile while protecting your teeth from further decay.",
+      "Tooth-colored fillings in Washington, D.C. restore cavities using durable composite materials that blend naturally with your teeth while maintaining strength and appearance.",
     services: [
-      "Composite Resin Fillings",
-      "Cavity Treatment",
-      "Old Filling Replacement",
-      "Mercury-Free Fillings",
-      "Same-Day Fillings"
+      "Cavity assessment",
+      "Composite filling placement",
+      "Color matching",
+      "Tooth reshaping",
+      "Bite adjustment"
     ],
     link: "/dental-fillings-washington-dc/"
   },
   {
     heading: "Tooth-Colored Fillings",
-    title: "Composite Fillings - Smile Expert Dental",
+    title: "Composite Fillings – Smile Expert Dental",
     value: "tooth_colored_fillings",
     description:
-      "Say goodbye to silver fillings! Our tooth-colored composite fillings provide a beautiful, natural appearance while effectively treating cavities and restoring tooth structure.",
+      "Composite dental fillings repair decayed or damaged teeth with strong, natural-looking material that bonds securely to tooth structure and supports long-term function.",
     services: [
-      "Aesthetic Composite Fillings",
-      "BPA-Free Materials",
-      "Bonded Restorations",
-      "Cavity Prevention Counseling",
-      "Conservative Tooth Preparation"
+      "Tooth evaluation",
+      "Decay removal",
+      "Composite bonding",
+      "Shape restoration",
+      "Polishing and finishing"
     ],
     link: "/tooth-colored-fillings-washington-dc/"
   },
   {
     heading: "Dentures",
-    title: "Affordable Dentures - Smile Expert Dental",
+    title: "Affordable Dentures – Smile Expert Dental",
     value: "dentures",
     description:
-      "Restore your smile and confidence with our high-quality, affordable dentures. We offer both full and partial dentures custom-made to fit comfortably and look natural.",
+      "Affordable dentures in Washington, D.C. replace missing teeth with comfortable solutions that improve chewing, speech, and facial support while supporting daily confidence.",
     services: [
-      "Full Dentures",
-      "Partial Dentures",
-      "Implant-Supported Dentures",
-      "Denture Repairs",
-      "Denture Relines",
-      "Same-Day Dentures"
+      "Denture consultation",
+      "Full dentures",
+      "Partial dentures",
+      "Adjustments and relines",
+      "Denture care guidance"
     ],
     link: "/affordable-dentures-washington-dc/"
   },
   {
     heading: "Comprehensive Dental Care",
-    title: "Complete Dental Care - Smile Expert Dental",
+    title: "Complete Dental Care – Smile Expert Dental",
     value: "comprehensive_care",
     description:
-      "Experience complete oral health care under one roof. Our comprehensive dental services cover everything from preventive care to advanced restorative treatments, ensuring your smile stays healthy for life.",
+      "Our complete dental care in Washington, D.C. brings preventive, restorative, and cosmetic services together under one roof to support consistent treatment and long-term oral health.",
     services: [
-      "Full Mouth Rehabilitation",
-      "Preventive Care Programs",
-      "Restorative Dentistry",
-      "Periodontal Care",
-      "Oral Surgery",
-      "Emergency Dental Services",
-      "Pediatric Dentistry"
+      "Preventive dentistry",
+      "Restorative treatments",
+      "Cosmetic solutions",
+      "Ongoing maintenance",
+      "Comprehensive evaluations"
     ],
     link: "/comprehensive-dental-care-washington-dc/"
   },
   {
     heading: "Preventive Dentistry",
-    title: "Preventive Dental Care - Smile Expert Dental",
+    title: "Preventive Dental Care – Smile Expert Dental",
     value: "preventive_care",
     description:
-      "Prevention is the foundation of good oral health. Our preventive dentistry services help you maintain a healthy smile and avoid costly dental problems in the future.",
+      "Preventive dental care in Washington, D.C. focuses on protecting teeth and gums through regular checkups, cleanings, and education to help avoid future dental problems.",
     services: [
-      "Regular Dental Checkups",
-      "Professional Cleanings",
-      "Oral Health Education",
-      "Nutritional Counseling",
-      "Custom Mouthguards",
-      "TMJ Treatment"
+      "Routine checkups",
+      "Professional cleanings",
+      "Fluoride treatments",
+      "Sealants",
+      "Oral hygiene guidance"
     ]
   },
   {
     heading: "Emergency Dental Care",
-    title: "Emergency Dentist - Smile Expert Dental",
+    title: "Emergency Dentist – Smile Expert Dental",
     value: "emergency_care",
     description:
-      "Dental emergencies can happen anytime. Our team is ready to provide prompt, compassionate care when you need it most. We offer same-day appointments for urgent dental issues.",
+      "Our emergency dental care in Washington, D.C. provides prompt treatment for sudden pain, injury, or infection with a focus on relief, stability, and same-day care.",
     services: [
-      "Toothache Relief",
-      "Broken Tooth Repair",
-      "Lost Filling/Crown Replacement",
-      "Abscess Treatment",
-      "Trauma Care",
-      "Same-Day Emergency Appointments"
+      "Toothache treatment",
+      "Broken tooth repair",
+      "Infection management",
+      "Emergency exams",
+      "Same-day care"
     ]
   }
 ];

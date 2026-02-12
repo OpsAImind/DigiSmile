@@ -3,13 +3,21 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Dental Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
+  title: "Dental Fillings Washington D.C | Smile Experts Dental Clinic",
   description:
-    "Dental fillings in Smile Experts Dental Clinic to repair cavities and restore tooth strength and comfort. Call (202) 545-6336.",
+    "Smile Experts Dental Clinic offers dental fillings in Washington D.C to treat cavities using durable, natural-looking materials for long-lasting comfort.",
+  keywords: [
+    "dental filling in Washington D.C",
+    "what is a dental filling",
+    "do dental filling hurt",
+    "composite dental filling",
+    "what does a dental filling look like",
+    "how long do dental fillings take"
+  ],
   alternates: { canonical: "https://www.smilexpertsdental.com/dental-fillings-washington-dc/" },
   openGraph: {
-    title: "Dental Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
-    description: "Restore decayed teeth with comfortable, long-lasting fillings.",
+    title: "Dental Fillings Washington D.C | Smile Experts Dental Clinic",
+    description: "Smile Experts Dental Clinic offers dental fillings in Washington D.C to treat cavities using durable, natural-looking materials for long-lasting comfort.",
     url: "https://www.smilexpertsdental.com/dental-fillings-washington-dc/",
     siteName: "Smile Experts Dental",
     images: [
@@ -23,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dental Fillings in Smile Experts Dental Clinic | Smile Experts Dental",
-    description: "Comfortable fillings in Smile Experts Dental Clinic",
+    title: "Dental Fillings Washington D.C | Smile Experts Dental Clinic",
+    description: "Smile Experts Dental Clinic offers dental fillings in Washington D.C to treat cavities using durable, natural-looking materials for long-lasting comfort.",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -48,39 +56,39 @@ export default function Page() {
       <ServiceDetailPage
         title="Dental Fillings"
         location="Smile Experts Dental Clinic"
-        intro="We remove decay and place durable fillings designed for comfort, function, and appearance."
+        intro="Protect your teeth and restore comfort with professional cavity care. Our dental filling in Washington D.C helps repair decay while keeping your bite strong and your smile natural in appearance."
         heroImageSrc="/dental-fillings-washington-dc.jpg"
         heroImageAlt="Dental Fillings in Smile Experts Dental Clinic"
         whatIsSection={{
-          title: "What are Dental Fillings?",
+          title: "What Are Dental Fillings?",
           content:
-            "Fillings restore tooth structure lost to decay. We prioritize conservative techniques and materials tailored to your needs.",
+            "Understanding what is a dental filling helps patients see how damaged teeth are restored. Fillings replace areas affected by decay, bringing back strength and shape while allowing you to chew and speak comfortably.",
         }}
         benefits={[
-          { title: "Comfortable Treatment", description: "Modern anesthetics and techniques for a smooth visit." },
-          { title: "Durable Materials", description: "Long-lasting restorations for daily function." },
-          { title: "Natural Look", description: "Tooth-colored options to blend with your smile." },
-          { title: "Prevents Spread", description: "Stops decay and protects neighboring teeth." },
-          { title: "Quick Visits", description: "Many fillings are completed in under an hour." },
-          { title: "Personalized Care", description: "We discuss options and recommend the best approach for you." },
+          { title: "Comfortable Treatment", description: "Many patients ask do dental filling hurt, and modern anesthesia keeps the procedure smooth and pain-controlled." },
+          { title: "Durable Materials", description: "Options such as composite dental filling provide reliable strength for everyday use." },
+          { title: "Natural Look", description: "Tooth-colored materials blend in with your smile." },
+          { title: "Prevents Spread", description: "Treating cavities stops decay from reaching nearby teeth." },
+          { title: "Quick Visits", description: "Most fillings are completed efficiently, often in one visit." },
+          { title: "Personalized Care", description: "We explain your options and recommend what fits your needs best." },
         ]}
         faqs={[
           {
-            question: "Will I feel pain?",
-            answer: "You’ll be numb and should feel only pressure; post-op sensitivity is temporary.",
+            question: "How long do dental fillings last?",
+            answer: "With good oral hygiene, fillings can last many years before needing replacement.",
           },
           {
-            question: "How long will it last?",
-            answer: "Longevity varies by size, location, and care—often many years.",
+            question: "What does a dental filling look like?",
+            answer: "Many people wonder what does a dental filling look like, and tooth-colored fillings are designed to match natural enamel.",
           },
           {
-            question: "Composite or amalgam?",
-            answer: "We’ll recommend based on clinical factors and your preferences.",
+            question: "How long do dental fillings take?",
+            answer: "Most procedures are completed in under an hour, depending on the size of the cavity.",
           },
         ]}
         ctaSection={{
           title: "Repair Cavities Comfortably",
-          description: "Schedule a filling appointment in Smile Experts Dental Clinic",
+          description: "Schedule your filling appointment at Smile Experts Dental Clinic today and receive trusted, gentle care for a healthy smile in Washington, D.C.",
           phone: "(202) 545-6336",
         }}
       />

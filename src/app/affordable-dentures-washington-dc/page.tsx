@@ -3,13 +3,20 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Affordable Dentures in Smile Experts Dental Clinic | Smile Experts Dental",
+  title: "Affordable Dentures Washington D.C | Smile Experts Dental Clinic",
   description:
-    "Affordable dentures and partials in Smile Experts Dental Clinic Restore comfort, function, and confidence. Call (202) 545-6336.",
+    "Smile Experts Dental Clinic provides affordable dentures in Washington D.C including partial, full & implant-supported options for comfortable, natural smiles.",
+  keywords: [
+    "affordable dentures in Washington D.C",
+    "what are dentures",
+    "partial dentures in Washington D.C",
+    "dentures and implants in Washington D.C",
+    "how much do dentures cost"
+  ],
   alternates: { canonical: "https://www.smilexpertsdental.com/affordable-dentures-washington-dc/" },
   openGraph: {
-    title: "Affordable Dentures in Smile Experts Dental Clinic | Smile Experts Dental",
-    description: "Comfortable, natural-looking dentures and partials tailored to you.",
+    title: "Affordable Dentures Washington D.C | Smile Experts Dental Clinic",
+    description: "Smile Experts Dental Clinic provides affordable dentures in Washington D.C including partial, full & implant-supported options for comfortable, natural smiles.",
     url: "https://www.smilexpertsdental.com/affordable-dentures-washington-dc/",
     siteName: "Smile Experts Dental",
     images: [
@@ -23,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Affordable Dentures in Smile Experts Dental Clinic | Smile Experts Dental",
-    description: "Dentures and partials in Smile Experts Dental Clinic",
+    title: "Affordable Dentures Washington D.C | Smile Experts Dental Clinic",
+    description: "Smile Experts Dental Clinic provides affordable dentures in Washington D.C including partial, full & implant-supported options for comfortable, natural smiles.",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -48,46 +55,46 @@ export default function Page() {
       <ServiceDetailPage
         title="Affordable Dentures"
         location="Smile Experts Dental Clinic"
-        intro="Restore your smile’s function and appearance with dentures designed for comfort, fit, and confidence."
+        intro="Restore your smile's comfort and confidence with custom dentures made to fit your lifestyle. Our affordable dentures in Washington D.C help replace missing teeth while supporting clear speech, comfortable chewing, and a natural-looking smile."
         heroImageSrc="/affordable-dentures-washington-dc.jpg"
         heroImageAlt="Affordable Dentures in Smile Experts Dental Clinic"
         whatIsSection={{
-          title: "What are Dentures?",
+          title: "What Are Dentures?",
           content:
-            "Dentures replace missing teeth to restore your ability to eat, speak, and smile confidently. We offer full, partial, and implant-supported options.",
+            "Understanding what are dentures are helps patients know how missing teeth can be replaced with removable or fixed dental appliances. Dentures restore the ability to eat, speak, and smile while supporting facial structure and oral balance.",
         }}
         benefits={[
-          { title: "Improved Function", description: "Eat more comfortably with a stable, customized fit." },
-          { title: "Enhanced Appearance", description: "Support lips and cheeks for a more youthful look." },
+          { title: "Improved Function", description: "Custom partial dentures in Washington D.C help restore chewing and everyday comfort." },
+          { title: "Enhanced Appearance", description: "Dentures support lips and cheeks to create a more youthful look." },
           {
             title: "Budget-Friendly Options",
-            description: "Multiple materials and approaches fit a range of budgets.",
+            description: "Treatment choices are available to fit different needs and budgets.",
           },
-          { title: "Custom Fit", description: "Careful measurements and adjustments for comfort." },
-          { title: "Removable or Implant-Supported", description: "Choose what matches your goals and lifestyle." },
-          { title: "Maintainable", description: "Clear guidance to keep your dentures in great shape." },
+          { title: "Custom Fit", description: "Careful measurements and adjustments help provide a secure, comfortable fit." },
+          { title: "Removable or Implant-Supported", description: "Options like dentures and implants in Washington D.C allow patients to choose the level of stability they prefer." },
+          { title: "Maintainable", description: "We provide guidance for daily cleaning and long-term care." },
         ]}
         procedure={[
           {
             step: 1,
             title: "Consultation & Impressions",
-            description: "We review options and take detailed measurements.",
+            description: "We discuss goals and take detailed measurements.",
           },
-          { step: 2, title: "Try-In", description: "A wax try-in checks fit, speech, and esthetics." },
-          { step: 3, title: "Delivery & Adjustments", description: "We place your dentures and fine-tune comfort." },
-          { step: 4, title: "Follow-Up", description: "We monitor fit as you adapt and make any needed adjustments." },
+          { step: 2, title: "Try-In", description: "A wax model allows you to test fit, comfort, and appearance." },
+          { step: 3, title: "Delivery & Adjustments", description: "Your dentures are placed and adjusted for comfort." },
+          { step: 4, title: "Follow-Up", description: "We monitor fit as you adapt and make refinements as needed." },
         ]}
         faqs={[
-          { question: "Will dentures look natural?", answer: "Yes—shade and shape are customized to your preference." },
+          { question: "Will dentures look natural?", answer: "Modern materials are designed to match natural teeth and gum tones." },
           {
-            question: "How long do they last?",
-            answer: "With care, many last 5–10 years; periodic relines may be needed.",
+            question: "How long do dentures last?",
+            answer: "With proper care, dentures can last many years before needing replacement.",
           },
-          { question: "Are implants required?", answer: "No, but implant support can improve stability and function." },
+          { question: "How much do dentures cost?", answer: "Many patients ask how much do dentures cost, and pricing depends on materials, type, and whether implants are used." },
         ]}
         ctaSection={{
           title: "Restore Comfort and Confidence",
-          description: "Schedule a denture consultation in Smile Experts Dental Clinic",
+          description: "Schedule your denture consultation at Smile Experts Dental Clinic today and enjoy a comfortable, natural-looking smile with trusted dental care in Washington, D.C.",
           phone: "(202) 545-6336",
         }}
       />

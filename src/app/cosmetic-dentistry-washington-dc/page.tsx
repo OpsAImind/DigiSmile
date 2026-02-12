@@ -3,15 +3,20 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "Cosmetic Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
+  title: "Cosmetic Dentistry Washington D.C | Smile Experts Dental Clinic",
   description:
-    "Cosmetic dentistry in Smile Experts Dental Clinic including veneers, whitening, bonding, and more. Call (202) 545-6336.",
+    "Smile Experts Dental Clinic offers cosmetic dentistry in Washington D.C including veneers, whitening, and smile improvements focused on natural, confident results.",
+  keywords: [
+    "Cosmetic Dentistry in Washington D.C",
+    "what is cosmetic dentistry",
+    "cosmetic dentistry services"
+  ],
   alternates: {
     canonical: "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/",
   },
   openGraph: {
-    title: "Cosmetic Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
-    description: "Personalized cosmetic dentistry—veneers, whitening, and bonding to enhance your smile.",
+    title: "Cosmetic Dentistry Washington D.C | Smile Experts Dental Clinic",
+    description: "Smile Experts Dental Clinic offers cosmetic dentistry in Washington D.C including veneers, whitening, and smile improvements focused on natural, confident results.",
     url: "https://www.smilexpertsdental.com/cosmetic-dentistry-washington-dc/",
     siteName: "Smile Experts Dental",
     images: [
@@ -25,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cosmetic Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
-    description: "Cosmetic smile enhancements in Smile Experts Dental Clinic",
+    title: "Cosmetic Dentistry Washington D.C | Smile Experts Dental Clinic",
+    description: "Smile Experts Dental Clinic offers cosmetic dentistry in Washington D.C including veneers, whitening, and smile improvements focused on natural, confident results.",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -50,55 +55,55 @@ export default function Page() {
       <ServiceDetailPage
         title="Cosmetic Dentistry"
         location="Smile Experts Dental Clinic"
-        intro="Refine tooth shape, shade, and symmetry with personalized cosmetic treatments designed for your unique smile."
+        intro="Refine tooth shape, shade, and symmetry with personalized treatments designed to help you feel confident in every smile. Our Cosmetic Dentistry in Washington D.C focuses on modern techniques that deliver balanced, natural-looking results while keeping your comfort a priority."
         heroImageSrc="/cosmetic-dentistry-washington-dc.jpg"
         heroImageAlt="Cosmetic Dentistry in Smile Experts Dental Clinic"
         whatIsSection={{
-          title: "What is Cosmetic Dentistry?",
+          title: "What Is Cosmetic Dentistry?",
           content:
-            "Cosmetic dentistry focuses on improving the appearance of your smile—addressing discoloration, chips, spacing, and alignment. We tailor plans to achieve natural, confident results.",
+            "Understanding what is cosmetic dentistry helps patients see how modern dental care goes beyond function. Cosmetic dentistry improves the color, shape, spacing, and alignment of teeth to create a more attractive smile while supporting overall oral confidence and facial harmony.",
         }}
         benefits={[
-          { title: "Natural-Looking Results", description: "Modern materials blend seamlessly with your smile." },
+          { title: "Natural-Looking Results", description: "Advanced materials and careful planning help cosmetic treatments blend smoothly with your natural teeth." },
           {
             title: "Personalized Plans",
-            description: "Every smile is unique—your plan reflects your goals and lifestyle.",
+            description: "Your smile goals, daily habits, and comfort guide every treatment decision.",
           },
-          { title: "Minimally Invasive", description: "Many options require little to no tooth alteration." },
+          { title: "Minimally Invasive Options", description: "Many procedures improve appearance with little to no removal of healthy tooth structure." },
           {
             title: "Confidence Boost",
-            description: "Look and feel your best in photos, presentations, and every day.",
+            description: "A brighter, more balanced smile helps you feel comfortable in photos, conversations, and professional settings.",
           },
-          { title: "Fast Improvements", description: "Whitening and bonding can refresh your smile quickly." },
-          { title: "Durable Options", description: "Veneers and ceramic restorations provide long-lasting beauty." },
+          { title: "Fast Improvements", description: "Procedures like whitening and bonding can refresh your smile in a short time." },
+          { title: "Durable Solutions", description: "Veneers and ceramic restorations offer long-lasting results that support both beauty and function." },
         ]}
         procedure={[
           {
             step: 1,
             title: "Consultation & Smile Assessment",
-            description: "We discuss your goals and evaluate your smile.",
+            description: "We begin with a detailed discussion about your goals and a careful evaluation of your teeth and gums.",
           },
           {
             step: 2,
             title: "Treatment Options",
-            description: "We present options like whitening, bonding, or veneers.",
+            description: "Options such as whitening, bonding, or veneers are explained clearly so you can choose what fits your needs.",
           },
-          { step: 3, title: "Preview & Planning", description: "See potential outcomes and plan timelines and costs." },
-          { step: 4, title: "Treatment Day(s)", description: "Comfortable, efficient care with a focus on detail." },
+          { step: 3, title: "Preview & Planning", description: "You will see potential outcomes and receive a clear plan that includes timing and care steps." },
+          { step: 4, title: "Treatment Day(s)", description: "Comfortable appointments focus on accuracy, appearance, and patient ease." },
           {
             step: 5,
             title: "Maintenance",
-            description: "Keep your results fresh with simple at-home care and visits.",
+            description: "Simple at-home care and regular dental visits help maintain your cosmetic results for years.",
           },
         ]}
         faqs={[
-          { question: "Are results natural?", answer: "Yes—shade, translucency, and shape are customized to you." },
-          { question: "Does whitening hurt?", answer: "Sensitivity is temporary for most; we offer gentle options." },
-          { question: "How long do veneers last?", answer: "With care, many veneers last 10–15 years or more." },
+          { question: "Are cosmetic dentistry results natural?", answer: "Yes. Modern materials and skilled techniques allow cosmetic treatments to look realistic and well-balanced." },
+          { question: "Is cosmetic dentistry safe?", answer: "Cosmetic procedures are considered safe when performed by trained dental professionals using approved materials and methods." },
+          { question: "How long do veneers last?", answer: "With good oral hygiene and regular checkups, veneers can last many years while keeping your smile bright and even." },
         ]}
         ctaSection={{
           title: "Love Your Smile",
-          description: "Book a cosmetic consultation in Smile Experts Dental Clinic and preview your possibilities.",
+          description: "Book your cosmetic consultation at Smile Experts Dental Clinic today and take the next step toward a confident, polished smile with expert care in Washington, D.C.",
           phone: "(202) 545-6336",
         }}
       />

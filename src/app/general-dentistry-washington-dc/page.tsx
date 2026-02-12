@@ -3,13 +3,19 @@ import ServiceDetailPage from "@/features/ServiceDetail/ServiceDetailPage"
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/SEO/JsonLd"
 
 export const metadata: Metadata = {
-  title: "General Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
+  title: "General Dentistry Services in Washington D.C",
   description:
-    "Preventive and family dental care in Smile Experts Dental Clinic Cleanings, exams, and personalized oral health plans. Call (202) 545-6336.",
+    "Smile Experts Dental Clinic provides general dentistry services in Washington D.C, including exams, cleanings, and preventive dental care for the whole family.",
+  keywords: [
+    "general dentistry services in Washington D.C",
+    "what is general dentistry services",
+    "general dentistry service in Washington D.C",
+    "local general dentistry services in Washington D.C"
+  ],
   alternates: { canonical: "https://www.smilexpertsdental.com/general-dentistry-washington-dc/" },
   openGraph: {
-    title: "General Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
-    description: "Cleanings, exams, and prevention for all ages.",
+    title: "General Dentistry Services in Washington D.C",
+    description: "Smile Experts Dental Clinic provides general dentistry services in Washington D.C, including exams, cleanings, and preventive dental care for the whole family.",
     url: "https://www.smilexpertsdental.com/general-dentistry-washington-dc/",
     siteName: "Smile Experts Dental",
     images: [
@@ -23,8 +29,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "General Dentistry in Smile Experts Dental Clinic | Smile Experts Dental",
-    description: "Preventive and family dental care in Smile Experts Dental Clinic",
+    title: "General Dentistry Services in Washington D.C",
+    description: "Smile Experts Dental Clinic provides general dentistry services in Washington D.C, including exams, cleanings, and preventive dental care for the whole family.",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
 }
@@ -48,32 +54,32 @@ export default function Page() {
       <ServiceDetailPage
         title="General Dentistry"
         location="Smile Experts Dental Clinic"
-        intro="Maintain a healthy smile with routine cleanings, exams, and preventive care for the whole family."
+        intro="Maintain a healthy, confident smile with routine cleanings, exams, and preventive care for the whole family. Our general dentistry services in Washington D.C focus on early detection, comfort, and long-term oral health, helping patients of all ages keep their teeth and gums in great condition through consistent care."
         heroImageSrc="/general-dentistry-washington-dc.jpg"
         heroImageAlt="General Dentistry in Smile Experts Dental Clinic"
         whatIsSection={{
-          title: "What is General Dentistry?",
+          title: "What Is General Dentistry?",
           content:
-            "General dentistry focuses on prevention and early intervention. Routine visits help protect your teeth and gums, reduce future treatment needs, and keep your smile strong.",
+            "General dentistry focuses on prevention and early intervention to support long-term oral health. Understanding what is general dentistry services helps patients see the value of routine visits, which protect teeth and gums, reduce the need for future treatments, and help maintain a strong, healthy smile over time.",
         }}
         benefits={[
-          { title: "Prevention First", description: "Catch issues early to avoid complex care later." },
-          { title: "Personalized Advice", description: "Home care tips and tools tailored to your needs." },
-          { title: "Comfortable Visits", description: "Gentle cleanings and modern technology." },
-          { title: "Family-Friendly", description: "Care for children, teens, and adults." },
-          { title: "Clear Plans", description: "We explain options and timelines for any recommended care." },
-          { title: "Convenient Scheduling", description: "Easy appointments in Smile Experts Dental Clinic" },
+          { title: "Prevention First", description: "Our general dentistry service in Washington D.C focuses on early detection, helping catch dental issues before they turn into complex treatments." },
+          { title: "Personalized Advice", description: "Patients receive clear, practical home care guidance based on their individual oral health needs." },
+          { title: "Comfortable Visits", description: "Gentle cleanings and modern dental technology help create a relaxed and comfortable experience." },
+          { title: "Family-Friendly Care", description: "We provide consistent dental care for children, teens, adults, and seniors in a welcoming environment." },
+          { title: "Clear Treatment Plans", description: "All recommended care is explained clearly, including timelines and available options." },
+          { title: "Convenient Scheduling", description: "Flexible appointment times make it easy to receive care at Smile Experts Dental Clinic." },
         ]}
         faqs={[
           {
-            question: "How often should I visit?",
-            answer: "Most patients benefit from a checkup every 6 months; some need more frequent visits.",
+            question: "How often should I visit the dentist?",
+            answer: "Most patients benefit from dental checkups every six months. Visiting local general dentistry services in Washington D.C regularly helps detect concerns early and maintain long-term oral health.",
           },
           {
-            question: "Are X-rays necessary?",
-            answer: "They help us find issues not visible to the eye. We take them only when needed.",
+            question: "Are dental X-rays necessary?",
+            answer: "Dental X-rays help identify problems that are not visible during a standard exam. They are recommended only when clinically necessary for accurate diagnosis.",
           },
-          { question: "Do you see kids?", answer: "Yes, we’re happy to care for your whole family." },
+          { question: "Do you provide dental care for children?", answer: "Yes, we welcome children of all ages and provide gentle, family-focused dental care to support healthy smiles from an early age." },
         ]}
         ctaSection={{
           title: "Keep Your Smile Healthy",
