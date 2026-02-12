@@ -43,7 +43,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
 
         {/* Canonical URL */}
-        {/* <link rel="canonical" href="https://yourclinicurl.com/" /> */}
+        <link rel="canonical" href="https://www.smilexpertsdental.com/" />
 
         {/* Favicon */}
         {/* <link rel="icon" href="/favicon.ico" sizes="any" />

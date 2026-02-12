@@ -42,7 +42,9 @@ const LocationSection = () => {
           <Flex flexDir={"column"} alignItems={"center"}>
             <Text as={"h1"}>Washington D.C</Text>
             <Text as={"h5"}>Mon, Wed, Fri: 10am-5pm Hours</Text>
-            <Text as={"h5"}>(202) 545-6336</Text>
+            <Text as={"h5"}>
+              <a href="tel:+12025456336" style={{ textDecoration: "none", color: "inherit" }}>(202) 545-6336</a>
+            </Text>
             <Button
               mt={4}
               variant={"location-section-button"}
@@ -62,7 +64,9 @@ const LocationSection = () => {
           <Flex flexDir={"column"} alignItems={"center"}>
             <Text as={"h1"}>Burke, VA</Text>
             <Text as={"h5"}>Tue, Thu, Sat: 9am-4pm Hours</Text>
-            <Text as={"h5"}>(571) 374-8000</Text>
+            <Text as={"h5"}>
+              <a href="tel:+15713748000" style={{ textDecoration: "none", color: "inherit" }}>(571) 374-8000</a>
+            </Text>
             <Button
               mt={4}
               variant={"location-section-button"}

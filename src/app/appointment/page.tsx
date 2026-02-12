@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Book Dental Appointment in Washington, D.C. | DigiSmile Experts",
   description:
     "Book your dental cleaning, exam, or consultation at DigiSmile Experts in Washington, D.C. Choose a convenient time today.",
+  alternates: { canonical: "https://www.smilexpertsdental.com/appointment/" },
   openGraph: {
     title: "Book Dental Appointment | DigiSmile Experts",
     description:

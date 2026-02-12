@@ -4,6 +4,8 @@ import React from "react";
 import DigiLayout from "@/components/Layout";
 import { Box, Flex, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 
+// Note: Metadata should be added in a separate metadata export for Next.js App Router
+// This is a client component, so metadata is handled via layout or a parent server component
 const privacyPolicyPage = () => {
   return (
     <DigiLayout>
@@ -21,6 +23,7 @@ const privacyPolicyPage = () => {
           color={"white.900"}
           fontWeight={900}
           className="heading"
+          as="h1"
         >
           Privacy Policy
         </Text>
@@ -53,7 +56,7 @@ const privacyPolicyPage = () => {
           </Text>
           <Text as={"h4"} mt={2}>
             You can opt out of receiving SMS messages at any time by replying
-            with “STOP” to any message we send you.
+            with &quot;STOP&quot; to any message we send you.
           </Text>
           <Text as={"h3"} mt={8} fontWeight={800}>
             Data Security
@@ -67,7 +70,7 @@ const privacyPolicyPage = () => {
           </Text>
           <Text as={"h4"} mt={2}>
             If you have questions or concerns about our privacy practices,
-            contact us at (202) 545-6336.
+            contact us at <a href="tel:+12025456336" style={{ textDecoration: "none", color: "inherit" }}>(202) 545-6336</a>.
           </Text>
 
           <Text as={"h3"} mt={12} fontWeight={800}>
@@ -120,9 +123,8 @@ const privacyPolicyPage = () => {
             5. Opt-Out Instructions
           </Text>
           <Text as={"h4"} mt={2}>
-            You can opt out at any time by replying “STOP” to any SMS message.
-            Reply HELP for support. You may also contact us directly at (202)
-            545-6336.
+            You can opt out at any time by replying &quot;STOP&quot; to any SMS message.
+            Reply HELP for support. You may also contact us directly at <a href="tel:+12025456336" style={{ textDecoration: "none", color: "inherit" }}>(202) 545-6336</a>.
           </Text>
 
           <Text as={"h3"} mt={8} fontWeight={800}>

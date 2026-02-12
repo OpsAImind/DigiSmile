@@ -15,15 +15,18 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Button,
   Flex,
   Text,
   useMediaQuery
 } from "@chakra-ui/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 
 const AboutUsClient = () => {
   const [isLaptop] = useMediaQuery("(max-width: 1000px)");
+  const router = useRouter();
 
   return (
     <DigiLayout>
@@ -33,17 +36,23 @@ const AboutUsClient = () => {
         className="locations-bg-image"
         position={"relative"}
       >
-        <Text
+        <Flex
           position={"absolute"}
           top={"50%"}
           left={"50%"}
           transform={"translate(-50%, -50%)"}
           color={"white.900"}
-          fontWeight={900}
-          className="heading"
+          flexDir={"column"}
+          alignItems={"center"}
+          gap={4}
         >
-          ABOUT US
-        </Text>
+          <Text fontWeight={600} className="heading" as="h2">
+            About Us
+          </Text>
+          <Text fontWeight={900} className="heading" textAlign={"center"} as="h1">
+            Your Trusted Partner In Oral Health
+          </Text>
+        </Flex>
       </Box>
       <Flex flexDir={"column"} color={"black.900"} bg={"brand.200"}>
         <Flex
@@ -53,19 +62,8 @@ const AboutUsClient = () => {
           flexDir={"column"}
           gap={"0 !important"}
         >
-          <Text
-            fontWeight={600}
-            className="heading"
-            textAlign={"center"}
-            color={"brand.100"}
-          >
-            What we&apos;re striving for
-          </Text>
-          <Text as={"h3"} mt={8} color={"brand.100"}>
-            At Smile Experts Dental Clinic, nothing is more important than the
-            highest quality of care. Since day one, we have been committed to
-            our values so each of our patients can rest assured they are in good
-            hands.
+          <Text as={"h3"} mt={8} textAlign={"center"} color={"brand.100"}>
+            Smile Experts Dental Clinic provides compassionate, patient-focused care through experienced professionals, modern technology, and clear communication. We prioritize comfort, trust, and lasting results, creating a welcoming environment where every visit supports confidence, wellness, and long-term oral health goals.
           </Text> 
           <Flex width={"100%"} mt={20} flexDir={isLaptop ? "column" : "row"}>
             <Flex
@@ -85,16 +83,11 @@ const AboutUsClient = () => {
                   <Text as={"h3"} color={"brand.100"} fontWeight={900}>
                     Transparency
                   </Text>
-                  <Text as={"h5"} color={"brand.100"}>
-                    The best patient is an educated patient.
+                  <Text as={"h5"} color={"brand.100"} fontWeight={600}>
+                    We keep you informed every step of the way.
                   </Text>
                   <Text as={"h5"} color={"brand.100"} mt={4}>
-                    An educated patient is the best patient, so we prioritize
-                    clarity at every step. You&apos;ll know exactly why a
-                    treatment is recommended and its full cost upfront. Your
-                    journey with us doesn&apos;t end until you&apos;re fully
-                    satisfied, ensuring you feel confident in the care
-                    you&apos;ve received.
+                    An educated patient is an empowered patient. Our dental professionals make sure you understand every recommendation, procedure, and cost before we begin. No surprises, no confusion, just honest, upfront communication from start to finish.
                   </Text>
                 </Box>
               </Flex>
@@ -109,14 +102,11 @@ const AboutUsClient = () => {
                   <Text as={"h3"} color={"brand.100"} fontWeight={900}>
                     Excellence
                   </Text>
-                  <Text as={"h5"} color={"brand.100"}>
-                    The best patient is an educated patient.
+                  <Text as={"h5"} color={"brand.100"} fontWeight={600}>
+                    World-class dentistry, tailored to you.
                   </Text>
                   <Text as={"h5"} color={"brand.100"} mt={4}>
-                    You deserve outstanding dental care delivered with precision
-                    and skill. Our state-of-the-art equipment ensures accurate
-                    diagnoses and painless treatments. Our doctors complete
-                    hundreds of training
+                    Our experienced dentists stay at the forefront of innovation, continually training and using cutting-edge technology to provide the most accurate diagnoses and comfortable treatments. At Experts Dental Clinic, quality is not a goal—it&apos;s a guarantee.
                   </Text>
                 </Box>
               </Flex>
@@ -133,15 +123,11 @@ const AboutUsClient = () => {
                   <Text as={"h3"} color={"brand.100"} fontWeight={900}>
                     Seamless Service
                   </Text>
-                  <Text as={"h5"} color={"brand.100"}>
-                    A trip to the dentist&apos;s office should be a source of
-                    serenity, not anxiety.
+                  <Text as={"h5"} color={"brand.100"} fontWeight={600}>
+                    From booking to billing, easy, efficient, enjoyable.
                   </Text>
                   <Text as={"h5"} color={"brand.100"} mt={4}>
-                    A visit to the dentist should be smooth and stress-free.
-                    Book online, check in digitally, and enjoy a clear, itemized
-                    invoice. Relax during your appointment by streaming Netflix
-                    or Hulu while we take care of your smile.
+                    Say goodbye to stress and hello to simplicity. Book online, check in digitally, and receive a clear, itemized invoice without the guesswork. During your appointment, sit back and relax—enjoy Netflix or Hulu while we work on your smile.
                   </Text>
                 </Box>
               </Flex>
@@ -156,14 +142,11 @@ const AboutUsClient = () => {
                   <Text as={"h3"} color={"brand.100"} fontWeight={900}>
                     Mindfulness
                   </Text>
-                  <Text as={"h5"} color={"brand.100"}>
-                    Beautiful smiles begin on the inside.
+                  <Text as={"h5"} color={"brand.100"} fontWeight={600}>
+                    A calm mind creates a confident smile.
                   </Text>
                   <Text as={"h5"} color={"brand.100"} mt={4}>
-                    Exceptional dentistry starts with honoring your well-being.
-                    Our thoughtfully designed spaces promote relaxation and
-                    mindfulness, creating a serene environment where you can
-                    feel at ease during your dental visit.
+                    Our clinic is more than a dental office, it&apos;s a sanctuary. Designed with soothing elements and your mental well-being in mind, our space encourages relaxation and comfort, ensuring that you feel safe and supported at every visit.
                   </Text>
                 </Box>
               </Flex>
@@ -180,28 +163,12 @@ const AboutUsClient = () => {
           >
             <Image src={mahmoodImage} height={400} width={400} alt=""></Image>
             <Flex flexDir={"column"} gap={8}>
-              <Text className="heading">Our founders story</Text>
+              <Text className="heading">Our Founder&apos;s Story</Text>
               <Text as={"h4"}>
-                Dr. Andleeb Mahmood (Dentist) is genuinely gifted with a vision
-                and mission for her dental practice. She treats every patient as
-                family, aiming to provide an extraordinary experience and the
-                highest quality dental treatment. Her approach is grounded in
-                personalized care, ensuring that each patient receives a
-                treatment plan tailored specifically to their needs. Dr.
-                Mahmood&apos;s commitment to excellence in patient care is evident in
-                the way she has structured her practice and the patient-centric
-                focus she maintains.
+                Dr. Andleeb Mahmood, founder of Smile Experts Dental Clinic, is a highly accomplished and experienced dentist with over 15 years of clinical excellence. Known for her warm, patient-focused approach, she treats every individual like family, ensuring each visit is comfortable, transparent, and tailored to the patient&apos;s unique needs. Her mission has always been to provide exceptional dental care through compassion, precision, and trust—values that are deeply embedded in every aspect of her practice.
               </Text>
               <Text as={"h4"}>
-                With over 15 years of experience, Dr. Mahmood has established
-                three thriving offices in the DMV area. Her commitment to
-                providing excellent patient care is reflected in the wide range
-                of services her clinics offer, including routine check-ups,
-                cleanings, dental implants, and cosmetic dentistry. Her team,
-                selected for their expertise and dedication, shares her vision
-                of delivering top-notch care. Rigorous training ensures that
-                every team member is up-to-date with the latest knowledge and
-                skills in the field.
+                Under her leadership, Experts Dental Clinic has grown to include three thriving locations across the DMV area. Dr. Mahmood has built a team of skilled dental professionals who are carefully selected for their expertise, empathy, and dedication to ongoing education. Together, they offer a full range of services from preventive care and cleanings to dental implants and advanced cosmetic treatments, making Smile Experts a trusted destination for comprehensive, high-quality dentistry.
               </Text>
             </Flex>
           </Flex>
@@ -228,12 +195,7 @@ const AboutUsClient = () => {
                       {isExpanded ? <FaMinus /> : <FaPlus />}
                     </AccordionButton>
                     <AccordionPanel pb={4}>
-                      Our commitment to pioneering innovative tools ensures that
-                      you receive the most premium, gentle care on the market.
-                      We bridge the gap between preventative health and highly
-                      effective treatments to ensure an unparalleled experience
-                      you&apos;re sure to come back to time and time again.
-                      That&apos;s why we lead with innovative offerings.
+                      We use advanced tools and gentle techniques to combine prevention and treatment, delivering comfortable care that patients enjoy returning for again.
                     </AccordionPanel>
                   </>
                 )}
@@ -248,23 +210,7 @@ const AboutUsClient = () => {
                       {isExpanded ? <FaMinus /> : <FaPlus />}
                     </AccordionButton>
                     <AccordionPanel pb={4}>
-                      The desire for bright, white teeth is universal
-                      (we&apos;ve all dabbled with those whitening strips from
-                      time to time). But when you cut through the gimmicks and
-                      marketing ploys, you&apos;ll find that white teeth
-                      actually start with the foundation of a healthy smile. As
-                      our founder Dr. Mahmood says, &quot;You would never get your
-                      car waxed without first getting it cleaned&quot; - the same
-                      applies to our teeth. After diligent research, we
-                      identified an innovative method that leverages the
-                      dentist-designed Glo Pro Power technology. In one
-                      customized treatment administered by our expert
-                      Hygienists, you will garner the natural results you
-                      deserve (cue: satisfaction guaranteed), with zero hassle.
-                      Our customized plans are built around your personal needs
-                      and habits (such as smoking, drinking wine/coffee, and
-                      perio health), and ensure that you are safely guided and
-                      properly taken care of during the whitening process.
+                      The healthiest smiles come first, using researched whitening methods and personalized plans that consider habits, safety, and long-lasting natural results.
                     </AccordionPanel>
                   </>
                 )}
@@ -274,18 +220,12 @@ const AboutUsClient = () => {
                   <>
                     <AccordionButton>
                       <Box as="h3" flex="1" textAlign="left">
-                        How we treat patients at our clinic?
+                        How do we treat patients at our clinic?
                       </Box>
                       {isExpanded ? <FaMinus /> : <FaPlus />}
                     </AccordionButton>
                     <AccordionPanel pb={4}>
-                      We are guided by internationally recognized dental ethics,
-                      ensuring every patient is treated with compassion,
-                      dignity, and without discrimination. Whether it&apos;s a
-                      routine check-up or a complex case, we focus on your
-                      comfort, needs, and overall well-being. Emergency care is
-                      always prioritized, and we maintain a supportive,
-                      respectful environment for all.
+                      We treat every patient with compassion, respect, and dignity, prioritizing comfort, ethical care, emergency needs, and overall well-being for all.
                     </AccordionPanel>
                   </>
                 )}
@@ -295,19 +235,12 @@ const AboutUsClient = () => {
                   <>
                     <AccordionButton>
                       <Box as="h3" flex="1" textAlign="left">
-                        Is patient information confidential and how do you
-                        ensure professionalism?
+                        Is patient information confidential, and how do you ensure professionalism?
                       </Box>
                       {isExpanded ? <FaMinus /> : <FaPlus />}
                     </AccordionButton>
                     <AccordionPanel pb={4}>
-                      Yes, your privacy is our top priority. All personal and
-                      medical information is handled with strict confidentiality
-                      and shared only when legally required. Our team follows
-                      ethical guidelines in every aspect of care—taking full
-                      responsibility for treatments, working only with qualified
-                      professionals, and ensuring every procedure meets legal
-                      and professional standards.
+                      Patient privacy is protected through strict confidentiality, responsible information handling, qualified professionals, ethical conduct, and compliance with all legal standards.
                     </AccordionPanel>
                   </>
                 )}
@@ -322,19 +255,56 @@ const AboutUsClient = () => {
                       {isExpanded ? <FaMinus /> : <FaPlus />}
                     </AccordionButton>
                     <AccordionPanel pb={4}>
-                      Our dentists &quot;Dr Andleeb Mahmood&quot; are committed to
-                      lifelong learning and regularly participate in continuing
-                      education to stay updated with the latest techniques and
-                      technologies. We combine modern science with a
-                      patient-first approach, so you receive care that is both
-                      advanced and personalized. We also actively promote oral
-                      health education and contribute to building a
-                      healthier community.
+                      Our dentists pursue continuous education, applying modern science with patient-focused care while promoting oral health awareness within the community locally.
                     </AccordionPanel>
                   </>
                 )}
               </AccordionItem>
             </Accordion>
+          </Flex>
+        </Box>
+      </Flex>
+      <Flex flexDir={"column"} gap={10} color={"brand.100"}>
+        <Box width={"100%"} bg={"brand.100"} color={"#fff"} py={6}>
+          <Flex
+            className="responsive-dental-section"
+            alignItems={"center"}
+            justifyContent={"center"}
+            flexDir={"column"}
+            gap={3}
+          >
+            <Text className="heading" textAlign={"center"}>
+              Come Experience the Experts&apos; Difference
+            </Text>
+            <Text as={"h4"} textAlign={"center"} maxW={"800px"}>
+              At Smile Experts Dental Clinic, your smile is our specialty. Whether you&apos;re coming in for a routine cleaning or a full smile makeover, you&apos;ll receive exceptional care from a team that truly listens.
+            </Text>
+            <Text as={"h3"} fontWeight={700} textAlign={"center"}>
+              Ready to love your smile?
+            </Text>
+            <Button
+              size="lg"
+              bg={"white"}
+              color={"brand.100"}
+              _hover={{ bg: "gray.100", transform: "translateY(-2px)" }}
+              onClick={() => router.push("/appointment")}
+              px={8}
+              py={6}
+              fontSize={"lg"}
+              fontWeight={700}
+              minW={isLaptop ? "100%" : "300px"}
+              maxW={isLaptop ? "100%" : "400px"}
+              boxShadow={"lg"}
+              transition={"all 0.3s ease"}
+              sx={{
+                backgroundColor: "white !important",
+                "&:hover": {
+                  backgroundColor: "#E0E5F2 !important"
+                }
+              }}
+            >
+              Book Your Appointment Today →
+            </Button>
           </Flex>
         </Box>
       </Flex>

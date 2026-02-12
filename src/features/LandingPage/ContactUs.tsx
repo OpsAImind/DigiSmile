@@ -23,7 +23,7 @@ const ContactUs = () => {
               <h1 className="font-poppins">
                 Washington D.C.1747 Pennsylvania Aven NWSuite 100 Washington, DC
                 20006
-                <br /> (202) 545-6336
+                <br /> <a href="tel:+12025456336" style={{ textDecoration: "none", color: "inherit" }}>(202) 545-6336</a>
               </h1>
             </Box>
           </Box>
@@ -35,8 +35,7 @@ const ContactUs = () => {
             <Box className="flex items-center gap-2">
               <LocationOnIcon />
               <h1 className="font-poppins">
-                Burke, VA 9570 Burke Road Unit A Burke, VA 22015 <br /> (571)
-                374-8000
+                Burke, VA 9570 Burke Road Unit A Burke, VA 22015 <br /> <a href="tel:+15713748000" style={{ textDecoration: "none", color: "inherit" }}>(571) 374-8000</a>
               </h1>
             </Box>
           </Box>

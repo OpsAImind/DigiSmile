@@ -61,8 +61,16 @@ const Footer = () => {
               gap={2}
             >
               <Flex width={"100%"} flexDir={"column"} gap={2}>
-                <Text as={"h5"}>Smilexpertsdc@gmail.com</Text>
-                <Text as={"h5"}>(202) 545-6336</Text>
+                <Text as={"h5"}>
+                  <a href="mailto:Smilexpertsdc@gmail.com" style={{ textDecoration: "none", color: "inherit" }}>
+                    Smilexpertsdc@gmail.com
+                  </a>
+                </Text>
+                <Text as={"h5"}>
+                  <a href="tel:+12025456336" style={{ textDecoration: "none", color: "inherit" }}>
+                    (202) 545-6336
+                  </a>
+                </Text>
                 <Flex gap={2} mt={4}>
                   <InstagramIconComponent click={() => {
                     window.open("https://www.instagram.com/smile_experts_dental_dc?igsh=MzdpdXJvOXR0cTBq", "_blank");
@@ -119,8 +127,16 @@ const Footer = () => {
               gap={2}
             >
               <Flex width={"100%"} flexDir={"column"} gap={2}>
-                <Text as={"h5"}>Smilexpertsdc@gmail.com</Text>
-                <Text as={"h5"}>(571) 374-8000</Text>
+                <Text as={"h5"}>
+                  <a href="mailto:Smilexpertsdc@gmail.com" style={{ textDecoration: "none", color: "inherit" }}>
+                    Smilexpertsdc@gmail.com
+                  </a>
+                </Text>
+                <Text as={"h5"}>
+                  <a href="tel:+15713748000" style={{ textDecoration: "none", color: "inherit" }}>
+                    (571) 374-8000
+                  </a>
+                </Text>
                 <Flex gap={2} mt={4}>
                   <InstagramIconComponent click={() => {
                     window.open("https://www.instagram.com/smile_experts_dental_burke?igsh=eWM5MWdmaG9qMnJz ", "_blank");
