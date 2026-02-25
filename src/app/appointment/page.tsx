@@ -30,7 +30,17 @@ export const metadata: Metadata = {
     description:
       "Book your next dental check-up or cleaning at DigiSmile Experts in Washington, D.C.",
     images: ["/og/appointment.jpg"]
-  }
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function BookAppointmentPage() {

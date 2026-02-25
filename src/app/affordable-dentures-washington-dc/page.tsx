@@ -27,6 +27,16 @@ export const metadata: Metadata = {
     description: "Dentures and partials in Smile Experts Dental Clinic",
     images: ["https://www.smilexpertsdental.com/icon.png"],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 }
 
 export default function Page() {
