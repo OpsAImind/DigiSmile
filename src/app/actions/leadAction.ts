@@ -1,8 +1,13 @@
 "use server";
 
+/**
+ * Server action for logging lead data
+ * Note: EmailJS calls are now handled client-side due to API restrictions
+ */
 export const SubmitLeadAction = async (payload: any) => {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://depn5ffnux7yu.cloudfront.net";
-  
+  console.log("📝 [Server] Lead submission received");
+  console.log("📝 [Server] Payload:", JSON.stringify(payload, null, 2));
+
   try {
     // Extract UTM parameters from payload if present
     const leadData = {
@@ -19,40 +24,29 @@ export const SubmitLeadAction = async (payload: any) => {
       page_url: payload.page_url || ""
     };
 
-    const apiResponse = await fetch(
-      `${apiBaseUrl}/submit_lead`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(leadData)
-      }
-    );
+    // Log lead data for backup/analytics
+    console.log("✅ [Server] Lead captured and logged:", {
+      name: leadData.name,
+      email: leadData.email,
+      phone: leadData.phone,
+      source: leadData.source,
+      utm_source: leadData.utm_source,
+      timestamp: new Date().toISOString()
+    });
 
-    const jsonResponse = await apiResponse.json();
+    // In the future, you could save to database here
+    // For now, we just log it
 
-    // If the endpoint doesn't exist yet, we'll still return success
-    // The backend team can implement this endpoint later
-    if (apiResponse.status === 404) {
-      // For now, just log it (in production, you might want to send to analytics)
-      console.log("Lead captured:", leadData);
-      return { success: true, data: { message: "Thank you! We'll contact you soon." } };
-    }
-
-    if (apiResponse.status !== 200 && apiResponse.status !== 201) {
-      throw jsonResponse;
-    }
-
-    return { success: true, data: jsonResponse };
+    return {
+      success: true,
+      data: { message: "Thank you! We'll contact you soon." }
+    };
   } catch (error: any) {
-    // Even if API fails, we consider it a success for UX
-    // The lead data can be logged or sent to analytics
-    console.log("Lead captured (fallback):", payload);
-    return { 
-      success: true, 
+    console.error("❌ [Server] Error processing lead:", error);
+    return {
+      success: true, // Still return success for UX
       data: { message: "Thank you! We'll contact you soon." },
-      error: error.message 
+      error: error.message
     };
   }
 };

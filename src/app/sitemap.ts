@@ -33,7 +33,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/dental-fillings-washington-dc/`, changeFrequency: "monthly", priority: 0.8, lastModified: new Date() },
     { url: `${siteUrl}/tooth-colored-fillings-washington-dc/`, changeFrequency: "monthly", priority: 0.8, lastModified: new Date() },
     { url: `${siteUrl}/comprehensive-dental-care-washington-dc/`, changeFrequency: "monthly", priority: 0.8, lastModified: new Date() },
-    { url: `${siteUrl}/affordable-dentures-washington-dc/`, changeFrequency: "monthly", priority: 0.8, lastModified: new Date() }
+    { url: `${siteUrl}/affordable-dentures-washington-dc/`, changeFrequency: "monthly", priority: 0.8, lastModified: new Date() },
+    { url: `${siteUrl}/emergency-dental-care/`, changeFrequency: "monthly", priority: 0.9, lastModified: new Date() }
   ];
 
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({

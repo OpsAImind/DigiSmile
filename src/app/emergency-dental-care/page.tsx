@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Emergency Dental Care | Same-Day Appointments",
     description: "Experienced dental professionals ready to provide immediate care for your dental emergencies.",
     type: "website",
-    url: "https://www.smilexpertsdental.com/lp/emergency",
+    url: "https://www.smilexpertsdental.com/emergency-dental-care",
   },
   robots: {
     index: true,
