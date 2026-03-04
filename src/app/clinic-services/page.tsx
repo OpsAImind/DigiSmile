@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     "preventive dentistry DC",
     "dental fillings DigiSmile Experts"
   ],
-  alternates: { canonical: "https://www.smilexpertsdental.com/home/clinic-services/" },
+  alternates: { canonical: "https://www.smilexpertsdental.com/clinic-services/" },
   openGraph: {
     title: "Comprehensive Dental Services in DigiSmile Experts | DigiSmile Experts",
     description: "Complete dental care including cosmetic dentistry, root canals, teeth whitening, veneers, dentures & emergency services in Washington, D.C.",
-    url: "https://www.smilexpertsdental.com/home/clinic-services/",
+    url: "https://www.smilexpertsdental.com/clinic-services/",
     siteName: "DigiSmile Experts",
     images: [
       {
