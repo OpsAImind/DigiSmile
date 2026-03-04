@@ -232,6 +232,12 @@ export default function Navbar() {
                 </AnimatePresence>
               </Box>
             </Menu>
+            <Button
+              variant={"header"}
+              onClick={() => navigateToSection("emergency-dental-care")}
+            >
+              EMERGENCY
+            </Button>
             <Button variant={"header"}>
               <Link href={"/#home-location"}>LOCATIONS</Link>
             </Button>
@@ -624,6 +630,37 @@ export default function Navbar() {
                           </motion.div>
                         )}
                       </AnimatePresence>
+
+                      {/* EMERGENCY */}
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1, duration: 0.3 }}
+                      >
+                        <ListItem
+                          borderBottom="1px solid rgba(255,255,255,0.05)"
+                          _hover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                          transition="background-color 0.2s"
+                          padding={3}
+                          cursor="pointer"
+                          onClick={() => {
+                            navigateToSection("emergency-dental-care");
+                            setDrawerOpen(false);
+                          }}
+                        >
+                          <Text
+                            as="h5"
+                            color="white"
+                            fontWeight="normal"
+                            fontSize="md"
+                            letterSpacing="0.5px"
+                            _hover={{ color: "#963f36" }}
+                            transition="color 0.2s"
+                          >
+                            EMERGENCY
+                          </Text>
+                        </ListItem>
+                      </motion.div>
 
                       {/* Other menu items */}
                       {[
