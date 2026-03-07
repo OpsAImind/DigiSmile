@@ -60,6 +60,8 @@ const inputStyleBase = {
   transition: "border-color 0.2s, box-shadow 0.2s",
   outline: "none",
   width: "100%",
+  maxWidth: "100%",
+  boxSizing: "border-box",
 };
 
 const labelStyleBase = {
@@ -206,15 +208,17 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         bg={isPopup ? "white" : "brand.200"}
-        borderRadius={isPopup ? "0" : "16px"}
-        p={isPopup ? 10 : { base: 8, md: 10 }}
+        borderRadius={isPopup ? "0" : { base: "14px", md: "16px" }}
+        p={isPopup ? { base: 6, md: 10 } : { base: 6, sm: 8, md: 10 }}
         textAlign="center"
         display="flex"
         flexDir="column"
         alignItems="center"
         justifyContent="center"
-        minH="340px"
+        minH={{ base: "280px", md: "340px" }}
         gap={4}
+        width="100%"
+        maxW="100%"
       >
         <Box
           w={16}
@@ -277,11 +281,12 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
   return (
     <Box
       bg={isPopup ? "white" : "brand.200"}
-      borderRadius={isPopup ? "0" : "16px"}
-      p={isPopup ? { base: 6, md: 8 } : { base: 6, md: 8 }}
+      borderRadius={isPopup ? "0" : { base: "14px", md: "16px" }}
+      p={isPopup ? { base: 4, sm: 6, md: 8 } : { base: 4, sm: 6, md: 8 }}
       width="100%"
-      overflow="visible"
+      overflow="hidden"
       position="relative"
+      maxW="100%"
     >
       <Formik
         initialValues={initialValues}
@@ -301,10 +306,10 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                 animate="visible"
               >
                 {/* Header */}
-                <MotionBox variants={fadeUp} mb={6}>
+                <MotionBox variants={fadeUp} mb={{ base: 5, md: 6 }}>
                   <Text
                     fontWeight={900}
-                    fontSize={isPopup ? "xl" : { base: "xl", md: "2xl" }}
+                    fontSize={isPopup ? "xl" : { base: "lg", sm: "xl", md: "2xl" }}
                     color="brand.100"
                     lineHeight={1.2}
                     letterSpacing="-0.02em"
@@ -314,7 +319,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                       ? "Get Your Free Consultation"
                       : "Request Your Emergency Appointment"}
                   </Text>
-                  <Text fontSize="xs" color="brand.100" opacity={0.55} lineHeight={1.6}>
+                  <Text fontSize={{ base: "11px", sm: "xs" }} color="brand.100" opacity={0.55} lineHeight={1.6}>
                     {isPopup
                       ? "We'll get back to you within 24 hours."
                       : "Our team will contact you shortly to confirm."}
@@ -322,7 +327,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                 </MotionBox>
 
                 {/* Progress bar */}
-                <MotionBox variants={fadeUp} mb={6}>
+                <MotionBox variants={fadeUp} mb={{ base: 5, md: 6 }}>
                   <Flex justifyContent="space-between" mb={1.5}>
                     <Text fontSize="10px" fontWeight={700} color="brand.100" opacity={0.5} letterSpacing="0.1em" textTransform="uppercase">
                       Form Progress
@@ -344,7 +349,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                 </MotionBox>
 
                 {/* Fields */}
-                <MotionBox variants={fadeUp} mb={4}>
+                <MotionBox variants={fadeUp} mb={{ base: 3, md: 4 }}>
                   <FormField
                     label="Full Name"
                     name="name"
@@ -357,7 +362,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                   />
                 </MotionBox>
 
-                <MotionBox variants={fadeUp} mb={4}>
+                <MotionBox variants={fadeUp} mb={{ base: 3, md: 4 }}>
                   <FormField
                     label="Email Address"
                     name="email"
@@ -370,7 +375,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                   />
                 </MotionBox>
 
-                <MotionBox variants={fadeUp} mb={4}>
+                <MotionBox variants={fadeUp} mb={{ base: 3, md: 4 }}>
                   <FormField
                     label="Phone Number"
                     name="phone"
@@ -384,7 +389,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                 </MotionBox>
 
                 {/* Message */}
-                <MotionBox variants={fadeUp} mb={6}>
+                <MotionBox variants={fadeUp} mb={{ base: 5, md: 6 }}>
                   <FormControl>
                     <FormLabel
                       style={{ ...labelStyleBase, color: "#963f36" }}
@@ -420,7 +425,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                 </MotionBox>
 
                 {/* Submit */}
-                <MotionBox variants={fadeUp} mt={4} mb={2}>
+                <MotionBox variants={fadeUp} mt={{ base: 3, md: 4 }} mb={2}>
                   <Button
                     type="submit"
                     width="100%"
@@ -429,9 +434,9 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                     loadingText="Submitting…"
                     borderRadius="10px"
                     fontWeight={800}
-                    fontSize="sm"
+                    fontSize={{ base: "xs", sm: "sm" }}
                     letterSpacing="0.03em"
-                    h="52px"
+                    h={{ base: "48px", md: "52px" }}
                     cursor="pointer"
                     position="relative"
                     zIndex={1}
@@ -466,9 +471,9 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                 </MotionBox>
 
                 {/* Trust row */}
-                <MotionBox variants={fadeUp} mt={5}>
+                <MotionBox variants={fadeUp} mt={{ base: 4, md: 5 }}>
                   <Flex
-                    gap={4}
+                    gap={{ base: 3, md: 4 }}
                     justifyContent="center"
                     flexWrap="wrap"
                   >
@@ -479,7 +484,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                     ].map((t) => (
                       <HStack key={t.label} spacing={1.5}>
                         <Icon as={t.icon} color="brand.100" opacity={0.4} boxSize={3} />
-                        <Text fontSize="10px" color="brand.100" opacity={0.45} fontWeight={600} letterSpacing="0.05em">
+                        <Text fontSize="10px" color="brand.100" opacity={0.45} fontWeight={600} letterSpacing="0.05em" whiteSpace="nowrap">
                           {t.label}
                         </Text>
                       </HStack>

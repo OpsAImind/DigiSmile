@@ -338,21 +338,23 @@ const EmergencyLandingPage = () => {
 
           {/* Right: Form */}
           <MotionBox
-            flex={0.9}
+            flex={isMobile ? "1" : "0.9"}
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             width="100%"
             maxW={isMobile ? "100%" : "480px"}
+            w="100%"
           >
             {/* Form wrapper with accent border */}
             <Box
               position="relative"
+              w="100%"
               _before={{
                 content: '""',
                 position: "absolute",
                 inset: "-2px",
-                borderRadius: "18px",
+                borderRadius: { base: "16px", md: "18px" },
                 background: "brand.200",
                 opacity: 0.15,
                 zIndex: 0,
@@ -360,32 +362,42 @@ const EmergencyLandingPage = () => {
             >
               <Box
                 bg="brand.200"
-                borderRadius="16px"
-                overflow="visible"
+                borderRadius={{ base: "14px", md: "16px" }}
+                overflow="hidden"
                 position="relative"
                 zIndex={1}
-                boxShadow="0 32px 80px rgba(0,0,0,0.25)"
+                boxShadow={{ base: "0 16px 40px rgba(0,0,0,0.2)", md: "0 32px 80px rgba(0,0,0,0.25)" }}
+                w="100%"
               >
                 {/* Form header strip */}
-                <Box bg="brand.100" px={6} py={4} borderBottom="1px solid" borderColor="blackAlpha.100" borderRadius="16px 16px 0 0">
-                  <HStack spacing={2}>
-                    <Box w={3} h={3} bg="red.400" borderRadius="full" />
-                    <Box w={3} h={3} bg="yellow.400" borderRadius="full" />
-                    <Box w={3} h={3} bg="green.400" borderRadius="full" />
+                <Box 
+                  bg="brand.100" 
+                  px={{ base: 4, md: 6 }} 
+                  py={{ base: 3, md: 4 }} 
+                  borderBottom="1px solid" 
+                  borderColor="blackAlpha.100" 
+                  borderRadius={{ base: "14px 14px 0 0", md: "16px 16px 0 0" }}
+                >
+                  <HStack spacing={2} flexWrap="wrap">
+                    <HStack spacing={2}>
+                      <Box w={3} h={3} bg="red.400" borderRadius="full" />
+                      <Box w={3} h={3} bg="yellow.400" borderRadius="full" />
+                      <Box w={3} h={3} bg="green.400" borderRadius="full" />
+                    </HStack>
                     <Text
-                      ml={2}
-                      fontSize="xs"
+                      fontSize={{ base: "10px", md: "xs" }}
                       color="brand.200"
                       opacity={0.6}
                       fontWeight={600}
                       letterSpacing="0.1em"
                       textTransform="uppercase"
+                      whiteSpace="nowrap"
                     >
                       Secure Booking Form
                     </Text>
                   </HStack>
                 </Box>
-                <Box overflow="visible">
+                <Box overflow="hidden" w="100%">
                   <LeadCaptureForm variant="hero" />
                 </Box>
               </Box>

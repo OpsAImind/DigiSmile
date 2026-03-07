@@ -156,20 +156,26 @@ export default function ServiceDetailPage({
           color={theme.primaryForeground}
           {...fadeUp}
         >
-        <Container maxW="6xl" py={{ base: 20, md: 24 }}>
-          <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={{ base: 8, md: 12 }} alignItems="center">
+        <Container maxW="6xl" py={{ base: 12, sm: 16, md: 20, lg: 24 }} px={{ base: 4, sm: 6, md: 8 }}>
+          <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={{ base: 6, md: 8, lg: 12 }} alignItems="center">
             <Box as={motion.div} {...fadeUp}>
-              <Heading as="h1" size="3xl" fontWeight="bold" mb={4} lineHeight={"1.2"}>
+              <Heading 
+                as="h1" 
+                fontSize={{ base: "2xl", sm: "3xl", md: "4xl", lg: "5xl" }}
+                fontWeight="bold" 
+                mb={{ base: 3, md: 4 }} 
+                lineHeight={"1.2"}
+              >
                 {title} in {location}
               </Heading>
-              <Text fontSize={{ base: "md", md: "lg" }} mb={6} opacity={0.95}>
+              <Text fontSize={{ base: "sm", sm: "md", md: "lg" }} mb={{ base: 4, md: 6 }} opacity={0.95} lineHeight="1.7">
                 {intro}
               </Text>
-              <HStack spacing={3} flexWrap="wrap">
+              <HStack spacing={{ base: 2, sm: 3 }} flexWrap="wrap" gap={{ base: 2, sm: 3 }}>
                 <Button
                   as="a"
                   href="/appointment"
-                  size="lg"
+                  size={{ base: "md", md: "lg" }}
                   bg={card}
                   color={theme.foreground}
                   _hover={{ opacity: 0.9 }}
@@ -177,17 +183,21 @@ export default function ServiceDetailPage({
                   border="1px solid"
                   textColor={theme.primaryForeground}
                   borderColor={border}
+                  fontSize={{ base: "sm", md: "md" }}
+                  px={{ base: 4, md: 6 }}
                 >
                   Book Appointment
                 </Button>
                 <Button
                   as="a"
                   href={`tel:${ctaSection.phone}`}
-                  size="lg"
+                  size={{ base: "md", md: "lg" }}
                   variant="outline"
                   borderColor={theme.primaryForeground}
                   color={theme.primaryForeground}
                   _hover={{ bg: "whiteAlpha.200" }}
+                  fontSize={{ base: "sm", md: "md" }}
+                  px={{ base: 4, md: 6 }}
                 >
                   Call {ctaSection.phone}
                 </Button>
@@ -205,9 +215,9 @@ export default function ServiceDetailPage({
                 src={heroImageSrc || "/placeholder.svg?height=600&width=900&query=service hero image"}
                 alt={heroImageAlt}
                 w="full"
-                maxH="400px"
+                maxH={{ base: "280px", sm: "320px", md: "360px", lg: "400px" }}
                 objectFit="cover"
-                borderRadius="xl"
+                borderRadius={{ base: "lg", md: "xl" }}
                 boxShadow="lg"
                 border="1px solid"
                 borderColor={border}
@@ -229,11 +239,17 @@ export default function ServiceDetailPage({
 
       {/* What Is */}
       <Box as={motion.section} bg={theme.muted} {...fadeUp}>
-        <Container maxW="6xl" py={{ base: 12, md: 16 }}>
-          <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} mb={4}>
+        <Container maxW="6xl" py={{ base: 10, sm: 12, md: 16 }} px={{ base: 4, sm: 6, md: 8 }}>
+          <Heading 
+            as="h2" 
+            fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+            fontWeight="bold" 
+            color={theme.foreground} 
+            mb={{ base: 3, md: 4 }}
+          >
             {whatIsSection.title}
           </Heading>
-          <Text fontSize={{ base: "md", md: "lg" }} color="rgba(2,6,23,0.75)">
+          <Text fontSize={{ base: "sm", sm: "md", md: "lg" }} color="rgba(2,6,23,0.75)" lineHeight="1.7">
             {whatIsSection.content}
           </Text>
         </Container>
@@ -248,30 +264,43 @@ export default function ServiceDetailPage({
         whileInView="whileInView"
         viewport={{ once: true }}
       >
-        <Container maxW="6xl" py={{ base: 12, md: 16 }}>
-          <Heading as="h2" size="2xl" fontWeight="bold" lineHeight={"1.2"} color={theme.foreground} mb={8}>
+        <Container maxW="6xl" py={{ base: 10, sm: 12, md: 16 }} px={{ base: 4, sm: 6, md: 8 }}>
+          <Heading 
+            as="h2" 
+            fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+            fontWeight="bold" 
+            lineHeight={"1.2"} 
+            color={theme.foreground} 
+            mb={{ base: 6, md: 8 }}
+          >
             Why Choose {title} in {location}?
           </Heading>
-          <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
+          <Grid templateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={{ base: 4, sm: 5, md: 6 }}>
             {benefits.map((b, i) => (
               <Box
                 as={motion.article}
                 key={i}
                 bg={card}
-                p={6}
-                borderRadius="xl"
+                p={{ base: 4, sm: 5, md: 6 }}
+                borderRadius={{ base: "lg", md: "xl" }}
                 boxShadow="sm"
                 border="1px solid"
                 borderColor={border}
                 variants={item}
               >
-                <Text fontSize="sm" fontWeight="semibold" color={accent} mb={2}>
+                <Text fontSize={{ base: "xs", sm: "sm" }} fontWeight="semibold" color={accent} mb={2}>
                   {"0".concat(String(i + 1)).slice(-2)}
                 </Text>
-                <Heading as="h3" size="md" fontWeight="bold" color={theme.foreground} mb={2}>
+                <Heading 
+                  as="h3" 
+                  fontSize={{ base: "sm", sm: "md" }}
+                  fontWeight="bold" 
+                  color={theme.foreground} 
+                  mb={{ base: 1.5, md: 2 }}
+                >
                   {b.title}
                 </Heading>
-                <Text fontSize="md" color="rgba(2,6,23,0.75)">
+                <Text fontSize={{ base: "sm", sm: "md" }} color="rgba(2,6,23,0.75)" lineHeight="1.6">
                   {b.description}
                 </Text>
               </Box>
@@ -283,16 +312,23 @@ export default function ServiceDetailPage({
       {/* Procedure */}
       {procedure && procedure.length > 0 ? (
         <Box as={motion.section} bg={theme.muted} {...fadeUp}>
-          <Container maxW="5xl" py={{ base: 12, md: 16 }}>
-            <Heading as="h2" size="2xl" fontWeight="bold" lineHeight={"1.2"} color={theme.foreground} mb={8}>
+          <Container maxW="5xl" py={{ base: 10, sm: 12, md: 16 }} px={{ base: 4, sm: 6, md: 8 }}>
+            <Heading 
+              as="h2" 
+              fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+              fontWeight="bold" 
+              lineHeight={"1.2"} 
+              color={theme.foreground} 
+              mb={{ base: 6, md: 8 }}
+            >
               What to Expect During Your {title}
             </Heading>
-            <VStack spacing={4} align="stretch">
+            <VStack spacing={{ base: 3, md: 4 }} align="stretch">
               {procedure.map((step) => (
-                <Flex key={step.step} gap={4} as={motion.li} {...fadeUp}>
+                <Flex key={step.step} gap={{ base: 3, sm: 4 }} as={motion.li} {...fadeUp} flexDir={{ base: "column", sm: "row" }}>
                   <Flex
-                    w="40px"
-                    h="40px"
+                    w={{ base: "36px", sm: "40px" }}
+                    h={{ base: "36px", sm: "40px" }}
                     flexShrink={0}
                     alignItems="center"
                     justifyContent="center"
@@ -300,21 +336,28 @@ export default function ServiceDetailPage({
                     bg={theme.primary}
                     color={theme.primaryForeground}
                     fontWeight="semibold"
+                    fontSize={{ base: "sm", sm: "md" }}
                   >
                     {step.step}
                   </Flex>
                   <Box
                     flex={1}
                     bg={card}
-                    p={4}
-                    borderRadius="lg"
+                    p={{ base: 3, sm: 4 }}
+                    borderRadius={{ base: "md", md: "lg" }}
                     border="1px solid"
                     borderColor={border}
                   >
-                    <Heading as="h3" size="md" fontWeight="bold" color={theme.foreground} mb={1}>
+                    <Heading 
+                      as="h3" 
+                      fontSize={{ base: "sm", sm: "md" }}
+                      fontWeight="bold" 
+                      color={theme.foreground} 
+                      mb={{ base: 1, md: 1 }}
+                    >
                       {step.title}
                     </Heading>
-                    <Text fontSize="md" color="rgba(2,6,23,0.75)">
+                    <Text fontSize={{ base: "sm", sm: "md" }} color="rgba(2,6,23,0.75)" lineHeight="1.6">
                       {step.description}
                     </Text>
                   </Box>
@@ -328,11 +371,17 @@ export default function ServiceDetailPage({
       {/* Candidate */}
       {whoCandidateSection ? (
         <Box as={motion.section} bg={theme.background} {...fadeUp}>
-          <Container maxW="4xl" py={{ base: 12, md: 16 }} textAlign="center">
-            <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} mb={4}>
+          <Container maxW="4xl" py={{ base: 10, sm: 12, md: 16 }} px={{ base: 4, sm: 6, md: 8 }} textAlign="center">
+            <Heading 
+              as="h2" 
+              fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+              fontWeight="bold" 
+              color={theme.foreground} 
+              mb={{ base: 3, md: 4 }}
+            >
               {whoCandidateSection.title}
             </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} color="rgba(2,6,23,0.75)">
+            <Text fontSize={{ base: "sm", sm: "md", md: "lg" }} color="rgba(2,6,23,0.75)" lineHeight="1.7">
               {whoCandidateSection.content}
             </Text>
           </Container>
@@ -341,8 +390,15 @@ export default function ServiceDetailPage({
 
       {/* FAQs */}
       <Box as={motion.section} bg={theme.muted} {...fadeUp}>
-        <Container maxW="3xl" py={{ base: 12, md: 16 }}>
-          <Heading as="h2" size="2xl" fontWeight="bold" color={theme.foreground} textAlign="center" mb={8}>
+        <Container maxW="3xl" py={{ base: 10, sm: 12, md: 16 }} px={{ base: 4, sm: 6, md: 8 }}>
+          <Heading 
+            as="h2" 
+            fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+            fontWeight="bold" 
+            color={theme.foreground} 
+            textAlign="center" 
+            mb={{ base: 6, md: 8 }}
+          >
             Frequently Asked Questions
           </Heading>
           <Accordion allowToggle>
@@ -350,21 +406,26 @@ export default function ServiceDetailPage({
               <AccordionItem
                 key={i}
                 bg={card}
-                borderRadius="lg"
+                borderRadius={{ base: "md", md: "lg" }}
                 border="1px solid"
                 borderColor={border}
-                mb={4}
+                mb={{ base: 3, md: 4 }}
               >
-                <AccordionButton py={3} px={4}>
-                  <Box flex="1" textAlign="left">
-                    <Text fontSize="lg" fontWeight="bold" color={theme.foreground}>
+                <AccordionButton py={{ base: 2.5, md: 3 }} px={{ base: 3, sm: 4 }}>
+                  <Box flex="1" textAlign="left" pr={2}>
+                    <Text 
+                      fontSize={{ base: "sm", sm: "md", md: "lg" }} 
+                      fontWeight="bold" 
+                      color={theme.foreground}
+                      lineHeight="1.4"
+                    >
                       {faq.question}
                     </Text>
                   </Box>
-                  <AccordionIcon color={accent} />
+                  <AccordionIcon color={accent} boxSize={{ base: 4, md: 5 }} />
                 </AccordionButton>
-                <AccordionPanel pb={4} pt={0} px={4}>
-                  <Text fontSize="md" color="rgba(2,6,23,0.75)">
+                <AccordionPanel pb={{ base: 3, md: 4 }} pt={0} px={{ base: 3, sm: 4 }}>
+                  <Text fontSize={{ base: "sm", sm: "md" }} color="rgba(2,6,23,0.75)" lineHeight="1.6">
                     {faq.answer}
                   </Text>
                 </AccordionPanel>
@@ -376,18 +437,30 @@ export default function ServiceDetailPage({
 
       {/* CTA */}
       <Box as={motion.section} bg={theme.primary} color={theme.primaryForeground} {...fadeUp}>
-        <Container maxW="5xl" py={{ base: 12, md: 16 }} textAlign="center">
-          <Heading as="h2" size="2xl" fontWeight="bold" mb={3}>
+        <Container maxW="5xl" py={{ base: 10, sm: 12, md: 16 }} px={{ base: 4, sm: 6, md: 8 }} textAlign="center">
+          <Heading 
+            as="h2" 
+            fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
+            fontWeight="bold" 
+            mb={{ base: 2, md: 3 }}
+          >
             {ctaSection.title}
           </Heading>
-          <Text fontSize={{ base: "md", md: "lg" }} maxW="2xl" mx="auto" mb={6} opacity={0.95}>
+          <Text 
+            fontSize={{ base: "sm", sm: "md", md: "lg" }} 
+            maxW="2xl" 
+            mx="auto" 
+            mb={{ base: 5, md: 6 }} 
+            opacity={0.95}
+            lineHeight="1.7"
+          >
             {ctaSection.description}
           </Text>
-          <HStack spacing={3} justify="center" flexWrap="wrap">
+          <HStack spacing={{ base: 2, sm: 3 }} justify="center" flexWrap="wrap" gap={{ base: 2, sm: 3 }}>
             <Button
               as="a"
               href="/appointment"
-              size="lg"
+              size={{ base: "md", md: "lg" }}
               bg={card}
               color={theme.foreground}
               _hover={{ opacity: 0.9 }}
@@ -395,17 +468,21 @@ export default function ServiceDetailPage({
               textColor={theme.primaryForeground}
               border="1px solid"
               borderColor={border}
+              fontSize={{ base: "sm", md: "md" }}
+              px={{ base: 4, md: 6 }}
             >
               Book Online Now
             </Button>
             <Button
               as="a"
               href={`tel:${ctaSection.phone}`}
-              size="lg"
+              size={{ base: "md", md: "lg" }}
               variant="outline"
               borderColor={theme.primaryForeground}
               color={theme.primaryForeground}
               _hover={{ bg: "whiteAlpha.200" }}
+              fontSize={{ base: "sm", md: "md" }}
+              px={{ base: 4, md: 6 }}
             >
               Call {ctaSection.phone}
             </Button>
