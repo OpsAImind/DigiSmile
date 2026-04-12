@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
   }
   
   // Target domain: www.smilexpertsdental.com with https
-  const targetHost = "www.smilexpertsdental.com";
+  const targetHost = "smilexpertsdental.com";
   
   // Check if we need to redirect:
   // 1. Hostname doesn't match target (non-www, different domain)
