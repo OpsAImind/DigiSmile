@@ -183,6 +183,102 @@ export const clinicServices = [
       "Trauma Care",
       "Same-Day Emergency Appointments"
     ]
+  },
+  {
+    heading: "Dental Implants",
+    title: "Dental Implants - Smile Expert Dental",
+    value: "dental_implants",
+    description:
+      "The gold standard for replacing missing teeth. Our 3D-guided implant placement restores your smile permanently — with results that look, feel, and function like natural teeth.",
+    services: [
+      "Single Tooth Implants",
+      "Multiple Implants",
+      "Implant Crowns & Abutments",
+      "Bone Grafting",
+      "3D CT-Guided Implant Placement",
+      "Implant Consultations"
+    ],
+    link: "/dental-implants-washington-dc/"
+  },
+  {
+    heading: "All-on-4 / Full-Arch Restoration",
+    title: "All-on-4 Full-Arch Restoration - Smile Expert Dental",
+    value: "all_on_4",
+    description:
+      "Replace an entire arch of missing or failing teeth with just 4–6 implants. Many patients leave with a complete, fixed smile the same day as their procedure.",
+    services: [
+      "All-on-4 Implants",
+      "All-on-X (6 Implants)",
+      "Same-Day Teeth",
+      "Full Upper Arch Restoration",
+      "Full Lower Arch Restoration",
+      "Implant-Supported Fixed Arch"
+    ],
+    link: "/all-on-4-full-arch-restoration/"
+  },
+  {
+    heading: "Clear Aligners",
+    title: "Clear Aligners - Smile Expert Dental",
+    value: "clear_aligners",
+    description:
+      "Straighten your teeth discreetly with custom clear aligners. Virtually invisible, removable, and comfortable — with a digital preview of your final smile before you start.",
+    services: [
+      "Custom Clear Aligner Trays",
+      "Invisalign-Style Treatment",
+      "Teen Aligners",
+      "Digital Smile Simulation",
+      "Aligner Refinements",
+      "Post-Treatment Retainers"
+    ],
+    link: "/clear-aligners-washington-dc/"
+  },
+  {
+    heading: "Laser Gum Treatment",
+    title: "Laser Gum Treatment - Smile Expert Dental",
+    value: "laser_gum",
+    description:
+      "Advanced soft-tissue laser therapy for gum disease, pocket reduction, and gumline reshaping. Less pain, minimal bleeding, and faster healing than traditional surgery.",
+    services: [
+      "Laser Periodontal Therapy",
+      "Pocket Reduction Treatment",
+      "Gum Disease Treatment",
+      "Soft-Tissue Contouring",
+      "Crown Lengthening",
+      "Biostimulation & Healing Protocol"
+    ],
+    link: "/laser-gum-treatment-washington-dc/"
+  },
+  {
+    heading: "Dental Crowns",
+    title: "Dental Crowns - Smile Expert Dental",
+    value: "dental_crowns",
+    description:
+      "Restore cracked, broken, or severely decayed teeth with custom porcelain or zirconia crowns. Natural-looking, durable, and available as same-day restorations.",
+    services: [
+      "Porcelain Crowns",
+      "Zirconia Crowns",
+      "Same-Day CEREC Crowns",
+      "Implant Crowns",
+      "Crown Replacement",
+      "Post & Core Build-Up"
+    ],
+    link: "/dental-crowns-washington-dc/"
+  },
+  {
+    heading: "3D Digital Smile Design",
+    title: "3D Digital Smile Design - Smile Expert Dental",
+    value: "digital_smile_design",
+    description:
+      "See your new smile before treatment begins. Digital impressions, 3D CT scanning, and in-house milling allow us to plan and often deliver your restoration in a single visit.",
+    services: [
+      "Digital Smile Simulation",
+      "Cone-Beam CT (CBCT) Scanning",
+      "iTero Digital Impressions",
+      "In-House 3D Milling",
+      "Virtual Treatment Planning",
+      "Same-Day Restoration Fabrication"
+    ],
+    link: "/3d-digital-smile-design/"
   }
 ];
 

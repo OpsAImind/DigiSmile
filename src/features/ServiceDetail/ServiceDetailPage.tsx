@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 import { useMemo, useState } from "react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { Box, Container, Heading, Text, Button, Grid, GridItem, VStack, HStack, Flex, Image, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from "@chakra-ui/react"
@@ -20,12 +20,15 @@ type Theme = {
   muted: string
 }
 
+type BreadcrumbItem = { name: string; url: string }
+
 export interface ServiceDetailPageProps {
   title: string
   location: string
   intro: string
   heroImageSrc: string
   heroImageAlt: string
+  breadcrumbs?: BreadcrumbItem[]
   whatIsSection: {
     title: string
     content: string
@@ -96,6 +99,7 @@ export default function ServiceDetailPage({
   intro,
   heroImageSrc,
   heroImageAlt,
+  breadcrumbs,
   whatIsSection,
   benefits,
   procedure,
@@ -104,6 +108,11 @@ export default function ServiceDetailPage({
   ctaSection,
   theme: themeOverride,
 }: ServiceDetailPageProps) {
+  const resolvedBreadcrumbs: BreadcrumbItem[] = breadcrumbs ?? [
+    { name: "Home", url: "/" },
+    { name: "All Services", url: "/clinic-services" },
+    { name: title, url: "" },
+  ]
   const [expanded, setExpanded] = useState<number | null>(null)
   const prefersReducedMotion = useReducedMotion()
 
@@ -156,11 +165,47 @@ export default function ServiceDetailPage({
           color={theme.primaryForeground}
           {...fadeUp}
         >
-        <Container maxW="6xl" py={{ base: 12, sm: 16, md: 20, lg: 24 }} px={{ base: 4, sm: 6, md: 8 }}>
+        {/* Breadcrumbs */}
+        <Container maxW="6xl" pt={{ base: 4, md: 6 }} px={{ base: 4, sm: 6, md: 8 }}>
+          <Flex align="center" flexWrap="wrap" gap={1} opacity={0.85}>
+            {resolvedBreadcrumbs.map((crumb, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && (
+                  <Text fontSize={{ base: "xs", sm: "sm" }} color={theme.primaryForeground} opacity={0.7} mx={1}>
+                    /
+                  </Text>
+                )}
+                {crumb.url && i < resolvedBreadcrumbs.length - 1 ? (
+                  <Text
+                    as="a"
+                    href={crumb.url}
+                    fontSize={{ base: "xs", sm: "sm" }}
+                    color={theme.primaryForeground}
+                    opacity={0.8}
+                    _hover={{ opacity: 1, textDecoration: "underline" }}
+                    transition="opacity 0.2s"
+                  >
+                    {crumb.name}
+                  </Text>
+                ) : (
+                  <Text
+                    fontSize={{ base: "xs", sm: "sm" }}
+                    color={theme.primaryForeground}
+                    fontWeight="semibold"
+                  >
+                    {crumb.name}
+                  </Text>
+                )}
+              </React.Fragment>
+            ))}
+          </Flex>
+        </Container>
+
+        <Container maxW="6xl" py={{ base: 8, sm: 12, md: 16, lg: 20 }} px={{ base: 4, sm: 6, md: 8 }}>
           <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={{ base: 6, md: 8, lg: 12 }} alignItems="center">
             <Box as={motion.div} {...fadeUp}>
-              <Heading 
-                as="h1" 
+              <Heading
+                as="h1"
                 fontSize={{ base: "2xl", sm: "3xl", md: "4xl", lg: "5xl" }}
                 fontWeight="bold" 
                 mb={{ base: 3, md: 4 }} 

@@ -96,7 +96,7 @@ export default function Navbar() {
       top={0}
       zIndex={4}
       width={"100%"}
-      bg={scrolled ? "#963f36" : "transparent"}
+      bg={isMobile ? "#963f36" : scrolled ? "#963f36" : "transparent"}
       transition="background-color 0.4s ease"
       borderBottom={isMobile ? "1px white solid" : "unset"}
     >
@@ -169,6 +169,30 @@ export default function Navbar() {
                             {
                               label: "All Services",
                               path: "/clinic-services"
+                            },
+                            {
+                              label: "Dental Implants",
+                              path: "/dental-implants-washington-dc/"
+                            },
+                            {
+                              label: "All-on-4 / Full-Arch",
+                              path: "/all-on-4-full-arch-restoration/"
+                            },
+                            {
+                              label: "Clear Aligners",
+                              path: "/clear-aligners-washington-dc/"
+                            },
+                            {
+                              label: "Dental Crowns",
+                              path: "/dental-crowns-washington-dc/"
+                            },
+                            {
+                              label: "Laser Gum Treatment",
+                              path: "/laser-gum-treatment-washington-dc/"
+                            },
+                            {
+                              label: "3D Smile Design",
+                              path: "/3d-digital-smile-design/"
                             },
                             {
                               label: "Root Canal",
@@ -583,6 +607,12 @@ export default function Navbar() {
                           >
                             {[
                               { label: "ALL SERVICES", path: "clinic-services" },
+                              { label: "Dental Implants", path: "dental-implants-washington-dc/" },
+                              { label: "All-on-4 / Full-Arch", path: "all-on-4-full-arch-restoration/" },
+                              { label: "Clear Aligners", path: "clear-aligners-washington-dc/" },
+                              { label: "Dental Crowns", path: "dental-crowns-washington-dc/" },
+                              { label: "Laser Gum Treatment", path: "laser-gum-treatment-washington-dc/" },
+                              { label: "3D Smile Design", path: "3d-digital-smile-design/" },
                               { label: "Root Canal", path: "root-canal-washington-dc/" },
                               { label: "General Dentistry", path: "general-dentistry-washington-dc/" },
                               { label: "Comprehensive Care", path: "comprehensive-dental-care-washington-dc/" },

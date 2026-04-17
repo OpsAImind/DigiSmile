@@ -313,6 +313,65 @@ const Footer = () => {
               Comprehensive Care
             </Text>
           </Flex>
+          <Flex flexDir={"column"} gap={2}>
+            <Text as={"h5"} fontWeight={"bold"} mb={2}>
+              Advanced Treatments
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/dental-implants-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Dental Implants
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/all-on-4-full-arch-restoration/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              All-on-4 / Full-Arch
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/clear-aligners-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Clear Aligners
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/dental-crowns-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Dental Crowns
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/laser-gum-treatment-washington-dc/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              Laser Gum Treatment
+            </Text>
+            <Text
+              as={"a"}
+              fontSize={"sm"}
+              cursor={"pointer"}
+              onClick={() => router.push("/3d-digital-smile-design/")}
+              _hover={{ textDecoration: "underline" }}
+            >
+              3D Digital Smile Design
+            </Text>
+          </Flex>
         </Flex>
         <p>
           &copy; {new Date().getFullYear()} Smile Expert Dental. All rights
