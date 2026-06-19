@@ -34,7 +34,7 @@ export const AboutDoctor = () => {
               Reviews
             </h1>
             <h1 className="text-center font-bold text-2xl text-[#011632]">
-              204/4.5
+              204/4.9
               <StarOutline className="text-yellow-400 mx-1 mb-1" />
             </h1>
           </div>

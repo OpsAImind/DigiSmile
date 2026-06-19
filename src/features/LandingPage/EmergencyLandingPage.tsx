@@ -271,7 +271,7 @@ const EmergencyLandingPage = () => {
                 {[
                   { val: "15+", label: "Years Experience" },
                   { val: "380+", label: "Happy Patients" },
-                  { val: "4.5★", label: "Average Rating" },
+                  { val: "4.9★", label: "Average Rating" },
                 ].map((stat) => (
                   <Box
                     key={stat.label}
@@ -518,7 +518,7 @@ const EmergencyLandingPage = () => {
             <Flex gap={6} flexWrap="wrap">
               {[
                 { icon: about_1, val: "380+", label: "Happy Clients" },
-                { icon: about_2, val: "4.5 / 5", label: "204 Reviews", star: true },
+                { icon: about_2, val: "4.9 / 5", label: "204 Reviews", star: true },
               ].map((s) => (
                 <Box
                   key={s.label}
@@ -874,7 +874,7 @@ const EmergencyLandingPage = () => {
               >
                 <Box>
                   <Text fontSize="4xl" fontWeight={900} color="brand.200" lineHeight={1}>
-                    4.5
+                    4.9
                   </Text>
                   <HStack spacing={1} justifyContent="center" mt={1}>
                     {[1, 2, 3, 4].map((s) => (
