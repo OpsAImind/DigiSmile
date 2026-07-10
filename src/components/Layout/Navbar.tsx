@@ -28,6 +28,8 @@ import { getHeaderStatus, toggleHeader } from "@/redux/SharedSlice";
 import Link from "next/link";
 import { FaTooth, FaChevronDown } from "react-icons/fa";
 
+const OFFER_URL = "https://ofinapulse.ai/lp/smilexpertsdental";
+
 export default function Navbar() {
   const { data, isError } = useGetUserDetailsQuery();
   const router = useRouter();
@@ -286,6 +288,30 @@ export default function Navbar() {
             >
               BLOG
             </Button>
+            <Box
+              as="a"
+              href={OFFER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="offer-cta"
+              display="inline-flex"
+              alignItems="center"
+              gap={2}
+              bgGradient="linear(to-r, #FAC710, #f0a500)"
+              color="#963f36"
+              fontWeight="900"
+              fontSize="sm"
+              letterSpacing="0.4px"
+              lineHeight="1"
+              whiteSpace="nowrap"
+              borderRadius="full"
+              px={5}
+              py="10px"
+              transition="transform 0.25s ease"
+              _hover={{ transform: "translateY(-2px)" }}
+            >
+              📅 Book Appointment
+            </Box>
             {isError && (
               <>
                 <Button
@@ -525,6 +551,38 @@ export default function Navbar() {
                         <Text fontSize="2xl">×</Text>
                       </IconButton>
                     </Flex>
+
+                    {/* Special Offer - Prominent external landing page CTA */}
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Box px={4} py={3} borderBottom="1px solid rgba(255,255,255,0.1)">
+                        <Box
+                          as="a"
+                          href={OFFER_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="offer-cta"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          gap={2}
+                          width="100%"
+                          bgGradient="linear(to-r, #FAC710, #f0a500)"
+                          color="#963f36"
+                          fontWeight="900"
+                          fontSize="md"
+                          letterSpacing="0.4px"
+                          borderRadius="full"
+                          py={3}
+                          onClick={() => setDrawerOpen(false)}
+                        >
+                          📅 Book Appointment
+                        </Box>
+                      </Box>
+                    </motion.div>
 
                     {/* Navigation Items - Matching Desktop Menu */}
                     <Box>

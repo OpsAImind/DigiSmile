@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import InstagramIconComponent from "@/app/Icons/InstagramIcon";
 import FacebookIconComponent from "@/app/Icons/FacebookIcon";
 
+const OFFER_URL = "https://ofinapulse.ai/lp/smilexpertsdental";
+
 const Footer = () => {
   const router = useRouter();
   const [isLaptop] = useMediaQuery("(max-width: 1000px)");
@@ -32,6 +34,56 @@ const Footer = () => {
         width={"100%"}
       >
         <Image src={digismileLogoImage} alt="logo" width={200} height={100} />
+
+        {/* Special Offer - external lead-capture landing page */}
+        <Flex
+          direction={isMobile ? "column" : "row"}
+          align="center"
+          justify="space-between"
+          gap={6}
+          width="100%"
+          maxW="1000px"
+          bgGradient="linear(to-r, rgba(250,199,16,0.18), rgba(250,199,16,0.06))"
+          border="1px solid rgba(250,199,16,0.55)"
+          borderRadius="2xl"
+          px={isMobile ? 6 : 10}
+          py={isMobile ? 6 : 7}
+          textAlign={isMobile ? "center" : "left"}
+        >
+          <Flex direction="column" gap={1}>
+            <Text as="h3" color="white" fontWeight="800" fontSize={isMobile ? "xl" : "2xl"}>
+              Book your appointment online
+            </Text>
+            <Text as="p" color="rgba(255,255,255,0.85)" fontSize="sm">
+              Pick a date and time in under a minute — we&apos;ll take it from there.
+            </Text>
+          </Flex>
+          <Box
+            as="a"
+            href={OFFER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="offer-cta"
+            display="inline-flex"
+            alignItems="center"
+            justifyContent="center"
+            gap={2}
+            flexShrink={0}
+            bgGradient="linear(to-r, #FAC710, #f0a500)"
+            color="#963f36"
+            fontWeight="900"
+            fontSize="md"
+            letterSpacing="0.4px"
+            borderRadius="full"
+            px={8}
+            py={3}
+            transition="transform 0.25s ease"
+            _hover={{ transform: "translateY(-2px)" }}
+          >
+            📅 Book Appointment
+          </Box>
+        </Flex>
+
         <Flex
           justifyContent={isLaptop ? "center" : "space-between"}
           alignItems={"flex-start"}

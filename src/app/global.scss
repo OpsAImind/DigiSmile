@@ -30,6 +30,27 @@ html {
   font-size: clamp(1rem, 1vw + 2rem, 4rem) !important;
 }
 
+// Prominent "Special Offer" CTA (external landing page) in navbar/footer
+@keyframes offerGlow {
+  0%,
+  100% {
+    box-shadow: 0 4px 14px rgba(250, 199, 16, 0.45);
+  }
+  50% {
+    box-shadow: 0 4px 22px rgba(250, 199, 16, 0.85);
+  }
+}
+
+.offer-cta {
+  animation: offerGlow 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-cta {
+    animation: none;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .footer-heading {
     font-size: 2rem !important;
