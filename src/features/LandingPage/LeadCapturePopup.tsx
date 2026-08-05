@@ -23,13 +23,13 @@ import { FaStar, FaCheckCircle, FaUserMd } from "react-icons/fa";
 const MotionBox = motion(Box);
 
 const socialProofItems = [
-  "Same-day emergency appointments",
-  "Three convenient DMV locations",
+  "Same-day appointments available",
+  "Two convenient DMV locations",
   "15+ years of trusted care",
 ];
 
 const recentBookings = [
-  { name: "Sarah M.", time: "2 mins ago", treatment: "Emergency" },
+  { name: "Sarah M.", time: "2 mins ago", treatment: "Check-up" },
   { name: "James T.", time: "18 mins ago", treatment: "Whitening" },
   { name: "Priya K.", time: "1 hr ago", treatment: "Root Canal" },
 ];

@@ -51,6 +51,119 @@ html {
   }
 }
 
+// ── Appointment form date picker (react-datepicker) ──────────
+.appt-datepicker {
+  .appt-datepicker-wrapper {
+    width: 100%;
+    display: block;
+  }
+
+  input {
+    width: 100%;
+    height: 48px;
+    background: #fff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d3748;
+    padding: 0 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &::placeholder {
+      color: #a0aec0;
+      font-weight: 500;
+    }
+
+    &:focus {
+      border-color: #963f36;
+      box-shadow: 0 0 0 3px rgba(150, 63, 54, 0.12);
+    }
+  }
+}
+
+// Portal the calendar renders into — must float above the form wrappers
+#appt-datepicker-portal {
+  position: relative;
+  z-index: 9999;
+}
+
+.react-datepicker-popper {
+  z-index: 9999 !important;
+}
+
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid #f0e7e5;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(150, 63, 54, 0.18);
+  overflow: hidden;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+.react-datepicker__header {
+  background: #963f36;
+  border-bottom: none;
+  padding-top: 14px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header {
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.react-datepicker__day-name {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #fff;
+}
+
+.react-datepicker__day {
+  color: #2d3748;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.15s, color 0.15s;
+
+  &:hover {
+    background: #f5e9e7;
+    color: #963f36;
+  }
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background: #963f36 !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.react-datepicker__day--today {
+  font-weight: 700;
+  color: #963f36;
+}
+
+.react-datepicker__day--disabled {
+  color: #cbd5e0;
+  cursor: not-allowed;
+
+  &:hover {
+    background: transparent;
+    color: #cbd5e0;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .footer-heading {
     font-size: 2rem !important;

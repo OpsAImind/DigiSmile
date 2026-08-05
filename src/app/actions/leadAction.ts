@@ -14,6 +14,8 @@ export const SubmitLeadAction = async (payload: any) => {
       name: payload.name,
       email: payload.email,
       phone: payload.phone || "",
+      branch: payload.branch || "",
+      preferredDate: payload.preferredDate || "",
       message: payload.message || "",
       source: "landing_page",
       utm_source: payload.utm_source || "",
@@ -29,6 +31,8 @@ export const SubmitLeadAction = async (payload: any) => {
       name: leadData.name,
       email: leadData.email,
       phone: leadData.phone,
+      branch: leadData.branch,
+      preferredDate: leadData.preferredDate,
       source: leadData.source,
       utm_source: leadData.utm_source,
       timestamp: new Date().toISOString()

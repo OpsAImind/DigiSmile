@@ -12,9 +12,8 @@ import {
   Icon,
   VStack,
   Grid,
-  GridItem,
 } from "@chakra-ui/react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -24,14 +23,18 @@ import {
   FaCertificate,
   FaQuoteLeft,
   FaTooth,
-  FaPhone,
+  FaSyringe,
+  FaShieldAlt,
+  FaGem,
+  FaSmile,
+  FaTeeth,
+  FaArrowRight,
 } from "react-icons/fa";
+import { IconType } from "react-icons";
 import LeadCaptureForm from "./LeadCaptureForm";
 import { dr_image, about_1, about_2 } from "@/assets/images";
-import PatientReviews from "../patient-reviews";
 
 const MotionBox = motion(Box);
-const MotionFlex = motion(Flex);
 const MotionText = motion(Text);
 
 const fadeUp = {
@@ -52,48 +55,62 @@ const staggerContainer = {
   },
 };
 
-const services = [
+interface Service {
+  title: string;
+  description: string;
+  icon: IconType;
+  tag: string;
+  path: string;
+}
+
+const services: Service[] = [
   {
-    title: "Emergency Dental Care",
+    title: "Preventive Care",
     description:
-      "Immediate treatment for dental emergencies, pain relief, and urgent dental issues.",
-    icon: "🚨",
+      "Routine exams and cleanings to keep your smile healthy and catch issues early.",
+    icon: FaTooth,
     tag: "Same-day",
+    path: "/general-dentistry-washington-dc/",
   },
   {
     title: "Root Canal Therapy",
     description:
       "Expert root canal treatment to save your natural teeth and eliminate pain.",
-    icon: "🦷",
+    icon: FaSyringe,
     tag: "Pain-free",
+    path: "/root-canal-washington-dc/",
   },
   {
     title: "Dental Fillings",
     description:
       "Tooth-colored fillings that restore your teeth while maintaining a natural appearance.",
-    icon: "✨",
+    icon: FaShieldAlt,
     tag: "Natural look",
+    path: "/dental-fillings-washington-dc/",
   },
   {
     title: "Teeth Whitening",
     description:
       "Professional teeth whitening services for a brighter, more confident smile.",
-    icon: "💎",
+    icon: FaGem,
     tag: "In-office",
+    path: "/teeth-whitening-washington-dc/",
   },
   {
     title: "Cosmetic Dentistry",
     description:
       "Veneers, crowns, and cosmetic procedures to enhance your smile.",
-    icon: "🌟",
+    icon: FaSmile,
     tag: "Custom",
+    path: "/cosmetic-dentistry-washington-dc/",
   },
   {
     title: "Dentures",
     description:
       "Custom-fitted dentures for comfortable and natural-looking tooth replacement.",
-    icon: "🎯",
+    icon: FaTeeth,
     tag: "Precision fit",
+    path: "/affordable-dentures-washington-dc/",
   },
 ];
 
@@ -109,8 +126,8 @@ const testimonials = [
     name: "Sarah M.",
     location: "Washington, DC",
     rating: 5,
-    text: "Dr. Mahmood saved my tooth after a terrible emergency. She got me in same-day and the pain was gone within hours. Absolute lifesaver.",
-    treatment: "Emergency Care",
+    text: "Dr. Mahmood saved my tooth and got me in the same day — the pain was gone within hours. Absolute lifesaver.",
+    treatment: "Same-Day Visit",
   },
   {
     name: "James T.",
@@ -135,12 +152,16 @@ const testimonials = [
   },
 ];
 
-const EmergencyLandingPage = () => {
+const AppointmentLandingPage = () => {
   const router = useRouter();
   const [isMobile] = useMediaQuery("(max-width: 1000px)");
 
-  const navigateToAppointment = () => {
-    router.push("/appointment");
+  const scrollToForm = () => {
+    if (typeof document !== "undefined") {
+      document
+        .getElementById("appointment-form")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
@@ -162,7 +183,7 @@ const EmergencyLandingPage = () => {
           pointerEvents="none"
         />
 
-        {/* Large decorative number */}
+        {/* Large decorative monogram */}
         <Box
           position="absolute"
           right={isMobile ? "-20px" : "-40px"}
@@ -228,7 +249,7 @@ const EmergencyLandingPage = () => {
               mb={6}
               letterSpacing="-0.02em"
             >
-              Emergency Dental Care{" "}
+              Expert Dental Care{" "}
               <Box as="span" position="relative" display="inline-block">
                 When You Need
                 <Box
@@ -256,8 +277,8 @@ const EmergencyLandingPage = () => {
               maxW="480px"
             >
               Experienced dental professionals in the DMV area ready to provide
-              immediate, personalized care. Don&apos;t wait — relief is one call
-              away.
+              personalized care. Book your appointment and we&apos;ll take it
+              from there.
             </MotionText>
 
             {/* Trust indicators */}
@@ -304,8 +325,8 @@ const EmergencyLandingPage = () => {
             >
               <VStack align="flex-start" spacing={3}>
                 {[
-                  "Same-day emergency appointments",
-                  "Three convenient DMV locations",
+                  "Same-day appointments available",
+                  "Two convenient DMV locations",
                   "Insurance & flexible payment options",
                 ].map((item) => (
                   <MotionBox
@@ -338,6 +359,7 @@ const EmergencyLandingPage = () => {
 
           {/* Right: Form */}
           <MotionBox
+            id="appointment-form"
             flex={isMobile ? "1" : "0.9"}
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -345,6 +367,7 @@ const EmergencyLandingPage = () => {
             width="100%"
             maxW={isMobile ? "100%" : "480px"}
             w="100%"
+            scrollMarginTop="90px"
           >
             {/* Form wrapper with accent border */}
             <Box
@@ -366,16 +389,19 @@ const EmergencyLandingPage = () => {
                 overflow="hidden"
                 position="relative"
                 zIndex={1}
-                boxShadow={{ base: "0 16px 40px rgba(0,0,0,0.2)", md: "0 32px 80px rgba(0,0,0,0.25)" }}
+                boxShadow={{
+                  base: "0 16px 40px rgba(0,0,0,0.2)",
+                  md: "0 32px 80px rgba(0,0,0,0.25)",
+                }}
                 w="100%"
               >
                 {/* Form header strip */}
-                <Box 
-                  bg="brand.100" 
-                  px={{ base: 4, md: 6 }} 
-                  py={{ base: 3, md: 4 }} 
-                  borderBottom="1px solid" 
-                  borderColor="blackAlpha.100" 
+                <Box
+                  bg="brand.100"
+                  px={{ base: 4, md: 6 }}
+                  py={{ base: 3, md: 4 }}
+                  borderBottom="1px solid"
+                  borderColor="blackAlpha.100"
                   borderRadius={{ base: "14px 14px 0 0", md: "16px 16px 0 0" }}
                 >
                   <HStack spacing={2} flexWrap="wrap">
@@ -424,11 +450,7 @@ const EmergencyLandingPage = () => {
           alignItems="center"
         >
           {/* Image with decorative frame */}
-          <Box
-            flex={1}
-            position="relative"
-            maxW={isMobile ? "100%" : "420px"}
-          >
+          <Box flex={1} position="relative" maxW={isMobile ? "100%" : "420px"}>
             <Box
               position="absolute"
               top={6}
@@ -509,16 +531,21 @@ const EmergencyLandingPage = () => {
             >
               With over 15 years of experience, Dr. Mahmood treats every patient
               like family — delivering personalized, high-quality dental care
-              across three DMV offices. From routine check-ups to complex
-              cosmetic work, her practice is built on trust, precision, and
-              genuine compassion.
+              across our DMV offices. From routine check-ups to complex cosmetic
+              work, her practice is built on trust, precision, and genuine
+              compassion.
             </Text>
 
             {/* Stats row */}
             <Flex gap={6} flexWrap="wrap">
               {[
                 { icon: about_1, val: "380+", label: "Happy Clients" },
-                { icon: about_2, val: "4.9 / 5", label: "204 Reviews", star: true },
+                {
+                  icon: about_2,
+                  val: "4.9 / 5",
+                  label: "204 Reviews",
+                  star: true,
+                },
               ].map((s) => (
                 <Box
                   key={s.label}
@@ -599,6 +626,8 @@ const EmergencyLandingPage = () => {
                   borderColor="blackAlpha.100"
                   position="relative"
                   overflow="hidden"
+                  cursor="pointer"
+                  onClick={() => router.push(service.path)}
                   transition="all 0.3s cubic-bezier(0.22, 1, 0.36, 1)"
                   _hover={{
                     transform: "translateY(-6px)",
@@ -636,9 +665,20 @@ const EmergencyLandingPage = () => {
                     {service.tag}
                   </Box>
 
-                  <Text fontSize="2xl" mb={4}>
-                    {service.icon}
-                  </Text>
+                  {/* Single-color icon */}
+                  <Flex
+                    w={12}
+                    h={12}
+                    mb={5}
+                    align="center"
+                    justify="center"
+                    borderRadius="12px"
+                    bg="brand.100"
+                    position="relative"
+                    zIndex={1}
+                  >
+                    <Icon as={service.icon} color="brand.200" boxSize={5} />
+                  </Flex>
                   <Text
                     fontWeight={800}
                     fontSize="md"
@@ -648,9 +688,40 @@ const EmergencyLandingPage = () => {
                   >
                     {service.title}
                   </Text>
-                  <Text fontSize="sm" color="brand.100" opacity={0.65} lineHeight={1.7}>
+                  <Text
+                    fontSize="sm"
+                    color="brand.100"
+                    opacity={0.65}
+                    lineHeight={1.7}
+                  >
                     {service.description}
                   </Text>
+
+                  {/* Learn more affordance */}
+                  <HStack
+                    spacing={2}
+                    mt={5}
+                    position="relative"
+                    zIndex={1}
+                    color="brand.100"
+                    fontWeight={700}
+                    fontSize="xs"
+                    letterSpacing="0.04em"
+                    textTransform="uppercase"
+                    opacity={0.55}
+                    transition="all 0.3s"
+                    _groupHover={{ opacity: 1 }}
+                  >
+                    <Text>Learn more</Text>
+                    <Box
+                      as="span"
+                      display="inline-flex"
+                      transition="transform 0.3s"
+                      _groupHover={{ transform: "translateX(4px)" }}
+                    >
+                      <Icon as={FaArrowRight} boxSize={3} />
+                    </Box>
+                  </HStack>
                 </Box>
               </MotionBox>
             ))}
@@ -709,8 +780,8 @@ const EmergencyLandingPage = () => {
             lineHeight={1.8}
             fontSize={{ base: "sm", md: "md" }}
           >
-            Don&apos;t let dental pain wait. Schedule today and experience
-            personalized care that puts your comfort first.
+            Book your visit today and experience personalized care that puts
+            your comfort first.
           </Text>
           <Button
             variant="brand-second"
@@ -718,9 +789,12 @@ const EmergencyLandingPage = () => {
             px={10}
             fontSize="md"
             fontWeight={700}
-            onClick={navigateToAppointment}
+            onClick={scrollToForm}
             borderRadius="full"
-            _hover={{ transform: "translateY(-3px)", boxShadow: "0 12px 40px rgba(0,0,0,0.2)" }}
+            _hover={{
+              transform: "translateY(-3px)",
+              boxShadow: "0 12px 40px rgba(0,0,0,0.2)",
+            }}
             transition="all 0.3s"
           >
             Book Your Appointment →
@@ -781,19 +855,19 @@ const EmergencyLandingPage = () => {
                   }}
                 >
                   {/* Quote icon */}
-                  <Box
-                    position="absolute"
-                    top={6}
-                    right={8}
-                    opacity={0.07}
-                  >
+                  <Box position="absolute" top={6} right={8} opacity={0.07}>
                     <Icon as={FaQuoteLeft} boxSize={10} color="brand.100" />
                   </Box>
 
                   {/* Stars */}
                   <HStack spacing={1} mb={5}>
                     {Array.from({ length: t.rating }).map((_, si) => (
-                      <Icon key={si} as={FaStar} color="yellow.400" boxSize={4} />
+                      <Icon
+                        key={si}
+                        as={FaStar}
+                        color="yellow.400"
+                        boxSize={4}
+                      />
                     ))}
                   </HStack>
 
@@ -860,12 +934,7 @@ const EmergencyLandingPage = () => {
 
           {/* Rating summary bar */}
           <MotionBox variants={fadeUp} mt={10}>
-            <Box
-              bg="brand.100"
-              borderRadius="20px"
-              p={8}
-              textAlign="center"
-            >
+            <Box bg="brand.100" borderRadius="20px" p={8} textAlign="center">
               <Flex
                 justifyContent="center"
                 alignItems="center"
@@ -873,31 +942,63 @@ const EmergencyLandingPage = () => {
                 flexWrap="wrap"
               >
                 <Box>
-                  <Text fontSize="4xl" fontWeight={900} color="brand.200" lineHeight={1}>
+                  <Text
+                    fontSize="4xl"
+                    fontWeight={900}
+                    color="brand.200"
+                    lineHeight={1}
+                  >
                     4.9
                   </Text>
                   <HStack spacing={1} justifyContent="center" mt={1}>
                     {[1, 2, 3, 4].map((s) => (
                       <Icon key={s} as={FaStar} color="yellow.400" boxSize={4} />
                     ))}
-                    <Icon as={FaStar} color="yellow.300" boxSize={4} opacity={0.5} />
+                    <Icon
+                      as={FaStar}
+                      color="yellow.300"
+                      boxSize={4}
+                      opacity={0.5}
+                    />
                   </HStack>
                   <Text fontSize="xs" color="brand.200" opacity={0.6} mt={1}>
                     Average Rating
                   </Text>
                 </Box>
-                <Box w="1px" h="60px" bg="brand.200" opacity={0.2} display={isMobile ? "none" : "block"} />
+                <Box
+                  w="1px"
+                  h="60px"
+                  bg="brand.200"
+                  opacity={0.2}
+                  display={isMobile ? "none" : "block"}
+                />
                 <Box>
-                  <Text fontSize="4xl" fontWeight={900} color="brand.200" lineHeight={1}>
+                  <Text
+                    fontSize="4xl"
+                    fontWeight={900}
+                    color="brand.200"
+                    lineHeight={1}
+                  >
                     204
                   </Text>
                   <Text fontSize="xs" color="brand.200" opacity={0.6} mt={2}>
                     Verified Reviews
                   </Text>
                 </Box>
-                <Box w="1px" h="60px" bg="brand.200" opacity={0.2} display={isMobile ? "none" : "block"} />
+                <Box
+                  w="1px"
+                  h="60px"
+                  bg="brand.200"
+                  opacity={0.2}
+                  display={isMobile ? "none" : "block"}
+                />
                 <Box>
-                  <Text fontSize="4xl" fontWeight={900} color="brand.200" lineHeight={1}>
+                  <Text
+                    fontSize="4xl"
+                    fontWeight={900}
+                    color="brand.200"
+                    lineHeight={1}
+                  >
                     98%
                   </Text>
                   <Text fontSize="xs" color="brand.200" opacity={0.6} mt={2}>
@@ -931,7 +1032,12 @@ const EmergencyLandingPage = () => {
               Professional Certifications & Achievements
             </Text>
           </MotionBox>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} maxW="720px" mx="auto">
+          <SimpleGrid
+            columns={{ base: 1, md: 2 }}
+            spacing={4}
+            maxW="720px"
+            mx="auto"
+          >
             {certifications.map((cert, i) => (
               <MotionBox key={i} variants={fadeUp}>
                 <Flex
@@ -1015,7 +1121,7 @@ const EmergencyLandingPage = () => {
             fontSize={{ base: "sm", md: "md" }}
           >
             Join hundreds of satisfied patients who trust Dr. Mahmood with their
-            smiles. Contact us today.
+            smiles. Book your appointment today.
           </Text>
           <Flex
             flexDir={isMobile ? "column" : "row"}
@@ -1029,9 +1135,12 @@ const EmergencyLandingPage = () => {
               flex={1}
               fontWeight={700}
               fontSize="md"
-              onClick={navigateToAppointment}
+              onClick={scrollToForm}
               borderRadius="full"
-              _hover={{ transform: "translateY(-3px)", boxShadow: "0 12px 40px rgba(0,0,0,0.2)" }}
+              _hover={{
+                transform: "translateY(-3px)",
+                boxShadow: "0 12px 40px rgba(0,0,0,0.2)",
+              }}
               transition="all 0.3s"
             >
               Schedule Appointment
@@ -1056,4 +1165,4 @@ const EmergencyLandingPage = () => {
   );
 };
 
-export default EmergencyLandingPage;
+export default AppointmentLandingPage;

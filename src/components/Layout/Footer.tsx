@@ -80,7 +80,7 @@ const Footer = () => {
             transition="transform 0.25s ease"
             _hover={{ transform: "translateY(-2px)" }}
           >
-            📅 Book Appointment
+            📅 Book Online
           </Box>
         </Flex>
 

@@ -1,24 +1,25 @@
 // src/app/appointment/page.tsx
 import { Metadata } from "next";
-import AppointmentForm from "@/components/common/AppointmentForm";
+import AppointmentLandingPage from "@/features/LandingPage/AppointmentLandingPage";
+import Footer from "@/components/Layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Book Dental Appointment in Washington, D.C. | DigiSmile Experts",
+  title: "Book a Dental Appointment | Washington DC & Burke VA | Smile Experts Dental",
   description:
-    "Book your dental cleaning, exam, or consultation at DigiSmile Experts in Washington, D.C. Choose a convenient time today.",
+    "Book your dental appointment with Smile Experts Dental. Choose your location — Washington, DC or Burke, VA — pick a date, and our team will confirm your visit.",
   alternates: { canonical: "https://www.smilexpertsdental.com/appointment/" },
   openGraph: {
-    title: "Book Dental Appointment | DigiSmile Experts",
+    title: "Book Your Appointment | Smile Experts Dental",
     description:
-      "Book an appointment at DigiSmile Experts Dental Clinic in Washington, D.C. – expert dentists, flexible timings, and modern facilities.",
+      "Request an appointment at Smile Experts Dental in Washington, DC or Burke, VA — experienced dentists, flexible timings, and modern facilities.",
     url: "https://www.digismileexperts.com/appointment",
-    siteName: "DigiSmile Experts",
+    siteName: "Smile Experts Dental",
     images: [
       {
         url: "/og/appointment.jpg",
         width: 1200,
         height: 630,
-        alt: "Book Appointment at DigiSmile Experts"
+        alt: "Book Appointment at Smile Experts Dental"
       }
     ],
     locale: "en_US",
@@ -26,9 +27,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Book a Dental Appointment | DigiSmile Experts",
+    title: "Book a Dental Appointment | Smile Experts Dental",
     description:
-      "Book your next dental check-up or cleaning at DigiSmile Experts in Washington, D.C.",
+      "Book your next dental visit at Smile Experts Dental in Washington, DC or Burke, VA.",
     images: ["/og/appointment.jpg"]
   },
   robots: {
@@ -47,24 +48,24 @@ export default function BookAppointmentPage() {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Dentist",
-    name: "DigiSmile Experts Dental Clinic",
+    name: "Smile Experts Dental",
     image: "https://www.digismileexperts.com/og/appointment.jpg",
     "@id": "https://www.digismileexperts.com",
     url: "https://www.digismileexperts.com/appointment",
-    telephone: "+1-202-555-0170",
+    telephone: "+1-202-545-6336",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "1234 Smile Street NW",
+      streetAddress: "1747 Pennsylvania Avenue NW Suite 100",
       addressLocality: "Washington",
       addressRegion: "DC",
-      postalCode: "20001",
+      postalCode: "20006",
       addressCountry: "US"
     },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "09:00",
+        dayOfWeek: ["Monday", "Wednesday", "Friday"],
+        opens: "10:00",
         closes: "17:00"
       }
     ],
@@ -95,18 +96,14 @@ export default function BookAppointmentPage() {
   };
 
   return (
-    <main>
-      <section aria-label="Book Dental Appointment Form" className="appointment-section">
-        <h1 style={{ textAlign: "center", marginBottom: "1rem" }}>
-          Book a Dental Appointment
-        </h1>
-        <AppointmentForm />
-      </section>
+    <>
+      <AppointmentLandingPage />
+      <Footer />
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
-    </main>
+    </>
   );
 }

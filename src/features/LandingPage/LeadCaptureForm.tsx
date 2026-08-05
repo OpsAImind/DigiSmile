@@ -13,6 +13,7 @@ import {
   Flex,
   Icon,
   HStack,
+  Select,
 } from "@chakra-ui/react";
 import { emailValidation, requiredCharField, contactNumberValidation } from "@/validations";
 import { useDispatch } from "react-redux";
@@ -21,26 +22,42 @@ import { showToastWithTimeout } from "@/redux/SharedSlice";
 import { SubmitLeadAction } from "@/app/actions/leadAction";
 import { useSearchParams } from "next/navigation";
 import FormField from "@/components/common/FormField";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaShieldAlt, FaClock, FaPhone } from "react-icons/fa";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { sendBusinessNotificationEmail, sendThankYouEmail } from "@/utils/emailjs";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const MotionBox = motion(Box);
 
-const validationSchema = Yup.object({
-  name: requiredCharField("Name"),
-  email: emailValidation,
-  phone: contactNumberValidation,
-  message: Yup.string().trim().optional(),
-});
+// Clinic locations — values match the ?clinic= query param used across the site
+const BRANCHES = [
+  { value: "dc", label: "Washington, DC" },
+  { value: "burke", label: "Burke, VA" },
+];
 
-const initialValues = {
-  name: "",
-  email: "",
-  phone: "",
-  message: "",
-};
+const branchLabelFor = (value: string) =>
+  BRANCHES.find((b) => b.value === value)?.label || "Not specified";
+
+// Scheduling fields (branch + date) are required on the appointment page
+// but hidden/optional on the lightweight consultation popup.
+const buildValidationSchema = (requireScheduling: boolean) =>
+  Yup.object({
+    name: requiredCharField("Name"),
+    email: emailValidation,
+    phone: contactNumberValidation,
+    branch: requireScheduling
+      ? Yup.string().required("Please select a location")
+      : Yup.string().optional(),
+    preferredDate: requireScheduling
+      ? Yup.date()
+          .nullable()
+          .required("Please select a preferred date")
+          .typeError("Please select a valid date")
+      : Yup.date().nullable().optional(),
+    message: Yup.string().trim().optional(),
+  });
 
 interface LeadCaptureFormProps {
   variant?: "hero" | "popup";
@@ -89,6 +106,25 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
 
   const isPopup = variant === "popup";
 
+  const validationSchema = useMemo(
+    () => buildValidationSchema(!isPopup),
+    [isPopup]
+  );
+
+  // Pre-select the branch when the page is opened with ?clinic=dc|burke
+  const initialValues = useMemo(() => {
+    const clinic = searchParams.get("clinic");
+    const branch = BRANCHES.some((b) => b.value === clinic) ? (clinic as string) : "";
+    return {
+      name: "",
+      email: "",
+      phone: "",
+      branch,
+      preferredDate: null as Date | null,
+      message: "",
+    };
+  }, [searchParams]);
+
   const handleSubmit = async (values: any, { setSubmitting, resetForm }: any) => {
     console.log("🚀 [Form] Form submission started");
     console.log("🚀 [Form] Form values:", values);
@@ -106,7 +142,14 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
 
     try {
       // First, log the lead on the server
-      const serverResponse = await SubmitLeadAction({ ...values, ...utmParams });
+      const serverResponse = await SubmitLeadAction({
+        ...values,
+        branch: branchLabelFor(values.branch),
+        preferredDate: values.preferredDate
+          ? new Date(values.preferredDate).toISOString()
+          : "",
+        ...utmParams,
+      });
       console.log("✅ [Form] Server response:", serverResponse);
 
       // Format date for email
@@ -122,6 +165,17 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
 
       const businessEmail = process.env.NEXT_PUBLIC_BUSINESS_EMAIL || "info@smilexpertsdental.com";
 
+      // Human-readable branch + preferred date for the emails
+      const branchLabel = branchLabelFor(values.branch);
+      const preferredDate = values.preferredDate
+        ? new Date(values.preferredDate).toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        : "Not specified";
+
       // Prepare template parameters for business notification email
       const businessEmailParams = {
         to_email: businessEmail,
@@ -129,6 +183,8 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
         from_name: values.name,
         from_email: values.email,
         phone: values.phone || "Not provided",
+        branch: branchLabel,
+        preferred_date: preferredDate,
         message: values.message || "No message provided",
         submission_date: submissionDate,
         utm_source: utmParams.utm_source || "Direct",
@@ -144,7 +200,9 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
         to_email: values.email,
         to_name: values.name,
         from_name: "Dr. Andleeb Mahmood",
-        from_email: businessEmail
+        from_email: businessEmail,
+        branch: branchLabel,
+        preferred_date: preferredDate
       };
 
       console.log("📧 [Form] Sending emails via EmailJS...");
@@ -289,14 +347,26 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
       maxW="100%"
     >
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, errors, touched, values }) => {
+        {({ isSubmitting, errors, touched, values, setFieldValue, setFieldTouched }) => {
           // Progress: count filled required fields
-          const filled = [values.name, values.email, values.phone].filter(Boolean).length;
-          const progress = Math.round((filled / 3) * 100);
+          const requiredFields = isPopup
+            ? [values.name, values.email, values.phone]
+            : [
+                values.name,
+                values.email,
+                values.phone,
+                values.branch,
+                values.preferredDate,
+              ];
+          const filled = requiredFields.filter(Boolean).length;
+          const progress = Math.round(
+            (filled / requiredFields.length) * 100
+          );
 
           return (
             <Form>
@@ -317,7 +387,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                   >
                     {isPopup
                       ? "Get Your Free Consultation"
-                      : "Request Your Emergency Appointment"}
+                      : "Request Your Appointment"}
                   </Text>
                   <Text fontSize={{ base: "11px", sm: "xs" }} color="brand.100" opacity={0.55} lineHeight={1.6}>
                     {isPopup
@@ -388,6 +458,84 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                   />
                 </MotionBox>
 
+                {/* Scheduling fields — appointment page only */}
+                {!isPopup && (
+                  <>
+                {/* Preferred location (branch) */}
+                <MotionBox variants={fadeUp} mb={{ base: 3, md: 4 }}>
+                  <FormControl isInvalid={!!errors.branch && !!touched.branch}>
+                    <FormLabel
+                      style={{ ...labelStyleBase, color: "#963f36" }}
+                      htmlFor="branch"
+                    >
+                      Preferred Location
+                    </FormLabel>
+                    <Select
+                      id="branch"
+                      name="branch"
+                      value={values.branch}
+                      onChange={(e) => setFieldValue("branch", e.target.value)}
+                      onBlur={() => setFieldTouched("branch", true)}
+                      placeholder="Select a location"
+                      height="48px"
+                      bg="white"
+                      borderRadius="10px"
+                      borderColor="#e2e8f0"
+                      borderWidth="1.5px"
+                      fontSize="14px"
+                      fontWeight={500}
+                      color="#2d3748"
+                      _hover={{ borderColor: "#cbd5e0" }}
+                      _focus={{
+                        borderColor: "brand.100",
+                        boxShadow: "0 0 0 3px rgba(150, 63, 54, 0.12)",
+                      }}
+                    >
+                      {BRANCHES.map((b) => (
+                        <option key={b.value} value={b.value}>
+                          {b.label}
+                        </option>
+                      ))}
+                    </Select>
+                    <FormErrorMessage>{errors.branch}</FormErrorMessage>
+                  </FormControl>
+                </MotionBox>
+
+                {/* Preferred date */}
+                <MotionBox variants={fadeUp} mb={{ base: 3, md: 4 }}>
+                  <FormControl
+                    isInvalid={!!errors.preferredDate && !!touched.preferredDate}
+                  >
+                    <FormLabel
+                      style={{ ...labelStyleBase, color: "#963f36" }}
+                      htmlFor="preferredDate"
+                    >
+                      Preferred Date
+                    </FormLabel>
+                    <Box className="appt-datepicker">
+                      <DatePicker
+                        id="preferredDate"
+                        selected={values.preferredDate}
+                        onChange={(date) => setFieldValue("preferredDate", date)}
+                        onBlur={() => setFieldTouched("preferredDate", true)}
+                        minDate={new Date()}
+                        dateFormat="EEE, MMM d, yyyy"
+                        placeholderText="Select a date"
+                        calendarStartDay={0}
+                        showPopperArrow={false}
+                        portalId="appt-datepicker-portal"
+                        wrapperClassName="appt-datepicker-wrapper"
+                        popperClassName="appt-datepicker-popper"
+                      />
+                    </Box>
+                    <FormErrorMessage>
+                      {errors.preferredDate as string}
+                    </FormErrorMessage>
+                  </FormControl>
+                </MotionBox>
+                  </>
+                )}
+
                 {/* Message */}
                 <MotionBox variants={fadeUp} mb={{ base: 5, md: 6 }}>
                   <FormControl>
@@ -405,7 +553,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
                         <Textarea
                           {...field}
                           id="message"
-                          placeholder="Describe your dental concern or emergency…"
+                          placeholder="Describe your dental concern or reason for visit…"
                           style={{
                             ...inputStyleBase,
                             height: "auto",

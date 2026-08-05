@@ -260,9 +260,9 @@ export default function Navbar() {
             </Menu>
             <Button
               variant={"header"}
-              onClick={() => navigateToSection("emergency-dental-care")}
+              onClick={() => navigateToSection("appointment")}
             >
-              EMERGENCY
+              APPOINTMENT
             </Button>
             <Button variant={"header"}>
               <Link href={"/#home-location"}>LOCATIONS</Link>
@@ -310,7 +310,7 @@ export default function Navbar() {
               transition="transform 0.25s ease"
               _hover={{ transform: "translateY(-2px)" }}
             >
-              📅 Book Appointment
+              📅 Book Online
             </Box>
             {isError && (
               <>
@@ -579,7 +579,7 @@ export default function Navbar() {
                           py={3}
                           onClick={() => setDrawerOpen(false)}
                         >
-                          📅 Book Appointment
+                          📅 Book Online
                         </Box>
                       </Box>
                     </motion.div>
@@ -719,7 +719,7 @@ export default function Navbar() {
                         )}
                       </AnimatePresence>
 
-                      {/* EMERGENCY */}
+                      {/* APPOINTMENT */}
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -732,7 +732,7 @@ export default function Navbar() {
                           padding={3}
                           cursor="pointer"
                           onClick={() => {
-                            navigateToSection("emergency-dental-care");
+                            navigateToSection("appointment");
                             setDrawerOpen(false);
                           }}
                         >
@@ -745,7 +745,7 @@ export default function Navbar() {
                             _hover={{ color: "#963f36" }}
                             transition="color 0.2s"
                           >
-                            EMERGENCY
+                            APPOINTMENT
                           </Text>
                         </ListItem>
                       </motion.div>
