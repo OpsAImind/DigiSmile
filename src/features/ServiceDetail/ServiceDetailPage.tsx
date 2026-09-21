@@ -22,6 +22,8 @@ type Theme = {
 
 type BreadcrumbItem = { name: string; url: string }
 
+const toTelHref = (phone: string) => `tel:+1${phone.replace(/\D/g, "")}`
+
 export interface ServiceDetailPageProps {
   title: string
   location: string
@@ -235,7 +237,7 @@ export default function ServiceDetailPage({
                 </Button>
                 <Button
                   as="a"
-                  href={`tel:${ctaSection.phone}`}
+                  href={toTelHref(ctaSection.phone)}
                   size={{ base: "md", md: "lg" }}
                   variant="outline"
                   borderColor={theme.primaryForeground}
@@ -520,7 +522,7 @@ export default function ServiceDetailPage({
             </Button>
             <Button
               as="a"
-              href={`tel:${ctaSection.phone}`}
+              href={toTelHref(ctaSection.phone)}
               size={{ base: "md", md: "lg" }}
               variant="outline"
               borderColor={theme.primaryForeground}

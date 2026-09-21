@@ -346,7 +346,7 @@ export default function BlogPostClient({ slug }: BlogPostClientProps) {
               </Button>
               <Button
                 as="a"
-                href="tel:(202) 545-6336"
+                href="tel:+12025456336"
                 size="lg"
                 bg="transparent"
                 color="white"
