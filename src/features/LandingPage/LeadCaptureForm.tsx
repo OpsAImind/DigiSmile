@@ -20,11 +20,11 @@ import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/redux/store";
 import { showToastWithTimeout } from "@/redux/SharedSlice";
 import { SubmitLeadAction } from "@/app/actions/leadAction";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import FormField from "@/components/common/FormField";
 import { motion } from "framer-motion";
 import { FaShieldAlt, FaClock, FaPhone } from "react-icons/fa";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { sendBusinessNotificationEmail, sendThankYouEmail } from "@/utils/emailjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -61,7 +61,6 @@ const buildValidationSchema = (requireScheduling: boolean) =>
 
 interface LeadCaptureFormProps {
   variant?: "hero" | "popup";
-  onSuccess?: () => void;
 }
 
 // Shared input style overrides passed via inputStyles prop
@@ -99,10 +98,10 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) => {
+const LeadCaptureForm = ({ variant = "hero" }: LeadCaptureFormProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const searchParams = useSearchParams();
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
 
   const isPopup = variant === "popup";
 
@@ -125,7 +124,7 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
     };
   }, [searchParams]);
 
-  const handleSubmit = async (values: any, { setSubmitting, resetForm }: any) => {
+  const handleSubmit = async (values: any, { setSubmitting }: any) => {
     console.log("🚀 [Form] Form submission started");
     console.log("🚀 [Form] Form values:", values);
 
@@ -234,16 +233,9 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
         console.error("❌ [Form] Thank you email error:", thankYouResult.reason);
       }
 
-      // Show success message regardless of email status (for better UX)
-      setSubmitted(true);
-      await dispatch(
-        showToastWithTimeout({
-          message: serverResponse.data?.message || "Thank you! We'll contact you soon.",
-          status: "success",
-        })
-      );
-      resetForm();
-      if (onSuccess) setTimeout(onSuccess, 1800);
+      // Redirect regardless of email status (for better UX); the /thank-you
+      // page view is what GA/GTM counts as a completed booking
+      router.push("/thank-you");
     } catch (error: any) {
       console.error("❌ [Form] Form submission error:", error);
       await dispatch(
@@ -257,83 +249,6 @@ const LeadCaptureForm = ({ variant = "hero", onSuccess }: LeadCaptureFormProps) 
       console.log("🏁 [Form] Form submission completed");
     }
   };
-
-  // ── Success State ──────────────────────────────────────────
-  if (submitted) {
-    return (
-      <MotionBox
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        bg={isPopup ? "white" : "brand.200"}
-        borderRadius={isPopup ? "0" : { base: "14px", md: "16px" }}
-        p={isPopup ? { base: 6, md: 10 } : { base: 6, sm: 8, md: 10 }}
-        textAlign="center"
-        display="flex"
-        flexDir="column"
-        alignItems="center"
-        justifyContent="center"
-        minH={{ base: "280px", md: "340px" }}
-        gap={4}
-        width="100%"
-        maxW="100%"
-      >
-        <Box
-          w={16}
-          h={16}
-          bg="green.50"
-          borderRadius="full"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          mb={2}
-        >
-          <Text fontSize="2xl">✅</Text>
-        </Box>
-        <Text fontWeight={900} fontSize="xl" color="brand.100">
-          Request Received!
-        </Text>
-        <Text fontSize="sm" color="brand.100" opacity={0.65} maxW="280px" lineHeight={1.7}>
-          Our team will reach out within a few hours to confirm your appointment.
-        </Text>
-        <Button
-          as="a"
-          href="tel:+12025456336"
-          px={5}
-          py={2}
-          borderRadius="full"
-          fontSize="sm"
-          fontWeight={700}
-          mt={2}
-          cursor="pointer"
-          transition="all 0.2s"
-          sx={{
-            backgroundColor: "#963f36 !important",
-            color: "#faf7f5 !important",
-            textDecoration: "none",
-            "&:hover": {
-              backgroundColor: "#963f36 !important",
-              color: "#faf7f5 !important",
-              transform: "translateY(-2px)",
-              boxShadow: "0 8px 20px rgba(150,63,54,0.3)",
-              textDecoration: "none",
-            },
-            "&:active": {
-              transform: "translateY(0)",
-              backgroundColor: "#963f36 !important",
-              color: "#faf7f5 !important",
-            },
-            "&:visited": {
-              backgroundColor: "#963f36 !important",
-              color: "#faf7f5 !important",
-            }
-          }}
-        >
-          📞 Or call us directly
-        </Button>
-      </MotionBox>
-    );
-  }
 
   // ── Form ──────────────────────────────────────────────────
   return (

@@ -60,10 +60,6 @@ const LeadCapturePopup = () => {
     return () => clearInterval(interval);
   }, [isOpen]);
 
-  const handleSuccess = () => {
-    setTimeout(onClose, 1800);
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -293,7 +289,7 @@ const LeadCapturePopup = () => {
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <LeadCaptureForm variant="popup" onSuccess={handleSuccess} />
+                  <LeadCaptureForm variant="popup" />
                 </Box>
 
               </Flex>
