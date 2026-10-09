@@ -6,7 +6,6 @@ import {
   Flex,
   Text,
   Button,
-  useMediaQuery,
   SimpleGrid,
   HStack,
   Icon,
@@ -14,6 +13,7 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { keyframes } from "@emotion/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -35,7 +35,23 @@ import LeadCaptureForm from "./LeadCaptureForm";
 import { dr_image, about_1, about_2 } from "@/assets/images";
 
 const MotionBox = motion(Box);
-const MotionText = motion(Text);
+
+// Above-the-fold entrance animations are pure CSS so the hero paints from the
+// server-rendered HTML immediately instead of staying hidden until hydration.
+const heroFadeUp = keyframes`
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const heroSlideIn = keyframes`
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+`;
+
+const heroReveal = (delayMs: number, frames = heroFadeUp) => ({
+  animation: `${frames} 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${delayMs}ms both`,
+  "@media (prefers-reduced-motion: reduce)": { animation: "none" },
+});
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -154,7 +170,6 @@ const testimonials = [
 
 const AppointmentLandingPage = () => {
   const router = useRouter();
-  const [isMobile] = useMediaQuery("(max-width: 1000px)");
 
   const scrollToForm = () => {
     if (typeof document !== "undefined") {
@@ -169,7 +184,7 @@ const AppointmentLandingPage = () => {
       {/* ─── HERO ─────────────────────────────────────────────── */}
       <Box
         position="relative"
-        minH={isMobile ? "auto" : "100vh"}
+        minH={{ base: "auto", responsive: "100vh" }}
         bg="brand.100"
         overflow="hidden"
       >
@@ -186,10 +201,10 @@ const AppointmentLandingPage = () => {
         {/* Large decorative monogram */}
         <Box
           position="absolute"
-          right={isMobile ? "-20px" : "-40px"}
+          right={{ base: "-20px", responsive: "-40px" }}
           top="50%"
           transform="translateY(-50%)"
-          fontSize={isMobile ? "200px" : "380px"}
+          fontSize={{ base: "200px", responsive: "380px" }}
           fontWeight={900}
           color="brand.200"
           opacity={0.04}
@@ -206,20 +221,15 @@ const AppointmentLandingPage = () => {
           mx="auto"
           px={{ base: 6, md: 10, lg: 16 }}
           py={{ base: 16, md: 20 }}
-          flexDir={isMobile ? "column" : "row"}
+          flexDir={{ base: "column", responsive: "row" }}
           alignItems="center"
           gap={{ base: 12, md: 16 }}
-          minH={isMobile ? "auto" : "100vh"}
+          minH={{ base: "auto", responsive: "100vh" }}
         >
           {/* Left: Copy */}
-          <MotionBox
-            flex={1.1}
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
+          <Box flex={1.1}>
             {/* Pill badge */}
-            <MotionBox variants={fadeUp} mb={6}>
+            <Box sx={heroReveal(0)} mb={6}>
               <Box
                 display="inline-flex"
                 alignItems="center"
@@ -237,10 +247,10 @@ const AppointmentLandingPage = () => {
                 <Box w={2} h={2} bg="green.400" borderRadius="full" />
                 Same-Day Appointments Available
               </Box>
-            </MotionBox>
+            </Box>
 
-            <MotionText
-              variants={fadeUp}
+            <Text
+              sx={heroReveal(80)}
               as="h1"
               fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
               fontWeight={900}
@@ -265,10 +275,10 @@ const AppointmentLandingPage = () => {
                 />
               </Box>{" "}
               It Most
-            </MotionText>
+            </Text>
 
-            <MotionText
-              variants={fadeUp}
+            <Text
+              sx={heroReveal(160)}
               fontSize={{ base: "md", md: "lg" }}
               color="brand.200"
               opacity={0.75}
@@ -279,10 +289,10 @@ const AppointmentLandingPage = () => {
               Experienced dental professionals in the DMV area ready to provide
               personalized care. Book your appointment and we&apos;ll take it
               from there.
-            </MotionText>
+            </Text>
 
             {/* Trust indicators */}
-            <MotionBox variants={fadeUp}>
+            <Box sx={heroReveal(240)}>
               <Grid
                 templateColumns="repeat(3, 1fr)"
                 gap={4}
@@ -315,23 +325,19 @@ const AppointmentLandingPage = () => {
                   </Box>
                 ))}
               </Grid>
-            </MotionBox>
+            </Box>
 
             {/* Check items */}
-            <MotionBox
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-            >
+            <Box>
               <VStack align="flex-start" spacing={3}>
                 {[
                   "Same-day appointments available",
                   "Two convenient DMV locations",
                   "Insurance & flexible payment options",
-                ].map((item) => (
-                  <MotionBox
+                ].map((item, i) => (
+                  <Box
                     key={item}
-                    variants={fadeUp}
+                    sx={heroReveal(320 + i * 80)}
                     display="flex"
                     alignItems="center"
                     gap={3}
@@ -351,21 +357,19 @@ const AppointmentLandingPage = () => {
                     <Text color="brand.200" fontSize="sm" fontWeight={500}>
                       {item}
                     </Text>
-                  </MotionBox>
+                  </Box>
                 ))}
               </VStack>
-            </MotionBox>
-          </MotionBox>
+            </Box>
+          </Box>
 
           {/* Right: Form */}
-          <MotionBox
+          <Box
             id="appointment-form"
-            flex={isMobile ? "1" : "0.9"}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            flex={{ base: "1", responsive: "0.9" }}
+            sx={heroReveal(200, heroSlideIn)}
             width="100%"
-            maxW={isMobile ? "100%" : "480px"}
+            maxW={{ base: "100%", responsive: "480px" }}
             w="100%"
             scrollMarginTop="90px"
           >
@@ -428,7 +432,7 @@ const AppointmentLandingPage = () => {
                 </Box>
               </Box>
             </Box>
-          </MotionBox>
+          </Box>
         </Flex>
       </Box>
 
@@ -445,12 +449,12 @@ const AppointmentLandingPage = () => {
           maxW="1280px"
           mx="auto"
           px={{ base: 6, md: 10, lg: 16 }}
-          flexDir={isMobile ? "column" : "row"}
+          flexDir={{ base: "column", responsive: "row" }}
           gap={16}
           alignItems="center"
         >
           {/* Image with decorative frame */}
-          <Box flex={1} position="relative" maxW={isMobile ? "100%" : "420px"}>
+          <Box flex={1} position="relative" maxW={{ base: "100%", responsive: "420px" }}>
             <Box
               position="absolute"
               top={6}
@@ -970,7 +974,7 @@ const AppointmentLandingPage = () => {
                   h="60px"
                   bg="brand.200"
                   opacity={0.2}
-                  display={isMobile ? "none" : "block"}
+                  display={{ base: "none", responsive: "block" }}
                 />
                 <Box>
                   <Text
@@ -990,7 +994,7 @@ const AppointmentLandingPage = () => {
                   h="60px"
                   bg="brand.200"
                   opacity={0.2}
-                  display={isMobile ? "none" : "block"}
+                  display={{ base: "none", responsive: "block" }}
                 />
                 <Box>
                   <Text
@@ -1124,7 +1128,7 @@ const AppointmentLandingPage = () => {
             smiles. Book your appointment today.
           </Text>
           <Flex
-            flexDir={isMobile ? "column" : "row"}
+            flexDir={{ base: "column", responsive: "row" }}
             gap={4}
             width="100%"
             maxW="480px"

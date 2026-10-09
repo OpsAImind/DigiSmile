@@ -20,11 +20,11 @@ import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/redux/store";
 import { showToastWithTimeout } from "@/redux/SharedSlice";
 import { SubmitLeadAction } from "@/app/actions/leadAction";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import FormField from "@/components/common/FormField";
 import { motion } from "framer-motion";
 import { FaShieldAlt, FaClock, FaPhone } from "react-icons/fa";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { sendBusinessNotificationEmail, sendThankYouEmail } from "@/utils/emailjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -100,8 +100,16 @@ const fadeUp = {
 
 const LeadCaptureForm = ({ variant = "hero" }: LeadCaptureFormProps) => {
   const dispatch = useDispatch<AppDispatch>();
-  const searchParams = useSearchParams();
   const router = useRouter();
+  // Query params are read from window (not useSearchParams) so the page
+  // hosting this form can still be server-rendered instead of bailing out
+  // to client-only rendering.
+  const [presetBranch, setPresetBranch] = useState("");
+
+  useEffect(() => {
+    const clinic = new URLSearchParams(window.location.search).get("clinic");
+    if (BRANCHES.some((b) => b.value === clinic)) setPresetBranch(clinic as string);
+  }, []);
 
   const isPopup = variant === "popup";
 
@@ -111,23 +119,23 @@ const LeadCaptureForm = ({ variant = "hero" }: LeadCaptureFormProps) => {
   );
 
   // Pre-select the branch when the page is opened with ?clinic=dc|burke
-  const initialValues = useMemo(() => {
-    const clinic = searchParams.get("clinic");
-    const branch = BRANCHES.some((b) => b.value === clinic) ? (clinic as string) : "";
-    return {
+  const initialValues = useMemo(
+    () => ({
       name: "",
       email: "",
       phone: "",
-      branch,
+      branch: presetBranch,
       preferredDate: null as Date | null,
       message: "",
-    };
-  }, [searchParams]);
+    }),
+    [presetBranch]
+  );
 
   const handleSubmit = async (values: any, { setSubmitting }: any) => {
     console.log("🚀 [Form] Form submission started");
     console.log("🚀 [Form] Form values:", values);
 
+    const searchParams = new URLSearchParams(window.location.search);
     const utmParams = {
       utm_source: searchParams.get("utm_source") || "",
       utm_medium: searchParams.get("utm_medium") || "",

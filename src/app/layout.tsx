@@ -66,55 +66,6 @@ export default function RootLayout({
         <meta name="geo.placename" content="Washington" />
       </Head>
 
-      {/* Google Tag Manager */}
-      <Script id="gtm-js" strategy="beforeInteractive">
-        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TSWJXC32');`}
-      </Script>
-      <Script id="gtm-js-kn2ttsr7" strategy="beforeInteractive">
-        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KN2TTSR7');`}
-      </Script>
-      <Script id="gtm-js-wgbslnvz" strategy="beforeInteractive">
-        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WGBSLNVZ');`}
-      </Script>
-
-      {/* Google Analytics */}
-      <Script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_APP_GTAG}`}
-      />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_APP_GTAG}');
-        `}
-      </Script>
-      <Script id="chatbot-config" strategy="beforeInteractive">
-        {`
-            window.embeddedChatbotConfig = {
-              chatbotId: "1ZYPlrW9E56Qhv7BVhwjH",
-              domain: "www.chatbase.co"
-            };
-          `}
-      </Script>
-      <Script
-        src="https://www.chatbase.co/embed.min.js"
-        strategy="afterInteractive"
-        defer
-      />
       <body className={`${poppins.className} ${dmSans.className}`}>
         {/* Google Tag Manager (noscript) */}
         <noscript>
@@ -141,6 +92,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        {/* Google Tag Manager */}
+        <Script id="gtm-js" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TSWJXC32');`}
+        </Script>
+        <Script id="gtm-js-kn2ttsr7" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KN2TTSR7');`}
+        </Script>
+        <Script id="gtm-js-wgbslnvz" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WGBSLNVZ');`}
+        </Script>
+
+        {/* Google Analytics */}
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_APP_GTAG}`}
+        />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_APP_GTAG}');
+          `}
+        </Script>
+        <Script id="chatbot-config" strategy="beforeInteractive">
+          {`
+              window.embeddedChatbotConfig = {
+                chatbotId: "1ZYPlrW9E56Qhv7BVhwjH",
+                domain: "www.chatbase.co"
+              };
+            `}
+        </Script>
+        <Script
+          src="https://www.chatbase.co/embed.min.js"
+          strategy="lazyOnload"
+        />
         <Suspense fallback={<div>Loading...</div>}>
           <Provider store={store}>
             <AppWrappers>{children}</AppWrappers>
