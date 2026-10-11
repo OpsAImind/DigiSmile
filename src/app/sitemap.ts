@@ -19,10 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // Key marketing pages
     { url: `${siteUrl}/locations/`, changeFrequency: "monthly", priority: 0.8, lastModified: new Date() },
-    { url: `${siteUrl}/home/about-us/`, changeFrequency: "yearly", priority: 0.6, lastModified: new Date() },
-    { url: `${siteUrl}/home/new-patients/`, changeFrequency: "yearly", priority: 0.6, lastModified: new Date() },
-    { url: `${siteUrl}/home/privacy-policy/`, changeFrequency: "yearly", priority: 0.2, lastModified: new Date() },
-    { url: `${siteUrl}/home/clinic-services/`, changeFrequency: "monthly", priority: 0.7, lastModified: new Date() },
+    { url: `${siteUrl}/about-us/`, changeFrequency: "yearly", priority: 0.6, lastModified: new Date() },
+    { url: `${siteUrl}/new-patients/`, changeFrequency: "yearly", priority: 0.6, lastModified: new Date() },
+    { url: `${siteUrl}/privacy-policy/`, changeFrequency: "yearly", priority: 0.2, lastModified: new Date() },
+    { url: `${siteUrl}/clinic-services/`, changeFrequency: "monthly", priority: 0.7, lastModified: new Date() },
     { url: `${siteUrl}/appointment/`, changeFrequency: "monthly", priority: 0.9, lastModified: new Date() },
     // Service detail pages (DC)
     { url: `${siteUrl}/general-dentistry-washington-dc/`, changeFrequency: "monthly", priority: 0.8, lastModified: new Date() },

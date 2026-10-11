@@ -1155,7 +1155,7 @@ const AppointmentLandingPage = () => {
               flex={1}
               fontWeight={700}
               fontSize="md"
-              onClick={() => router.push("/home/clinic-services")}
+              onClick={() => router.push("/clinic-services")}
               borderRadius="full"
               _hover={{ bg: "brand.200", color: "brand.100" }}
               transition="all 0.3s"
