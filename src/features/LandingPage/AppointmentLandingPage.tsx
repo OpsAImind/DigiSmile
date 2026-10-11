@@ -1157,8 +1157,17 @@ const AppointmentLandingPage = () => {
               fontSize="md"
               onClick={() => router.push("/clinic-services")}
               borderRadius="full"
-              _hover={{ bg: "brand.200", color: "brand.100" }}
               transition="all 0.3s"
+              sx={{
+                // !important so the "bordered" variant's own hover background
+                // can't win and leave brand-colored text on a brand background
+                "&:hover": {
+                  backgroundColor: "#faf7f5 !important",
+                  color: "#963f36 !important",
+                  transform: "translateY(-3px)",
+                  boxShadow: "0 12px 40px rgba(0,0,0,0.2)",
+                },
+              }}
             >
               View All Services
             </Button>
